@@ -1,0 +1,34 @@
+{
+  "name": "prismic-richtext",
+  "version": "1.0.0",
+  "description": "Convert Rich Text raw data to generic tree to simplify serialization",
+  "main": "dist/prismic-richtext.min.js",
+  "scripts": {
+    "build": "webpack --debug; webpack -p",
+    "dev": "webpack -d --watch",
+    "prepublish": "npm run build; npm run docs",
+    "docs": "typedoc --mode file --out ./docs/ ./src/",
+    "lint": "tslint src",
+    "posttest": "tslint lib",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prismicio/prismic-richtext.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prismicio/prismic-richtext/issues"
+  },
+  "homepage": "https://github.com/prismicio/prismic-richtext#readme",
+  "devDependencies": {
+    "jasmine": "^2.6.0",
+    "ts-loader": "^2.2.2",
+    "tslint": "^5.5.0",
+    "typedoc": "^0.7.1",
+    "typescript": "^2.4.1",
+    "webpack": "^3.1.0",
+    "yargs": "^8.0.2"
+  }
+}
