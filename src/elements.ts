@@ -18,7 +18,8 @@ export enum ElementKind {
   image,
   embed,
   hyperlink,
-  label
+  label,
+  span
 };
 
 export interface IElement {
@@ -189,6 +190,18 @@ export class Label implements IElement {
   }
 }
 
+export class Span implements IElement {
+  kind: ElementKind;
+  value: any;
+  content: string;
+
+  constructor(value: any, content: string) {
+    this.kind = ElementKind.span;
+    this.value = value;
+    this.content = content;
+  }
+}
+
 export const Element = {
   apply(element: any, content: string, linkResolver: (doc: any, isBroken: boolean) => string): IElement {
     switch(element.type) {
@@ -208,7 +221,8 @@ export const Element = {
       case 'embed': return new Embed(element, content);
       case 'hyperlink': return new Link(element, content, linkResolver);
       case 'label': return new Label(element, content);
-      default: throw new Error(`Invalid element type on element : ${JSON.stringify(element)}`);
+      case 'span': return new Span(element, content);
+      default: throw new Error(`Invalid element type ${element.type} on element : ${JSON.stringify(element)}`);
     }
   }
 }

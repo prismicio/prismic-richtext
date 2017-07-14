@@ -10,7 +10,7 @@
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
     "posttest": "tslint lib",
-    "test": "jasmine"
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
     "typescript": "^2.4.1",
     "webpack": "^3.1.0",
     "yargs": "^8.0.2"
+  },
+  "dependencies": {
+    "uuid": "^3.1.0"
   }
 }
