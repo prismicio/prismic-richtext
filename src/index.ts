@@ -102,6 +102,8 @@ export class Tree implements ITree {
         ancestor.remove(toExplore);
         ancestor.add(immutable);
 
+        //process toSplit + toSplit children because the subTree of ancestor was mutate
+        // a smaller node (immutable) replaced toExplore so a child may not fit anymore
         toSplit.flatWithChildren().forEach((toSplit: ILeaf) => {
           //process toSplit and its children
           const [inNode, outNode] = (() => {
@@ -166,12 +168,6 @@ export class Leaf implements ILeaf {
   }
 
   add(leaf: ILeaf): void {
-    // this.children = this.children.length === 0
-    //   ? [leaf]
-    //   : this.children.reduce<ILeaf[]>((acc: ILeaf[], child: ILeaf) => {
-    //       const toConcat: ILeaf[] = child.start > leaf.start ? [leaf, child] : [child];
-    //       return acc.concat(toConcat);
-    //     }, []);
     this.children.push(leaf);
     this.children.sort((a: ILeaf, b: ILeaf) => {
       return a.start - b.start;
