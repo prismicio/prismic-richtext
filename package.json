@@ -10,7 +10,7 @@
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
     "posttest": "tslint lib",
-    "test": "node test"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
   "homepage": "https://github.com/prismicio/prismic-richtext#readme",
   "devDependencies": {
     "jasmine": "^2.6.0",
+    "jasmine-console-reporter": "^1.2.7",
+    "json-stable-stringify": "^1.0.1",
     "ts-loader": "^2.2.2",
     "tslint": "^5.5.0",
     "typedoc": "^0.7.1",

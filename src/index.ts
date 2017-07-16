@@ -1,7 +1,3 @@
-    // structuredText: any[],
-    // linkResolver: (doc: any, isBroken: boolean) => string,
-    // htmlSerializer: (element: HTMLElement, content: string) => string
-
 import uuid from './uuid';
 import { IElement, Element, ElementKind } from '@root/elements';
 
@@ -193,11 +189,17 @@ export class Leaf implements ILeaf {
   }
 }
 
-function insertSpans(tree: ITree, text: string, spans: any[], linkResolver: (doc: any, isBroken: boolean) => string): void {
+function insertCustomText(tree: ITree, text: string, spans: any[], linkResolver: (doc: any, isBroken: boolean) => string): void {
   spans.forEach((span: any) => {
     const leaf = new Leaf(span.start, span.end, span.type, Element.apply(span, text.substr(span.start, span.end - span.start), linkResolver), []);
     tree.insert(leaf);
   });
+}
+
+function insertBasicText(tree: ITree, text: string): void {
+  const missingIntervals = (() => {
+    tree.root.children
+  })();
 }
 
 export function asGenericTree(
@@ -210,7 +212,9 @@ export function asGenericTree(
     const element: IElement = Element.apply(block, block.text, linkResolver);
     const leaf = new Leaf(0, block.text.length, block.type, element);
     tree.addChild(leaf);
-    insertSpans(Tree.subTree(leaf), block.text, block.spans, linkResolver);
+    const subTree = Tree.subTree(leaf);
+    insertCustomText(subTree, block.text, block.spans, linkResolver);
+    insertBasicText(subTree, block.text);
   });
 
   return tree;
