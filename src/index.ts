@@ -1,5 +1,5 @@
 import uuid from './uuid';
-import { IElement, Element, ElementKind } from '@root/elements';
+import { IElement, Element, ElementKind, Span } from '@root/elements';
 
 const PRIORITIES = {
   [ElementKind[ElementKind.heading1]]: 4,
@@ -189,17 +189,23 @@ export class Leaf implements ILeaf {
   }
 }
 
-function insertCustomText(tree: ITree, text: string, spans: any[], linkResolver: (doc: any, isBroken: boolean) => string): void {
+function insertCustomText(subtree: ITree, text: string, spans: any[], linkResolver: (doc: any, isBroken: boolean) => string): void {
   spans.forEach((span: any) => {
     const leaf = new Leaf(span.start, span.end, span.type, Element.apply(span, text.substr(span.start, span.end - span.start), linkResolver), []);
-    tree.insert(leaf);
+    subtree.insert(leaf);
   });
 }
 
-function insertBasicText(tree: ITree, text: string): void {
-  const missingIntervals = (() => {
-    tree.root.children
+function insertBasicText(subtree: ITree, text: string): void {
+  const missingBlock = (() => {
+    //TODO compute missing intervals
+    //this following line is just a demo of what it should looks like.
+    return [{start: 0, end: 5, text: "demo text"}];
   })();
+  missingBlock.forEach((block: any) => {
+    const textLeaf = new Leaf(block.start, block.end, ElementKind[ElementKind.span], new Span({}, block.text));
+    subtree.addChild(textLeaf);
+  });
 }
 
 export function asGenericTree(
