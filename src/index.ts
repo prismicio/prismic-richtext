@@ -68,71 +68,78 @@ export class Tree implements ITree {
   }
 
   insert(leaf: ILeaf): ILeaf {
-    //must return a node only if it contains fully the children otherwise return null
-    function explore(ancestor: ILeaf, toExplore: ILeaf, toProcess: ILeaf): ILeaf | null {
-      if(toProcess.isOutside(toExplore)) {
-        return null;
-      } else if(toExplore.contains(toProcess)) {
-        const maybeCandidate = toExplore.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
-          return maybeLeaf || explore(toExplore, child, toProcess);
-        }, null);
+    return this._explore(this.root, this.root, leaf) || this.root;
+  }
 
-        if(maybeCandidate) {
-          return maybeCandidate;
-        } else {
-          toExplore.add(toProcess);
-          return toExplore;
-        };
-      } else if(toProcess.contains(toExplore)) {
-        ancestor.remove(toExplore);
-        toProcess.add(toExplore);
-        ancestor.add(toProcess);
-        return toProcess;
+  //must return a node only if it contains fully the children otherwise return null
+  _explore(ancestor: ILeaf, toExplore: ILeaf, toProcess: ILeaf): ILeaf | null {
+    if(toProcess.isOutside(toExplore)) {
+      return null;
+    } else if(toExplore.contains(toProcess)) {
+      const maybeCandidate = toExplore.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
+        return maybeLeaf || this._explore(toExplore, child, toProcess);
+      }, null);
+
+      if(maybeCandidate) {
+        return maybeCandidate;
       } else {
-        
-        //define which node is immutable and which node need to be split
-        const [immutable, toSplit] = (() => {
-          const [temp1, temp2] = toExplore.start <= toProcess.start ? [toExplore, toProcess] : [toProcess, toExplore];
-          return PRIORITIES[temp1.type] <= PRIORITIES[temp2.type] ? [temp1, temp2] : [temp2, temp1];
-        })();
-        ancestor.remove(toExplore);
-        ancestor.add(immutable);
+        toExplore.add(toProcess);
+        return toExplore;
+      };
+    } else if(toProcess.contains(toExplore)) {
+      ancestor.remove(toExplore);
+      toProcess.add(toExplore);
+      ancestor.add(toProcess);
+      return toProcess;
+    } else {
+      //define which node is immutable and which node need to be split
+      const [immutable, toSplit] = this._defineEligibleNodeToSplit(toExplore, toProcess);
+      ancestor.remove(toExplore);
+      ancestor.add(immutable);
 
-        //process toSplit + toSplit children because the subTree of ancestor was mutate
-        // a smaller node (immutable) replaced toExplore so a child may not fit anymore
-        toSplit.flatWithChildren().forEach((toSplit: ILeaf) => {
-          //process toSplit and its children
-          const [inNode, outNode] = (() => {
-            if(immutable.start <= toSplit.start) {
-              const inNode: ILeaf = toSplit.copy(toSplit.start, immutable.end);
-              const outNode: ILeaf = toSplit.copy(immutable.end + 1, toSplit.end);
-              return [inNode, outNode];
-            } else {
-              const outNode: ILeaf = toSplit.copy(toSplit.start, immutable.start - 1);
-              const inNode: ILeaf = toSplit.copy(immutable.start, toSplit.end);
-              return [inNode, outNode];
-            }
-          })();
-          
-          //try to insert outNode inside ancestor children
-          const maybeOutNodeParent = ancestor.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
-            return maybeLeaf || explore(ancestor, child, outNode);
-          }, null);
+      //process toSplit + toSplit children because the subTree of ancestor was mutate
+      // a smaller node (immutable) replaced toExplore so a child may not fit anymore
+      toSplit.flatWithChildren().forEach((toSplit: ILeaf) => {
+        this._processNodeToSplit(ancestor, immutable, toSplit);
+      });
 
-          if(!maybeOutNodeParent) ancestor.add(outNode);
-
-          //try to insert inNode inside immutable children
-          const maybeInNodeParent = immutable.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
-            return maybeLeaf || explore(immutable, child, inNode);
-          }, null);
-
-          if(!maybeInNodeParent) immutable.add(inNode);
-        })
-
-        return immutable;
-      }
+      return immutable;
     }
-    return explore(this.root, this.root, leaf) || this.root;
+  }
+
+      //will return first the node that will not be mutate and then the node to split
+  _defineEligibleNodeToSplit(node1: ILeaf, node2: ILeaf): [ILeaf, ILeaf] {
+    const [temp1, temp2] = node1.start <= node2.start ? [node1, node2] : [node2, node1];
+    return PRIORITIES[temp1.type] <= PRIORITIES[temp2.type] ? [temp1, temp2] : [temp2, temp1];
+  }
+
+  _processNodeToSplit(ancestor: ILeaf, immutable: ILeaf, toSplit: ILeaf): void {
+    //process toSplit and its children
+    const [inNode, outNode] = (() => {
+      if(immutable.start <= toSplit.start) {
+        const inNode: ILeaf = toSplit.copy(toSplit.start, immutable.end);
+        const outNode: ILeaf = toSplit.copy(immutable.end + 1, toSplit.end);
+        return [inNode, outNode];
+      } else {
+        const outNode: ILeaf = toSplit.copy(toSplit.start, immutable.start - 1);
+        const inNode: ILeaf = toSplit.copy(immutable.start, toSplit.end);
+        return [inNode, outNode];
+      }
+    })();
+    
+    //try to insert outNode inside ancestor children
+    const maybeOutNodeParent = ancestor.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
+      return maybeLeaf || this._explore(ancestor, child, outNode);
+    }, null);
+
+    if(!maybeOutNodeParent) ancestor.add(outNode);
+
+    //try to insert inNode inside immutable children
+    const maybeInNodeParent = immutable.children.reduce<ILeaf | null>((maybeLeaf: ILeaf | null, child: ILeaf) => {
+      return maybeLeaf || this._explore(immutable, child, inNode);
+    }, null);
+
+    if(!maybeInNodeParent) immutable.add(inNode);
   }
 }
 

@@ -26,6 +26,9 @@ export declare class Tree implements ITree {
     static subTree(leaf: ILeaf): ITree;
     addChild(leaf: ILeaf): void;
     insert(leaf: ILeaf): ILeaf;
+    _explore(ancestor: ILeaf, toExplore: ILeaf, toProcess: ILeaf): ILeaf | null;
+    _defineEligibleNodeToSplit(node1: ILeaf, node2: ILeaf): [ILeaf, ILeaf];
+    _processNodeToSplit(ancestor: ILeaf, immutable: ILeaf, toSplit: ILeaf): void;
 }
 export declare class Leaf implements ILeaf {
     key: string;
