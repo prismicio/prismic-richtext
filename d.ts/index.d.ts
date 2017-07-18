@@ -1,15 +1,18 @@
-import { IElement } from '@root/elements';
 export interface ITree {
-    root: ILeaf;
+    root: INode;
 }
-export interface ILeaf {
+export interface INode {
+    key: string;
+    children: ILeaf[];
+}
+export interface ILeaf extends INode {
     key: string;
     start: number;
     end: number;
     type: string;
-    content: IElement;
+    text: string;
+    raw: any;
     children: ILeaf[];
-    isRoot: boolean;
     contains(node: ILeaf): boolean;
     isOutside(node: ILeaf): boolean;
     addChildren(nodes: ILeaf[]): ILeaf;
@@ -18,7 +21,7 @@ export interface ILeaf {
     add(node: ILeaf): ILeaf;
 }
 export declare class Tree implements ITree {
-    root: ILeaf;
+    root: INode;
     private constructor();
     static create(nodes: ILeaf[]): ITree;
 }
@@ -27,10 +30,10 @@ export declare class Leaf implements ILeaf {
     start: number;
     end: number;
     type: string;
-    content: IElement;
+    text: string;
+    raw: any;
     children: ILeaf[];
-    isRoot: boolean;
-    constructor(start: number, end: number, type: string, content: IElement, children?: ILeaf[], isRoot?: boolean);
+    constructor(start: number, end: number, type: string, text: string, raw: any, children?: ILeaf[]);
     contains(node: ILeaf): boolean;
     isOutside(node: ILeaf): boolean;
     copy(params: ILeaf): ILeaf;
