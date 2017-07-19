@@ -1,3 +1,10 @@
+export interface SerializedTree<T> {
+    root: SerializedNode<T>;
+}
+export interface SerializedNode<T> {
+    value: T;
+    children: SerializedNode<T>;
+}
 export interface ITree {
     root: INode;
 }
@@ -41,4 +48,5 @@ export declare class Leaf implements ILeaf {
     addChildren(nodes: ILeaf[]): ILeaf;
     length(): number;
 }
-export declare function asGenericTree(richText: any[], linkResolver: (doc: any, isBroken: boolean) => string): ITree;
+export declare function asGenericTree(richText: any[]): ITree;
+export declare function asSerializedTree<T>(richText: any[], serialize: (text: String, content: any) => T, linkResolver: (doc: any, isBroken: boolean) => string, htmlSerializer: (text: string, content: string) => T): SerializedTree<T>;

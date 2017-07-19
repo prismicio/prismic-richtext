@@ -23,6 +23,15 @@ const PRIORITIES = {
   [ElementKind[ElementKind.span]]: 7
 };
 
+export interface SerializedTree<T> {
+  root: SerializedNode<T>
+}
+
+export interface SerializedNode<T> {
+  value: T,
+  children: SerializedNode<T>
+}
+
 export interface ITree {
   root: INode;
 }
@@ -127,7 +136,7 @@ function subText(text: string, start: number, end: number): string {
   return text.substr(start, length);
 }
 
-function customText(text: string, spans: any[], linkResolver: (doc: any, isBroken: boolean) => string): ILeaf[] {
+function customText(text: string, spans: any[]): ILeaf[] {
   const leaves: ILeaf[] = spans.map((span: any) => {
     const subStrLength = span.end - span.start + 1;
     return new Leaf(span.start, span.end, span.type, text.substr(span.start, subStrLength), span, []);
@@ -154,7 +163,9 @@ function sortByPriorities(leaves: ILeaf[]): ILeaf[] {
   return leaves.sort((a: ILeaf, b: ILeaf): number => {
     const diffPriorities = PRIORITIES[a.type] - PRIORITIES[b.type];
     if(diffPriorities === 0) return a.length() - b.length();
-    else return diffPriorities;
+    else {
+      return b.contains(a) ? 1 : - 1;;
+    }
   });
 }
 
@@ -201,20 +212,28 @@ function splitLeaves(immutable: ILeaf, leaves: ILeaf[]): [ILeaf[], ILeaf[]] {
 }
 
 export function asGenericTree(
-  richText: any[],
-  linkResolver: (doc: any, isBroken: boolean) => string
+  richText: any[]
 ): ITree {
 
   const leaves: ILeaf[] = richText.map((block: any) => {
-    const element: IElement = Element.apply(block, block.text, linkResolver);
-    const customItems = customText(block.text, block.spans, linkResolver);
+    const customItems = customText(block.text, block.spans);
     const sortedCustomItems = customItems.sort((a: ILeaf, b:ILeaf): number => {
       return a.start - b.start;
     });
     const blockStart = 0;
     const blockEnd = block.text.length - 1;
-    return new Leaf(blockStart, blockEnd, block.type, subText(block.text, blockStart, blockEnd) , sortedCustomItems);
+    return new Leaf(blockStart, blockEnd, block.type, subText(block.text, blockStart, blockEnd), {}, sortedCustomItems);
   });
 
   return Tree.create(leaves);
+}
+
+export function asSerializedTree <T>(
+  richText: any[],
+  serialize: (text: String, content: any) => T,
+  linkResolver: (doc: any, isBroken: boolean) => string,
+  htmlSerializer: (text: string, content: string) => T
+): SerializedTree<T> {
+
+  return {} as SerializedTree<T>;
 }
