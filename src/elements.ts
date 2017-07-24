@@ -22,6 +22,28 @@ export enum ElementKind {
   span
 };
 
+export const ElementKindAsObj: any = {
+  heading1: "heading1",
+  heading2: "heading2",
+  heading3: "heading3",
+  heading4: "heading4",
+  heading5: "heading5",
+  heading6: "heading6",
+  paragraph: "paragraph",
+  preformatted: "preformatted",
+  strong: "strong",
+  em: "em",
+  listItem: "list-item",
+  oListItem: "o-list-item",
+  list: "group-list-item",
+  oList: "group-o-list-item",
+  image: "image",
+  embed: "embed",
+  hyperlink: "hyperlink",
+  label: "label",
+  span: "span"
+};
+
 export interface IElement {
   kind: ElementKind;
   value: any;
@@ -203,6 +225,30 @@ export class Span implements IElement {
 }
 
 export const Element = {
+  containsText(element: any): boolean {
+    return !(element.type === 'image' || element.embed === 'embed');
+  },
+
+  isList(elem: any): boolean {
+    return !!elem && ElementKindAsObj.list === elem.type;
+  },
+
+  isOrderedList(elem: any): boolean {
+    return !!elem && ElementKindAsObj.oList === elem.type;
+  },
+
+  isListItem(elem: any): boolean {
+    return !!elem && ElementKindAsObj.listItem === elem.type;
+  },
+
+  isOrderedListItem(elem: any): boolean {
+    return !!elem && ElementKindAsObj.oListItem === elem.type;
+  },
+
+  isSpan(elem: any): boolean {
+    return !!elem && ElementKindAsObj.span === elem.type;
+  },
+
   apply(element: any, content: string, linkResolver: (doc: any, isBroken: boolean) => string): IElement {
     switch(element.type) {
       case 'heading1': return new Heading(element, 1, content);

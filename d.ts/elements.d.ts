@@ -19,6 +19,7 @@ export declare enum ElementKind {
     label = 17,
     span = 18,
 }
+export declare const ElementKindAsObj: any;
 export interface IElement {
     kind: ElementKind;
     value: any;
@@ -103,5 +104,11 @@ export declare class Span implements IElement {
     constructor(value: any, content: string);
 }
 export declare const Element: {
+    containsText(element: any): boolean;
+    isList(elem: any): boolean;
+    isOrderedList(elem: any): boolean;
+    isListItem(elem: any): boolean;
+    isOrderedListItem(elem: any): boolean;
+    isSpan(elem: any): boolean;
     apply(element: any, content: string, linkResolver: (doc: any, isBroken: boolean) => string): IElement;
 };
