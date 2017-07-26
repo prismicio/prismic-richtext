@@ -1,4 +1,4 @@
-import LinkHelper from '@root/link';
+import { Link as LinkHelper } from 'prismic-helpers';
 
 export enum ElementKind {
   heading1,

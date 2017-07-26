@@ -4,7 +4,7 @@
     "declaration": true,
     "declarationDir": "../d.ts",
     "module": "commonjs",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "preserveConstEnums": true,
     "removeComments": false,
     "sourceMap": true,
