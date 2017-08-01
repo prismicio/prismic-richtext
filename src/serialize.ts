@@ -20,7 +20,7 @@ function serializeNode<T>(
     }, []);
 
     return htmlSerializer && htmlSerializer(node.raw, node.text) ||
-      serialize(node.type, node.raw, node.text || null, node.children.length > 0 ? serializedChildren : null);
+      serialize(node.type, node.raw, node.text || null, serializedChildren);
   }
   return exec(node);
 }
