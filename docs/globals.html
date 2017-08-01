@@ -87,8 +87,6 @@
 								<li class="tsd-kind-class"><a href="classes/listitem.html" class="tsd-kind-icon">List<wbr>Item</a></li>
 								<li class="tsd-kind-class"><a href="classes/paragraph.html" class="tsd-kind-icon">Paragraph</a></li>
 								<li class="tsd-kind-class"><a href="classes/preformatted.html" class="tsd-kind-icon">Preformatted</a></li>
-								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/serializednode.html" class="tsd-kind-icon">Serialized<wbr>Node</a></li>
-								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/serializedtree.html" class="tsd-kind-icon">Serialized<wbr>Tree</a></li>
 								<li class="tsd-kind-class"><a href="classes/span.html" class="tsd-kind-icon">Span</a></li>
 								<li class="tsd-kind-class"><a href="classes/strong.html" class="tsd-kind-icon">Strong</a></li>
 								<li class="tsd-kind-class"><a href="classes/tree.html" class="tsd-kind-icon">Tree</a></li>
@@ -100,9 +98,6 @@
 								<li class="tsd-kind-interface"><a href="interfaces/ielement.html" class="tsd-kind-icon">IElement</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ileaf.html" class="tsd-kind-icon">ILeaf</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/inode.html" class="tsd-kind-icon">INode</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/iserializednode.html" class="tsd-kind-icon">ISerialized<wbr>Node</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/iserializedroot.html" class="tsd-kind-icon">ISerialized<wbr>Root</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/iserializedtree.html" class="tsd-kind-icon">ISerialized<wbr>Tree</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/itree.html" class="tsd-kind-icon">ITree</a></li>
 							</ul>
 						</section>
@@ -110,6 +105,8 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#customtext" class="tsd-kind-icon">custom<wbr>Text</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#fromrichtext" class="tsd-kind-icon">from<wbr>Rich<wbr>Text</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter tsd-is-not-exported"><a href="globals.html#serializenode" class="tsd-kind-icon">serialize<wbr>Node</a></li>
 								<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#sortbypriorities" class="tsd-kind-icon">sort<wbr>ByPriorities</a></li>
 								<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#splitleaves" class="tsd-kind-icon">split<wbr>Leaves</a></li>
 								<li class="tsd-kind-function tsd-is-not-exported"><a href="globals.html#subtext" class="tsd-kind-icon">sub<wbr>Text</a></li>
@@ -120,6 +117,7 @@
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-object-literal"><a href="globals.html#element" class="tsd-kind-icon">Element</a></li>
+								<li class="tsd-kind-object-literal"><a href="globals.html#elementkindasobj" class="tsd-kind-icon">Element<wbr>Kind<wbr>AsObj</a></li>
 								<li class="tsd-kind-object-literal tsd-is-not-exported"><a href="globals.html#priorities" class="tsd-kind-icon">PRIORITIES</a></li>
 							</ul>
 						</section>
@@ -132,13 +130,13 @@
 					<a name="customtext" class="tsd-anchor"></a>
 					<h3>custom<wbr>Text</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">custom<wbr>Text<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, spans<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">custom<wbr>Text<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, spans<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in generic.ts:147</li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L182">generic.ts:182</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -147,10 +145,176 @@
 									<h5>text: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>spans: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> spans: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="fromrichtext" class="tsd-anchor"></a>
+					<h3>from<wbr>Rich<wbr>Text</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Rich<wbr>Text&lt;T&gt;<span class="tsd-signature-symbol">(</span>richText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, serialize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, htmlSerializer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/serialize.ts#L3">serialize.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>richText: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>serialize: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, children<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>type: <span class="tsd-signature-type">string</span></h5>
+														</li>
+														<li>
+															<h5>data: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>text: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+														</li>
+														<li>
+															<h5>children: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5>htmlSerializer: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>data: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>text: <span class="tsd-signature-type">string</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+					<a name="serializenode" class="tsd-anchor"></a>
+					<h3>serialize<wbr>Node</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">serialize<wbr>Node&lt;T&gt;<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a>, serialize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, htmlSerializer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/serialize.ts#L11">serialize.ts:11</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a></h5>
+								</li>
+								<li>
+									<h5>serialize: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, children<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>type: <span class="tsd-signature-type">string</span></h5>
+														</li>
+														<li>
+															<h5>data: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>text: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+														</li>
+														<li>
+															<h5>children: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5>htmlSerializer: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>data: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> text: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -164,7 +328,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in generic.ts:170</li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L204">generic.ts:204</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -181,17 +345,20 @@
 					<a name="splitleaves" class="tsd-anchor"></a>
 					<h3>split<wbr>Leaves</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">split<wbr>Leaves<span class="tsd-signature-symbol">(</span>immutable<span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a>, leaves<span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span></li>
+						<li class="tsd-signature tsd-kind-icon">split<wbr>Leaves<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, immutable<span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a>, leaves<span class="tsd-signature-symbol">: </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in generic.ts:180</li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L216">generic.ts:216</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>text: <span class="tsd-signature-type">string</span></h5>
+								</li>
 								<li>
 									<h5>immutable: <a href="interfaces/ileaf.html" class="tsd-signature-type">ILeaf</a></h5>
 								</li>
@@ -207,19 +374,19 @@
 					<a name="subtext" class="tsd-anchor"></a>
 					<h3>sub<wbr>Text</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">sub<wbr>Text<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, start<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">sub<wbr>Text<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, start<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in generic.ts:142</li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L177">generic.ts:177</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>text: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> text: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></h5>
 								</li>
 								<li>
 									<h5>start: <span class="tsd-signature-type">number</span></h5>
@@ -242,7 +409,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/7bd17e3/src/uuid.ts#L1">uuid.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/uuid.ts#L1">uuid.ts:1</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -258,7 +425,7 @@
 					<div class="tsd-signature tsd-kind-icon">Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/7bd17e3/src/elements.ts#L205">elements.ts:205</a></li>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L227">elements.ts:227</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
@@ -271,7 +438,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/7bd17e3/src/elements.ts#L206">elements.ts:206</a></li>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L252">elements.ts:252</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -311,6 +478,344 @@
 							</li>
 						</ul>
 					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.containstext" class="tsd-anchor"></a>
+						<h3>contains<wbr>Text</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">contains<wbr>Text<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L228">elements.ts:228</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>element: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.islist" class="tsd-anchor"></a>
+						<h3>is<wbr>List</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">is<wbr>List<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L232">elements.ts:232</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>elem: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.islistitem" class="tsd-anchor"></a>
+						<h3>is<wbr>List<wbr>Item</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">is<wbr>List<wbr>Item<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L240">elements.ts:240</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>elem: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.isorderedlist" class="tsd-anchor"></a>
+						<h3>is<wbr>Ordered<wbr>List</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">is<wbr>Ordered<wbr>List<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L236">elements.ts:236</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>elem: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.isorderedlistitem" class="tsd-anchor"></a>
+						<h3>is<wbr>Ordered<wbr>List<wbr>Item</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">is<wbr>Ordered<wbr>List<wbr>Item<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L244">elements.ts:244</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>elem: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
+						<a name="element.isspan" class="tsd-anchor"></a>
+						<h3>is<wbr>Span</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
+							<li class="tsd-signature tsd-kind-icon">is<wbr>Span<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L248">elements.ts:248</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>elem: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal">
+					<a name="elementkindasobj" class="tsd-anchor"></a>
+					<h3>Element<wbr>Kind<wbr>AsObj</h3>
+					<div class="tsd-signature tsd-kind-icon">Element<wbr>Kind<wbr>AsObj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L25">elements.ts:25</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.em" class="tsd-anchor"></a>
+						<h3>em</h3>
+						<div class="tsd-signature tsd-kind-icon">em<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;em&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L35">elements.ts:35</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.embed" class="tsd-anchor"></a>
+						<h3>embed</h3>
+						<div class="tsd-signature tsd-kind-icon">embed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;embed&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L41">elements.ts:41</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading1" class="tsd-anchor"></a>
+						<h3>heading1</h3>
+						<div class="tsd-signature tsd-kind-icon">heading1<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading1&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L26">elements.ts:26</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading2" class="tsd-anchor"></a>
+						<h3>heading2</h3>
+						<div class="tsd-signature tsd-kind-icon">heading2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading2&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L27">elements.ts:27</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading3" class="tsd-anchor"></a>
+						<h3>heading3</h3>
+						<div class="tsd-signature tsd-kind-icon">heading3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading3&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L28">elements.ts:28</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading4" class="tsd-anchor"></a>
+						<h3>heading4</h3>
+						<div class="tsd-signature tsd-kind-icon">heading4<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading4&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L29">elements.ts:29</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading5" class="tsd-anchor"></a>
+						<h3>heading5</h3>
+						<div class="tsd-signature tsd-kind-icon">heading5<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading5&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L30">elements.ts:30</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.heading6" class="tsd-anchor"></a>
+						<h3>heading6</h3>
+						<div class="tsd-signature tsd-kind-icon">heading6<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;heading6&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L31">elements.ts:31</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.hyperlink" class="tsd-anchor"></a>
+						<h3>hyperlink</h3>
+						<div class="tsd-signature tsd-kind-icon">hyperlink<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;hyperlink&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L42">elements.ts:42</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.image" class="tsd-anchor"></a>
+						<h3>image</h3>
+						<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;image&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L40">elements.ts:40</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.label" class="tsd-anchor"></a>
+						<h3>label</h3>
+						<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;label&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L43">elements.ts:43</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.list" class="tsd-anchor"></a>
+						<h3>list</h3>
+						<div class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;group-list-item&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L38">elements.ts:38</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.listitem" class="tsd-anchor"></a>
+						<h3>list<wbr>Item</h3>
+						<div class="tsd-signature tsd-kind-icon">list<wbr>Item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;list-item&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L36">elements.ts:36</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.olist" class="tsd-anchor"></a>
+						<h3>o<wbr>List</h3>
+						<div class="tsd-signature tsd-kind-icon">o<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;group-o-list-item&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L39">elements.ts:39</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.olistitem" class="tsd-anchor"></a>
+						<h3>o<wbr>List<wbr>Item</h3>
+						<div class="tsd-signature tsd-kind-icon">o<wbr>List<wbr>Item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;o-list-item&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L37">elements.ts:37</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.paragraph" class="tsd-anchor"></a>
+						<h3>paragraph</h3>
+						<div class="tsd-signature tsd-kind-icon">paragraph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;paragraph&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L32">elements.ts:32</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.preformatted" class="tsd-anchor"></a>
+						<h3>preformatted</h3>
+						<div class="tsd-signature tsd-kind-icon">preformatted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;preformatted&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L33">elements.ts:33</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.span" class="tsd-anchor"></a>
+						<h3>span</h3>
+						<div class="tsd-signature tsd-kind-icon">span<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;span&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L44">elements.ts:44</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="elementkindasobj.strong" class="tsd-anchor"></a>
+						<h3>strong</h3>
+						<div class="tsd-signature tsd-kind-icon">strong<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;strong&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/elements.ts#L34">elements.ts:34</a></li>
+							</ul>
+						</aside>
+					</section>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-is-not-exported">
 					<a name="priorities" class="tsd-anchor"></a>
@@ -318,7 +823,7 @@
 					<div class="tsd-signature tsd-kind-icon">PRIORITIES<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in generic.ts:4</li>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L4">generic.ts:4</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -327,25 +832,25 @@
 						<div class="tsd-signature tsd-kind-icon">__computed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;7</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in generic.ts:5</li>
-								<li>Defined in generic.ts:6</li>
-								<li>Defined in generic.ts:7</li>
-								<li>Defined in generic.ts:8</li>
-								<li>Defined in generic.ts:9</li>
-								<li>Defined in generic.ts:10</li>
-								<li>Defined in generic.ts:11</li>
-								<li>Defined in generic.ts:12</li>
-								<li>Defined in generic.ts:13</li>
-								<li>Defined in generic.ts:14</li>
-								<li>Defined in generic.ts:15</li>
-								<li>Defined in generic.ts:16</li>
-								<li>Defined in generic.ts:17</li>
-								<li>Defined in generic.ts:18</li>
-								<li>Defined in generic.ts:19</li>
-								<li>Defined in generic.ts:20</li>
-								<li>Defined in generic.ts:21</li>
-								<li>Defined in generic.ts:22</li>
-								<li>Defined in generic.ts:23</li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L5">generic.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L6">generic.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L7">generic.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L8">generic.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L9">generic.ts:9</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L10">generic.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L11">generic.ts:11</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L12">generic.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L13">generic.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L14">generic.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L15">generic.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L16">generic.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L17">generic.ts:17</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L18">generic.ts:18</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L19">generic.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L20">generic.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L21">generic.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L22">generic.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/8cf0fa3/src/generic.ts#L23">generic.ts:23</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -398,12 +903,6 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/preformatted.html" class="tsd-kind-icon">Preformatted</a>
 					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/serializednode.html" class="tsd-kind-icon">Serialized<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/serializedtree.html" class="tsd-kind-icon">Serialized<wbr>Tree</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/span.html" class="tsd-kind-icon">Span</a>
 					</li>
@@ -422,20 +921,17 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/inode.html" class="tsd-kind-icon">INode</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/iserializednode.html" class="tsd-kind-icon">ISerialized<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/iserializedroot.html" class="tsd-kind-icon">ISerialized<wbr>Root</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/iserializedtree.html" class="tsd-kind-icon">ISerialized<wbr>Tree</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/itree.html" class="tsd-kind-icon">ITree</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#customtext" class="tsd-kind-icon">custom<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#fromrichtext" class="tsd-kind-icon">from<wbr>Rich<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+						<a href="globals.html#serializenode" class="tsd-kind-icon">serialize<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#sortbypriorities" class="tsd-kind-icon">sort<wbr>ByPriorities</a>
@@ -451,6 +947,9 @@
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#element" class="tsd-kind-icon">Element</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#elementkindasobj" class="tsd-kind-icon">Element<wbr>Kind<wbr>AsObj</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-is-not-exported">
 						<a href="globals.html#priorities" class="tsd-kind-icon">PRIORITIES</a>
