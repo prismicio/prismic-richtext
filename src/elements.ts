@@ -226,7 +226,7 @@ export class Span implements IElement {
 
 export const Element = {
   containsText(element: any): boolean {
-    return !(element.type === 'image' || element.embed === 'embed');
+    return !(element.type === 'image' || element.type === 'embed');
   },
 
   isList(elem: any): boolean {
