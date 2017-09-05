@@ -136,7 +136,7 @@ export class Leaf implements ILeaf {
   }
 
   isOutside(node: ILeaf): boolean {
-    return (this.start < node.start && this.end < node.start) || (this.start > node.end && this.end > node.end);
+    return (this.start < node.start && this.end <= node.start) || (this.start >= node.end && this.end > node.end);
   }
 
   copy(params: ILeaf): ILeaf {
@@ -170,7 +170,7 @@ export class Leaf implements ILeaf {
   }
 
   length(): number {
-    return this.start - this.end + 1;
+    return this.start - this.end;
   }
 }
 
@@ -184,7 +184,7 @@ function customText(text: string, spans: any[] = []): ILeaf[] {
     return new Leaf(span.start, span.end, span.type, span, [], subText(text, span.start, span.end));
   });
 
-  const textLeaf = new Leaf(0, text.length - 1, ElementKind[ElementKind.span], {}, [], text);
+  const textLeaf = new Leaf(0, text.length, ElementKind[ElementKind.span], {}, [], text);
   const leavesWithText = [textLeaf].concat(leaves);
 
   return (function processLeaves(leaves: ILeaf[]): ILeaf[] {
@@ -192,7 +192,6 @@ function customText(text: string, spans: any[] = []): ILeaf[] {
 
     const [head, ...tail] = sortByPriorities(leaves);
     const [inLeaves, outLeaves] = splitLeaves(text, head, tail instanceof Array ? tail : [tail]);
-
     const inTree = head.addChildren(inLeaves);
     const outTrees = processLeaves(outLeaves);
     
@@ -230,20 +229,20 @@ function splitLeaves(text: string, immutable: ILeaf, leaves: ILeaf[]): [ILeaf[],
         const inNode = toSplit.copy({start: immutable.start, end: immutable.end, text: immutable.text} as ILeaf);
 
         const outLeft = immutable.start > toSplit.start ? subNode(toSplit, toSplit.start, immutable.start) : null;
-        const outRight = immutable.end < toSplit.end ? subNode(toSplit, immutable.end, toSplit.end + 1) : null;
+        const outRight = immutable.end < toSplit.end ? subNode(toSplit, immutable.end, toSplit.end) : null;
         
         const outNodes = [outLeft, outRight].filter(n => n !== null) as ILeaf[];
         return [[inNode], outNodes];
       
       //left part is inside
       } else if(immutable.start <= toSplit.start && immutable.end < toSplit.end) {
-        const inNode = subNode(toSplit, toSplit.start, immutable.end + 1);
-        const outNode = subNode(toSplit, immutable.end + 1, toSplit.end + 1);
+        const inNode = subNode(toSplit, toSplit.start, immutable.end);
+        const outNode = subNode(toSplit, immutable.end, toSplit.end);
         return [[inNode], [outNode]];
 
         //right part inside
       } else if(immutable.start > toSplit.start && immutable.end >= toSplit.end) {
-        const inNode = subNode(toSplit, immutable.start, toSplit.end + 1);
+        const inNode = subNode(toSplit, immutable.start, toSplit.end);
         const outNode = subNode(toSplit, toSplit.start, immutable.start);
         return [[inNode], [outNode]];
       } else {
