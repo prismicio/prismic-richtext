@@ -1,6 +1,6 @@
 {
   "name": "prismic-richtext",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization",
   "main": "dist/prismic-richtext.min.js",
   "scripts": {
