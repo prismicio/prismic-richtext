@@ -19,7 +19,7 @@ function serializeNode<T>(
       return acc.concat([exec(node)]);
     }, []);
 
-    return htmlSerializer && htmlSerializer(node.raw, node.text) ||
+    return htmlSerializer && htmlSerializer(node, node.text) ||
       serialize(node.type, node.raw, node.text || null, serializedChildren);
   }
   return exec(node);
