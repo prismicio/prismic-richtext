@@ -70,7 +70,7 @@ export class Tree implements ITree {
           return a.start - b.start;
         });
         const blockStart = 0;
-        const blockEnd = block.text.length - 1;
+        const blockEnd = block.text.length;
 
         const tail = acc.length > 0 ? acc[acc.length -1] : null;
 
@@ -184,7 +184,7 @@ function customText(text: string, spans: any[] = []): ILeaf[] {
     return new Leaf(span.start, span.end, span.type, span, [], subText(text, span.start, span.end));
   });
 
-  const textLeaf = new Leaf(0, text.length, ElementKind[ElementKind.span], {}, [], text);
+  const textLeaf = new Leaf(0, text.length, ElementKind[ElementKind.span], { type: ElementKind[ElementKind.span] }, [], text);
   const leavesWithText = [textLeaf].concat(leaves);
 
   return (function processLeaves(leaves: ILeaf[]): ILeaf[] {
