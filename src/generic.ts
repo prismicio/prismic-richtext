@@ -90,12 +90,12 @@ export class Tree implements ITree {
         
         } else if(Element.isListItem(block)) {
           const listItemLeaf = new Leaf(blockStart, blockEnd, block.type, block, sortedCustomItems, subText(block.text, blockStart, blockEnd))
-          const listLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.list, {}, [listItemLeaf]);
+          const listLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.list, { type: ElementKindAsObj.list }, [listItemLeaf]);
           return acc.concat([listLeaf]);
 
         } else if(Element.isOrderedListItem(block)) {
           const oListItemLeaf = new Leaf(blockStart, blockEnd, block.type, block, sortedCustomItems, subText(block.text, blockStart, blockEnd))
-          const oListLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.oList, {}, [oListItemLeaf]);
+          const oListLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.oList, { type: ElementKindAsObj.oList }, [oListItemLeaf]);
           return acc.concat([oListLeaf]);
 
         } else {
