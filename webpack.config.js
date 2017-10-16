@@ -31,11 +31,7 @@ var config = {
         test: /\.ts$/,
         enforce: 'pre',
         loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          emitErrors: true,
-          failOnHint: true
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.json$/,

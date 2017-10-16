@@ -1,6 +1,6 @@
 import { Tree, ITree, ILeaf } from '@root/generic';
 
-function fromRichText<T>(richText: any[], serialize: (type: string, data: any, text: string | null, children: T[] | null) => T, htmlSerializer: (data: any, text: string) => T): T[] {
+function fromRichText<T>(richText: any[], serialize: (type: string, data: any, text: string | null, children: T[] | null) => T, htmlSerializer: (data: any, text: string | null, children: T[] | null) => T): T[] {
   const genericTree = Tree.fromRichText(richText);
   const children: T[] = genericTree.root.children.map((leaf: ILeaf) => {
     return serializeNode<T>(leaf, serialize, htmlSerializer);
@@ -11,7 +11,7 @@ function fromRichText<T>(richText: any[], serialize: (type: string, data: any, t
 function serializeNode<T>(
   node: ILeaf,
   serialize: (type: string, data: any, text: string | null, children: T[] | null) => T,
-  htmlSerializer: (data: any, text?: string) => T
+  htmlSerializer: (data: any, text?: string | null, children?: T[] | null) => T
 ): T {
 
   function exec(node: ILeaf): T {
@@ -19,7 +19,7 @@ function serializeNode<T>(
       return acc.concat([exec(node)]);
     }, []);
 
-    return htmlSerializer && htmlSerializer(node, node.text) ||
+    return htmlSerializer && htmlSerializer(node.raw, node.text || null, serializedChildren) ||
       serialize(node.type, node.raw, node.text || null, serializedChildren);
   }
   return exec(node);

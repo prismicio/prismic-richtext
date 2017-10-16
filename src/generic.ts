@@ -70,7 +70,7 @@ export class Tree implements ITree {
           return a.start - b.start;
         });
         const blockStart = 0;
-        const blockEnd = block.text.length - 1;
+        const blockEnd = block.text.length;
 
         const tail = acc.length > 0 ? acc[acc.length -1] : null;
 
@@ -90,12 +90,12 @@ export class Tree implements ITree {
         
         } else if(Element.isListItem(block)) {
           const listItemLeaf = new Leaf(blockStart, blockEnd, block.type, block, sortedCustomItems, subText(block.text, blockStart, blockEnd))
-          const listLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.list, {}, [listItemLeaf]);
+          const listLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.list, { type: ElementKindAsObj.list }, [listItemLeaf]);
           return acc.concat([listLeaf]);
 
         } else if(Element.isOrderedListItem(block)) {
           const oListItemLeaf = new Leaf(blockStart, blockEnd, block.type, block, sortedCustomItems, subText(block.text, blockStart, blockEnd))
-          const oListLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.oList, {}, [oListItemLeaf]);
+          const oListLeaf = new Leaf(blockStart, blockEnd, ElementKindAsObj.oList, { type: ElementKindAsObj.oList }, [oListItemLeaf]);
           return acc.concat([oListLeaf]);
 
         } else {
@@ -184,7 +184,7 @@ function customText(text: string, spans: any[] = []): ILeaf[] {
     return new Leaf(span.start, span.end, span.type, span, [], subText(text, span.start, span.end));
   });
 
-  const textLeaf = new Leaf(0, text.length, ElementKind[ElementKind.span], {}, [], text);
+  const textLeaf = new Leaf(0, text.length, ElementKind[ElementKind.span], { type: ElementKind[ElementKind.span] }, [], text);
   const leavesWithText = [textLeaf].concat(leaves);
 
   return (function processLeaves(leaves: ILeaf[]): ILeaf[] {
