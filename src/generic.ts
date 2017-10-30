@@ -62,7 +62,6 @@ export class Tree implements ITree {
   static fromRichText(
     richText: any[]
   ): ITree {
-
     const leaves: ILeaf[] = richText.reduce<ILeaf[]>((acc: ILeaf[], block: any): ILeaf[] => {
       if(Element.containsText(block)) {
         const customItems = customText(block.text, block.spans);
@@ -192,7 +191,7 @@ function customText(text: string, spans: any[] = []): ILeaf[] {
 
     const [head, ...tail] = sortByPriorities(leaves);
     const [inLeaves, outLeaves] = splitLeaves(text, head, tail instanceof Array ? tail : [tail]);
-    const inTree = head.addChildren(inLeaves);
+    const inTree = head.addChildren(processLeaves(inLeaves));
     const outTrees = processLeaves(outLeaves);
     
     return [inTree].concat(outTrees);
