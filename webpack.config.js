@@ -29,21 +29,12 @@ var config = {
     rules: [
       {
         test: /\.ts$/,
-        enforce: 'pre',
-        loader: 'ts-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader'
+        loader: 'ts-loader'
       }
     ]
   },
   resolve: {
-    alias:{
-      "@root": path.resolve( __dirname, './src' )
-    },
-    extensions: ['.ts']
+    extensions: ['.ts', '.js']
   },
   plugins: plugins
 };

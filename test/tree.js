@@ -1,7 +1,8 @@
 var path = require('path');
 var PrismicRichText = require(path.join(__dirname, '../', 'dist', 'prismic-richtext.min.js'));
+console.log(PrismicRichText);
 
-describe('Engine', function() {
+describe('Tree', function() {
 
   it('', function() {
     var richtext = [
@@ -22,7 +23,7 @@ describe('Engine', function() {
       }
     ];
 
-    var tree = PrismicRichText.asTree1(richtext);
+    var tree = PrismicRichText.asTree(richtext);
     console.log(JSON.stringify(tree, null, 2));
   });
 });

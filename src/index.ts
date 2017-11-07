@@ -1,6 +1,5 @@
-import Engine from '@root/engine';
-import Serialize from '@root/serialize';
-import { ElementKindAsObj } from '@root/elements';
+import Tree from "./tree";
+import Serialize from "./serialize";
 
 module.exports = {
   asText: (richtext: any) => {
@@ -8,7 +7,7 @@ module.exports = {
       return `${acc} ${block.text}`;
     }, '\n');
   },
-  asTree: Engine.fromRichText,
+  asTree: Tree.fromRichText,
   serialize: Serialize,
-  Elements: ElementKindAsObj
-}
+  Elements: Tree.NODE_TYPES,
+};
