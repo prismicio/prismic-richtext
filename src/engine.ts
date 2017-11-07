@@ -33,26 +33,34 @@ export interface Node {
   key: string;
   start: number;
   end: number;
-  tag: string;
+  type: string;
   text: string;
   children: Node[];
+  span: RichTextSpan;
 }
 
 class TextNode implements Node {
   key: string;
   start: number;
   end: number;
-  tag: string;
+  type: string;
   text: string;
   children: Node[];
+  span: RichTextSpan;
 
   constructor(start: number, end: number, text: string) {
     this.key = uuid();
     this.start = start;
     this.end = end;
-    this.tag = ElementKind[ElementKind.span];
+    this.type = ElementKind[ElementKind.span];
     this.text = text;
     this.children = [];
+    this.span = {
+      type: ElementKind[ElementKind.span],
+      start,
+      end,
+      text,
+    };
   }
 }
 
@@ -142,7 +150,7 @@ function electNode(candidates: Node[]): Group {
   if (candidates.length === 0) {
     throw new Error('Unable to elect node on empty list');    
   } else {
-    const [elected, ...others] = R.sortBy((node: Node) => PRIORITIES[node.tag], candidates);
+    const [elected, ...others] = R.sortBy((node: Node) => PRIORITIES[node.type], candidates);
     return { elected, others };
   }
 }
@@ -193,9 +201,10 @@ function processTextBlock(block: RichTextBlock): Tree {
       key: uuid(),
       start: span.start,
       end: span.end,
-      tag: span.type,
+      type: span.type,
       text: block.text.slice(span.start, span.end),
       children: [],
+      span,
     };
   });
 

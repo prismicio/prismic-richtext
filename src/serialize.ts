@@ -1,28 +1,26 @@
-import { Tree, ITree, ILeaf } from '@root/generic';
+import Engine, { Node, RichTextSpan } from '@root/engine';
 
-function fromRichText<T>(richText: any[], serialize: (type: string, data: any, text: string | null, children: T[] | null) => T, htmlSerializer: (data: any, text: string | null, children: T[] | null) => T): T[] {
-  const genericTree = Tree.fromRichText(richText);
-  const children: T[] = genericTree.root.children.map((leaf: ILeaf) => {
-    return serializeNode<T>(leaf, serialize, htmlSerializer);
-  })
-  return children;
+type Serializer<T> = (type: string, data: RichTextSpan, text: string, children: T[]) => T;
+
+function fromRichText<T>(richText: any[], serialize: Serializer<T>, htmlSerializer: Serializer<T>): T[] {
+  const tree = Engine.fromRichText(richText);
+  return tree.children.map((node: Node) => {
+    return serializeNode<T>(node, serialize, htmlSerializer);
+  });
 }
 
-function serializeNode<T>(
-  node: ILeaf,
-  serialize: (type: string, data: any, text: string | null, children: T[] | null) => T,
-  htmlSerializer: (data: any, text?: string | null, children?: T[] | null) => T
-): T {
+function serializeNode<T>(parentNode: Node, serializer: Serializer<T>, htmlSerializer?: Serializer<T>): T {
+  const serialize = htmlSerializer || serializer;
 
-  function exec(node: ILeaf): T {
-    const serializedChildren = node.children.reduce<T[]>((acc: T[], node: ILeaf) => {
-      return acc.concat([exec(node)]);
+  function step(node: Node): T {
+    const serializedChildren = node.children.reduce<T[]>((acc: T[], node: Node) => {
+      return acc.concat([step(node)]);
     }, []);
 
-    return htmlSerializer && htmlSerializer(node.raw, node.text || null, serializedChildren) ||
-      serialize(node.type, node.raw, node.text || null, serializedChildren);
+    return serialize(node.type, node.span, node.text, serializedChildren);
   }
-  return exec(node);
+
+  return step(parentNode);
 }
 
 export default fromRichText;
