@@ -135,14 +135,14 @@ function groupNodes(nodes: Node[]): Node[][] {
   const sortByStart = (nodeA: Node, nodeB: Node) => nodeA.start < nodeB.start;
   const sortByEnd = (nodeA: Node, nodeB: Node) => nodeA.end < nodeB.end;
   const sortedNodes = R.sortWith([sortByStart, sortByEnd], nodes);
-  return R.groupWith((nodeA, nodeB) => nodeA.end >= nodeB.start, sortedNodes);
+  return R.groupWith((nodeA: Node, nodeB: Node) => nodeA.end >= nodeB.start, sortedNodes);
 }
 
 function electNode(candidates: Node[]): Group {
   if (candidates.length === 0) {
     throw new Error('Unable to elect node on empty list');    
   } else {
-    const [elected, ...others] = R.sortBy(node => PRIORITIES[node.tag], candidates);
+    const [elected, ...others] = R.sortBy((node: Node) => PRIORITIES[node.tag], candidates);
     return { elected, others };
   }
 }
@@ -174,11 +174,11 @@ function fill(text: string, nodes: Node[], lowerBound: number, upperBound: numbe
 
 function buildTree(text: string, nodes: Node[], maybeLowerBound?: number, maybeUpperBound?: number): Node[] {
   if (nodes.length > 0) {
-    const sortedNodes = R.sortBy(node => node.start, nodes);
+    const sortedNodes = R.sortBy((node: Node) => node.start, nodes);
     const groups = groupNodes(sortedNodes);
     const postElection = groups.map(electNode);
     const tree = R.flatten(postElection.map(group => partitionGroup(text, group)));
-    const sortedTree = R.sortBy(node => node.start, tree);
+    const sortedTree = R.sortBy((node: Node) => node.start, tree);
     const lowerBound = maybeLowerBound === undefined ? nodes[0].start : maybeLowerBound;
     const upperBound = maybeUpperBound === undefined ? nodes[nodes.length - 1].end : maybeUpperBound;
     return fill(text, sortedTree, lowerBound, upperBound);

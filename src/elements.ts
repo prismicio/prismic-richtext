@@ -1,4 +1,6 @@
-import { Link as LinkHelper } from 'prismic-helpers';
+///<reference path="prismic-helpers.d.ts" />
+
+import { Link as LinkHelper } from "prismic-helpers";
 
 export enum ElementKind {
   heading1,

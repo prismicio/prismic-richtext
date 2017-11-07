@@ -4,8 +4,8 @@ import Serialize from '@root/serialize';
 import { ElementKindAsObj } from '@root/elements';
 
 module.exports = {
-  asText: (richtext) => {
-    return richtext.reduce((acc, block) => {
+  asText: (richtext: any) => {
+    return richtext.reduce((acc: any, block: any) => {
       return `${acc} ${block.text}`;
     }, '\n');
   },
