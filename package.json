@@ -10,7 +10,8 @@
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
     "posttest": "tslint lib",
-    "test": "jasmine"
+    "test": "mocha",
+    "check": "tsc --pretty --noEmit --project ./tsconfig.json --watch"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,12 @@
   },
   "homepage": "https://github.com/prismicio/prismic-richtext#readme",
   "devDependencies": {
+    "@types/ramda": "github:types/npm-ramda#dist",
+    "chai": "^4.1.2",
     "jasmine": "^2.6.0",
     "jasmine-console-reporter": "^1.2.7",
     "json-stable-stringify": "^1.0.1",
+    "mocha": "^4.0.1",
     "ts-loader": "^2.2.2",
     "tslint": "^5.5.0",
     "typedoc": "^0.7.1",
@@ -35,6 +39,7 @@
   },
   "dependencies": {
     "prismic-helpers": "^1.0.0",
+    "ramda": "^0.25.0",
     "uuid": "^3.1.0"
   }
 }
