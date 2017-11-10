@@ -61,6 +61,11 @@ export class Node {
   }
 }
 
+interface Boundaries {
+  lower: number;
+  upper: number;
+}
+
 export class SpanNode extends Node {
   start: number;
   end: number;
@@ -72,11 +77,22 @@ export class SpanNode extends Node {
     this.start = start;
     this.end = end;
     this.text = text;
-    this.children = children;
+    this.children = children;   
+  }
+
+  boundaries(): Boundaries {
+    return {
+      lower: this.start,
+      upper: this.end,
+    };
   }
 
   isParentOf(node: SpanNode): boolean {
     return this.start <= node.start && this.end >= node.end;
+  }
+
+  setChildren(children: SpanNode[]): SpanNode {
+    return new SpanNode(this.start, this.end, this.type, this.text, children, this.element);
   }
 
   static slice(node: SpanNode, start: number, end: number, text: string): SpanNode {
@@ -245,7 +261,7 @@ function partitionGroup(text: string, group: Group): SpanNode[] {
   }, { inner: [], outer: [] });
 
   const { inner, outer } = partitioned;
-  const head = R.assoc('children', buildTree(text, inner), group.elected);
+  const head = group.elected.setChildren(buildTree(text, inner, group.elected.boundaries()));
   return [head].concat(buildTree(text, outer));
 }
 
@@ -276,13 +292,19 @@ function sortByPriorities(nodes: SpanNode[]): SpanNode[] {
   });
 }
 
-function fill(text: string, nodes: SpanNode[], lowerBound: number, upperBound: number): SpanNode[] {
+function fill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode[] {
   return nodes.reduce((acc: SpanNode[], node, index) => {
-    if (index === 0 && node.start > lowerBound) {
-      const textNode = new TextNode(lowerBound, node.start, text.slice(lowerBound, node.start));
+    const fillStart = index === 0 && node.start > boundaries.lower;
+    const fillEnd = index === nodes.length - 1 && boundaries.upper > node.end;
+    if (fillStart && fillEnd) {
+      const textNodeStart = new TextNode(boundaries.lower, node.start, text.slice(boundaries.lower, node.start));
+      const textNodeEnd = new TextNode(node.end, boundaries.upper, text.slice(node.end, boundaries.upper));
+      return [textNodeStart, node, textNodeEnd];
+    } else if (fillStart) {
+      const textNode = new TextNode(boundaries.lower, node.start, text.slice(boundaries.lower, node.start));
       return [textNode, node];
-    } else if (index === nodes.length - 1 && upperBound > node.end) {
-      const textNode = new TextNode(node.end, upperBound, text.slice(node.end, upperBound));
+    } else if (fillEnd) {
+      const textNode = new TextNode(node.end, boundaries.upper, text.slice(node.end, boundaries.upper));
       return acc.concat([node, textNode]);
     } else {
       const previousNode = nodes[index - 1];
@@ -300,16 +322,21 @@ function fill(text: string, nodes: SpanNode[], lowerBound: number, upperBound: n
   }, []);
 }
 
-function buildTree(text: string, nodes: SpanNode[], maybeLowerBound?: number, maybeUpperBound?: number): SpanNode[] {
+function buildTree(text: string, nodes: SpanNode[], maybeBoundaries?: Boundaries): SpanNode[] {
   if (nodes.length > 0) {
     const sortedNodes: SpanNode[] = R.sortBy((node: SpanNode) => node.start, nodes);
     const groups: SpanNode[][] = groupNodes(sortedNodes);
     const postElection: Group[] = groups.map(electNode);
     const tree: SpanNode[] = R.flatten(postElection.map(group => partitionGroup(text, group)));
     const sortedTree = R.sortBy((node: SpanNode) => node.start, tree);
-    const lowerBound = maybeLowerBound === undefined ? nodes[0].start : maybeLowerBound;
-    const upperBound = maybeUpperBound === undefined ? nodes[nodes.length - 1].end : maybeUpperBound;
-    return fill(text, sortedTree, lowerBound, upperBound);
+    if (maybeBoundaries) {
+      return fill(text, sortedTree, maybeBoundaries);
+    } else {
+      return sortedTree;
+    }
+  } else if (maybeBoundaries) {
+    const subtext = text.slice(maybeBoundaries.lower, maybeBoundaries.upper);
+    return [new TextNode(maybeBoundaries.lower, maybeBoundaries.upper, subtext)];
   } else {
     return [];
   }
@@ -321,7 +348,8 @@ function processTextBlock(block: RichTextBlock): SpanNode[] {
       const text = block.text.slice(span.start, span.end);
       return new SpanNode(span.start, span.end, span.type, text, [], span);
     });
-    return buildTree(block.text, nodes, 0, block.text.length);
+    const boundaries = { lower: 0, upper: block.text.length };
+    return buildTree(block.text, nodes, boundaries);
   } else {
     return [new TextNode(0, block.text.length, block.text)];
   }
