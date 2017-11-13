@@ -1,8 +1,10 @@
-import Tree, { Node, SpanNode, NodeElement } from './tree';
+import Tree from './tree';
+import { Node, SpanNode, NodeElement } from './nodes';
+import { RichTextBlock } from './richtext';
 
 type Serializer<T> = (type: string, element: NodeElement, text: string | null, children: T[]) => T;
 
-function fromRichText<T>(richText: any[], serialize: Serializer<T>, htmlSerializer?: Serializer<T>): T[] {
+function fromRichText<T>(richText: RichTextBlock[], serialize: Serializer<T>, htmlSerializer?: Serializer<T>): T[] {
   const tree = Tree.fromRichText(richText);
   return tree.children.map((node: Node) => {
     return serializeNode<T>(node, serialize, htmlSerializer);

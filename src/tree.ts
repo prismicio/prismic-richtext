@@ -1,222 +1,18 @@
 import * as R from "ramda";
-import uuid from "./uuid";
-
-export const NODE_TYPES = {
-  heading1: "heading1",
-  heading2: "heading2",
-  heading3: "heading3",
-  heading4: "heading4",
-  heading5: "heading5",
-  heading6: "heading6",
-  paragraph: "paragraph",
-  preformatted: "preformatted",
-  strong: "strong",
-  em: "em",
-  listItem: "list-item",
-  oListItem: "o-list-item",
-  list: "group-list-item",
-  oList: "group-o-list-item",
-  image: "image",
-  embed: "embed",
-  hyperlink: "hyperlink",
-  label: "label",
-  span: "span",
-};
-
-const PRIORITIES = {
-  [NODE_TYPES.heading1]: 4,
-  [NODE_TYPES.heading2]: 4,
-  [NODE_TYPES.heading3]: 4,
-  [NODE_TYPES.heading4]: 4,
-  [NODE_TYPES.heading5]: 4,
-  [NODE_TYPES.heading6]: 4,
-  [NODE_TYPES.paragraph]: 3,
-  [NODE_TYPES.preformatted]: 5,
-  [NODE_TYPES.strong]: 6,
-  [NODE_TYPES.em]: 6,
-  [NODE_TYPES.oList]: 1,
-  [NODE_TYPES.list]: 1,
-  [NODE_TYPES.listItem]: 1,
-  [NODE_TYPES.oListItem]: 1,
-  [NODE_TYPES.image]: 1,
-  [NODE_TYPES.embed]: 1,
-  [NODE_TYPES.hyperlink]: 3,
-  [NODE_TYPES.label]: 4,
-  [NODE_TYPES.span]: 7,
-};
-
-export type NodeElement = RichTextSpan | RichTextBlock; 
-
-export class Node {
-  key: string;
-  type: string;
-  element: NodeElement;
-  children: Node[];
-
-  constructor(type: string, element: NodeElement, children: Node[]) {
-    this.key = uuid();
-    this.type = type;
-    this.element = element;
-    this.children = children;
-  }
-}
-
-interface Boundaries {
-  lower: number;
-  upper: number;
-}
-
-export class SpanNode extends Node {
-  start: number;
-  end: number;
-  text: string;
-  children: SpanNode[];
-
-  constructor(start: number, end: number, type: string, text: string, children: SpanNode[], element: NodeElement) {
-    super(type, element, children);
-    this.start = start;
-    this.end = end;
-    this.text = text;
-    this.children = children;   
-  }
-
-  boundaries(): Boundaries {
-    return {
-      lower: this.start,
-      upper: this.end,
-    };
-  }
-
-  isParentOf(node: SpanNode): boolean {
-    return this.start <= node.start && this.end >= node.end;
-  }
-
-  setChildren(children: SpanNode[]): SpanNode {
-    return new SpanNode(this.start, this.end, this.type, this.text, children, this.element);
-  }
-
-  static slice(node: SpanNode, start: number, end: number, text: string): SpanNode {
-    return new SpanNode(start, end, node.type, text.slice(start, end), node.children, node.element);
-  }
-}
-
-export class TextNode extends SpanNode {
-
-  constructor(start: number, end: number, text: string) {
-    const element: RichTextSpan = {
-      type: NODE_TYPES.span,
-      start,
-      end,
-      text,
-    };
-
-    super(start, end, NODE_TYPES.span, text, [], element);
-  }
-}
-
-export class BlockNode extends Node {
-
-  constructor(type: string, block: RichTextBlock, children: BlockNode[] = []) {
-    super(type, block, children);
-  }
-}
-
-export class ListItemBlockNode extends BlockNode {
-
-  constructor(block: RichTextBlock, children: SpanNode[]) {
-    super(NODE_TYPES.listItem, block, children);
-  }
-}
-
-export class OrderedListItemBlockNode extends BlockNode {
-
-  constructor(block: RichTextBlock, children: SpanNode[]) {
-    super(NODE_TYPES.oListItem, block, children);
-  }
-}
-
-export class OrderedListBlockNode extends BlockNode {
-
-  constructor(block: RichTextBlock, children: BlockNode[]) {
-    super(NODE_TYPES.oList, block, children);
-  }
-
-  addChild(node: ListItemBlockNode): ListBlockNode {
-    const children = this.children.concat(node);
-    return new OrderedListBlockNode(this.element as RichTextBlock, children);
-  }
-}
-
-export class ListBlockNode extends BlockNode {
-
-  constructor(block: RichTextBlock, children: BlockNode[]) {
-    super(NODE_TYPES.list, block, children);
-  }
-
-  addChild(node: ListItemBlockNode): ListBlockNode {
-    const children = this.children.concat(node);
-    return new ListBlockNode(this.element as RichTextBlock, children);
-  }
-}
-
-export interface RichTextSpan {
-  start: number;
-  end: number;
-  type: string;
-  text: string;
-}
-
-export class RichTextBlock {
-  type: string;
-  text: string;
-  spans: RichTextSpan[];
-
-  constructor(type: string, text: string, spans: RichTextSpan[]) {
-    this.type = type;
-    this.text = text;
-    this.spans = spans;
-  }
-
-  static isEmbedBlock(type: string): boolean {
-    return type === NODE_TYPES.embed;
-  }
-
-  static isImageBlock(type: string): boolean {
-    return type === NODE_TYPES.image;
-  }
-
-  static isList(type: string): boolean {
-    return type === NODE_TYPES.list;
-  }
-
-  static isOrderedList(type: string): boolean {
-    return type === NODE_TYPES.oList;
-  }
-
-  static isListItem(type: string): boolean {
-    return type === NODE_TYPES.listItem;
-  }
-
-  static isOrderedListItem(type: string): boolean {
-    return type === NODE_TYPES.oListItem;
-  }
-
-  static emptyList(): RichTextBlock {
-    return {
-      type: NODE_TYPES.list,
-      spans: [],
-      text: '',
-    };
-  }
-
-  static emptyOrderedList(): RichTextBlock {
-    return {
-      type: NODE_TYPES.oList,
-      spans: [],
-      text: '',
-    };
-  }
-}
+import uuid from './uuid';
+import { RichTextSpan, RichTextBlock } from './richtext';
+import { NODE_TYPES, PRIORITIES } from './types';
+import {
+  Boundaries,
+  Node,
+  SpanNode,
+  TextNode,
+  BlockNode,
+  ListBlockNode,
+  ListItemBlockNode,
+  OrderedListBlockNode,
+  OrderedListItemBlockNode,
+} from './nodes';
 
 export interface Group {
   elected: SpanNode;
@@ -231,6 +27,17 @@ interface SlicedNode {
 interface PartitionedGroup {
   inner: SpanNode[];
   outer: SpanNode[];
+}
+
+function sortByPriorities(nodes: SpanNode[]): SpanNode[] {
+  return nodes.sort((nodeA: SpanNode, nodeB: SpanNode): number => {
+    if (nodeB.isParentOf(nodeA)) {
+      return 1;
+    } else {
+      const result = PRIORITIES[nodeA.type] - PRIORITIES[nodeB.type];
+      return (result === 0) ? (nodeA.text.length - nodeB.text.length) : result;
+    }
+  });
 }
 
 function sliceNode(text: string, elected: SpanNode, node: SpanNode): SlicedNode {
@@ -279,17 +86,6 @@ function electNode(candidates: SpanNode[]): Group {
     const [elected, ...others] = sortByPriorities(candidates);
     return { elected, others };
   }
-}
-
-function sortByPriorities(nodes: SpanNode[]): SpanNode[] {
-  return nodes.sort((nodeA: SpanNode, nodeB: SpanNode): number => {
-    if (nodeB.isParentOf(nodeA)) {
-      return 1;
-    } else {
-      const result = PRIORITIES[nodeA.type] - PRIORITIES[nodeB.type];
-      return (result === 0) ? (nodeA.text.length - nodeB.text.length) : result;
-    }
-  });
 }
 
 function fill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode[] {
