@@ -327,7 +327,7 @@ function buildTree(text: string, nodes: SpanNode[], maybeBoundaries?: Boundaries
     const sortedNodes: SpanNode[] = R.sortBy((node: SpanNode) => node.start, nodes);
     const groups: SpanNode[][] = groupNodes(sortedNodes);
     const postElection: Group[] = groups.map(electNode);
-    const tree: SpanNode[] = R.flatten(postElection.map(group => partitionGroup(text, group)));
+    const tree: SpanNode[] = R.flatten<SpanNode>(postElection.map(group => partitionGroup(text, group)));
     const sortedTree = R.sortBy((node: SpanNode) => node.start, tree);
     if (maybeBoundaries) {
       return fill(text, sortedTree, maybeBoundaries);

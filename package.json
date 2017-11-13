@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/ramda": "^0.25.3",
     "chai": "^4.1.2",
+    "chai-subset": "^1.6.0",
     "mocha": "^4.0.1",
     "ts-loader": "^3.1.1",
     "tslint": "^5.5.0",
