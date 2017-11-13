@@ -68,7 +68,7 @@ function partitionGroup(text: string, group: Group): SpanNode[] {
   }, { inner: [], outer: [] });
 
   const { inner, outer } = partitioned;
-  const head = group.elected.setChildren(buildTree(text, inner, group.elected.boundaries()));
+  const head = group.elected.setChildren(buildTreeAndFill(text, inner, group.elected.boundaries()));
   return [head].concat(buildTree(text, outer));
 }
 
@@ -118,37 +118,31 @@ function fill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode
   }, []);
 }
 
-function buildTree(text: string, nodes: SpanNode[], maybeBoundaries?: Boundaries): SpanNode[] {
+function buildTreeAndFill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode[] {
   if (nodes.length > 0) {
-    const sortedNodes: SpanNode[] = R.sortBy((node: SpanNode) => node.start, nodes);
-    const groups: SpanNode[][] = groupNodes(sortedNodes);
-    const postElection: Group[] = groups.map(electNode);
-    const tree: SpanNode[] = R.flatten<SpanNode>(postElection.map(group => partitionGroup(text, group)));
-    const sortedTree = R.sortBy((node: SpanNode) => node.start, tree);
-    if (maybeBoundaries) {
-      return fill(text, sortedTree, maybeBoundaries);
-    } else {
-      return sortedTree;
-    }
-  } else if (maybeBoundaries) {
-    const subtext = text.slice(maybeBoundaries.lower, maybeBoundaries.upper);
-    return [new TextNode(maybeBoundaries.lower, maybeBoundaries.upper, subtext)];
+    const tree = buildTree(text, nodes);
+    return fill(text, tree, boundaries);
   } else {
-    return [];
+    const subtext = text.slice(boundaries.lower, boundaries.upper);
+    return [new TextNode(boundaries.lower, boundaries.upper, subtext)];
   }
 }
 
+function buildTree(text: string, nodes: SpanNode[]): SpanNode[] {
+  const sortedNodes: SpanNode[] = R.sortBy((node: SpanNode) => node.start, nodes);
+  const groups: SpanNode[][] = groupNodes(sortedNodes);
+  const postElection: Group[] = groups.map(electNode);
+  const tree: SpanNode[] = R.flatten<SpanNode>(postElection.map(group => partitionGroup(text, group)));
+  return R.sortBy((node: SpanNode) => node.start, tree);
+}
+
 function processTextBlock(block: RichTextBlock): SpanNode[] {
-  if (block.spans.length > 0) {
-    const nodes = block.spans.map((span) => {
-      const text = block.text.slice(span.start, span.end);
-      return new SpanNode(span.start, span.end, span.type, text, [], span);
-    });
-    const boundaries = { lower: 0, upper: block.text.length };
-    return buildTree(block.text, nodes, boundaries);
-  } else {
-    return [new TextNode(0, block.text.length, block.text)];
-  }
+  const nodes = block.spans.map((span) => {
+    const text = block.text.slice(span.start, span.end);
+    return new SpanNode(span.start, span.end, span.type, text, [], span);
+  });
+  const boundaries = { lower: 0, upper: block.text.length };
+  return buildTreeAndFill(block.text, nodes, boundaries);
 }
 
 export default class Tree {
