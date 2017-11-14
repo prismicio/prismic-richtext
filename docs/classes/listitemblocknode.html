@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Label | prismic-richtext</title>
+	<title>ListItemBlockNode | prismic-richtext</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="label.html">Label</a>
+					<a href="listitemblocknode.html">ListItemBlockNode</a>
 				</li>
 			</ul>
-			<h1>Class Label</h1>
+			<h1>Class ListItemBlockNode</h1>
 		</div>
 	</div>
 </header>
@@ -70,14 +70,13 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Label</span>
+						<a href="blocknode.html" class="tsd-signature-type">BlockNode</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ListItemBlockNode</span>
+							</li>
+						</ul>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/ielement.html" class="tsd-signature-type">IElement</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -87,15 +86,16 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="label.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="listitemblocknode.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="label.html#content" class="tsd-kind-icon">content</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="label.html#kind" class="tsd-kind-icon">kind</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="label.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="listitemblocknode.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="listitemblocknode.html#element" class="tsd-kind-icon">element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="listitemblocknode.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="listitemblocknode.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,65 +103,77 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Label<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="label.html" class="tsd-signature-type">Label</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>List<wbr>Item<wbr>Block<wbr>Node<span class="tsd-signature-symbol">(</span>block<span class="tsd-signature-symbol">: </span><a href="richtextblock.html" class="tsd-signature-type">RichTextBlock</a>, children<span class="tsd-signature-symbol">: </span><a href="spannode.html" class="tsd-signature-type">SpanNode</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="listitemblocknode.html" class="tsd-signature-type">ListItemBlockNode</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="blocknode.html">BlockNode</a>.<a href="blocknode.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in elements.ts:206</li>
+									<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/996e5ac/src/nodes.ts#L81">nodes.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>block: <a href="richtextblock.html" class="tsd-signature-type">RichTextBlock</a></h5>
 								</li>
 								<li>
-									<h5>content: <span class="tsd-signature-type">string</span></h5>
+									<h5>children: <a href="spannode.html" class="tsd-signature-type">SpanNode</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="label.html" class="tsd-signature-type">Label</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="listitemblocknode.html" class="tsd-signature-type">ListItemBlockNode</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="content" class="tsd-anchor"></a>
-					<h3>content</h3>
-					<div class="tsd-signature tsd-kind-icon">content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="children" class="tsd-anchor"></a>
+					<h3>children</h3>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <a href="node.html" class="tsd-signature-type">Node</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ielement.html">IElement</a>.<a href="../interfaces/ielement.html#content">content</a></p>
+						<p>Inherited from <a href="node.html">Node</a>.<a href="node.html#children">children</a></p>
 						<ul>
-							<li>Defined in elements.ts:206</li>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/996e5ac/src/nodes.ts#L11">nodes.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="kind" class="tsd-anchor"></a>
-					<h3>kind</h3>
-					<div class="tsd-signature tsd-kind-icon">kind<span class="tsd-signature-symbol">:</span> <a href="../enums/elementkind.html" class="tsd-signature-type">ElementKind</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="element" class="tsd-anchor"></a>
+					<h3>element</h3>
+					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <a href="../globals.html#nodeelement" class="tsd-signature-type">NodeElement</a></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ielement.html">IElement</a>.<a href="../interfaces/ielement.html#kind">kind</a></p>
+						<p>Inherited from <a href="node.html">Node</a>.<a href="node.html#element">element</a></p>
 						<ul>
-							<li>Defined in elements.ts:204</li>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/996e5ac/src/nodes.ts#L10">nodes.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/ielement.html">IElement</a>.<a href="../interfaces/ielement.html#value">value</a></p>
+						<p>Inherited from <a href="node.html">Node</a>.<a href="node.html#key">key</a></p>
 						<ul>
-							<li>Defined in elements.ts:205</li>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/996e5ac/src/nodes.ts#L8">nodes.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="node.html">Node</a>.<a href="node.html#type">type</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/prismicio/prismic-richtext/blob/996e5ac/src/nodes.ts#L9">nodes.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,109 +189,121 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/elementkind.html" class="tsd-kind-icon">Element<wbr>Kind</a>
+					<li class=" tsd-kind-class">
+						<a href="blocknode.html" class="tsd-kind-icon">Block<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="embed.html" class="tsd-kind-icon">Embed</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="emphasized.html" class="tsd-kind-icon">Emphasized</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="heading.html" class="tsd-kind-icon">Heading</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="image.html" class="tsd-kind-icon">Image</a>
+						<a href="listblocknode.html" class="tsd-kind-icon">List<wbr>Block<wbr>Node</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="label.html" class="tsd-kind-icon">Label</a>
+						<a href="listitemblocknode.html" class="tsd-kind-icon">List<wbr>Item<wbr>Block<wbr>Node</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="label.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="listitemblocknode.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="label.html#content" class="tsd-kind-icon">content</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="listitemblocknode.html#children" class="tsd-kind-icon">children</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="label.html#kind" class="tsd-kind-icon">kind</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="listitemblocknode.html#element" class="tsd-kind-icon">element</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="label.html#value" class="tsd-kind-icon">value</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="listitemblocknode.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="listitemblocknode.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="leaf.html" class="tsd-kind-icon">Leaf</a>
+						<a href="node.html" class="tsd-kind-icon">Node</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="link.html" class="tsd-kind-icon">Link</a>
+						<a href="orderedlistblocknode.html" class="tsd-kind-icon">Ordered<wbr>List<wbr>Block<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="list.html" class="tsd-kind-icon">List</a>
+						<a href="orderedlistitemblocknode.html" class="tsd-kind-icon">Ordered<wbr>List<wbr>Item<wbr>Block<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="listitem.html" class="tsd-kind-icon">List<wbr>Item</a>
+						<a href="richtextblock.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Block</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="paragraph.html" class="tsd-kind-icon">Paragraph</a>
+						<a href="spannode.html" class="tsd-kind-icon">Span<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="preformatted.html" class="tsd-kind-icon">Preformatted</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="span.html" class="tsd-kind-icon">Span</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="strong.html" class="tsd-kind-icon">Strong</a>
+						<a href="textnode.html" class="tsd-kind-icon">Text<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="tree.html" class="tsd-kind-icon">Tree</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ielement.html" class="tsd-kind-icon">IElement</a>
+						<a href="../interfaces/boundaries.html" class="tsd-kind-icon">Boundaries</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/ileaf.html" class="tsd-kind-icon">ILeaf</a>
+						<a href="../interfaces/group.html" class="tsd-kind-icon">Group</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/partitionedgroup.html" class="tsd-kind-icon">Partitioned<wbr>Group</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/inode.html" class="tsd-kind-icon">INode</a>
+						<a href="../interfaces/richtextspan.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Span</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/itree.html" class="tsd-kind-icon">ITree</a>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/slicednode.html" class="tsd-kind-icon">Sliced<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#nodeelement" class="tsd-kind-icon">Node<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+						<a href="../globals.html#serializer" class="tsd-kind-icon">Serializer</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
-						<a href="../globals.html#customtext" class="tsd-kind-icon">custom<wbr>Text</a>
+						<a href="../globals.html#buildtree" class="tsd-kind-icon">build<wbr>Tree</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#buildtreeandfill" class="tsd-kind-icon">build<wbr>Tree<wbr>And<wbr>Fill</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#electnode" class="tsd-kind-icon">elect<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#fill" class="tsd-kind-icon">fill</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../globals.html#fromrichtext" class="tsd-kind-icon">from<wbr>Rich<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#groupnodes" class="tsd-kind-icon">group<wbr>Nodes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#groupwith" class="tsd-kind-icon">group<wbr>With</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#partitiongroup" class="tsd-kind-icon">partition<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#processtextblock" class="tsd-kind-icon">process<wbr>Text<wbr>Block</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../globals.html#serializenode" class="tsd-kind-icon">serialize<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="../globals.html#slicenode" class="tsd-kind-icon">slice<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="../globals.html#sortbypriorities" class="tsd-kind-icon">sort<wbr>ByPriorities</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-not-exported">
-						<a href="../globals.html#splitleaves" class="tsd-kind-icon">split<wbr>Leaves</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-not-exported">
-						<a href="../globals.html#subtext" class="tsd-kind-icon">sub<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#uuid" class="tsd-kind-icon">uuid</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="../globals.html#element" class="tsd-kind-icon">Element</a>
+						<a href="../globals.html#node_types" class="tsd-kind-icon">NODE_<wbr>TYPES</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="../globals.html#elementkindasobj" class="tsd-kind-icon">Element<wbr>Kind<wbr>AsObj</a>
-					</li>
-					<li class=" tsd-kind-object-literal tsd-is-not-exported">
 						<a href="../globals.html#priorities" class="tsd-kind-icon">PRIORITIES</a>
 					</li>
 				</ul>
