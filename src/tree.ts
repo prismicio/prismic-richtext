@@ -72,11 +72,32 @@ function partitionGroup(text: string, group: Group): SpanNode[] {
   return [head].concat(buildTree(text, outer));
 }
 
+function groupWith(p: (nodeA: SpanNode, nodeB: SpanNode) => boolean, nodes: SpanNode[]): SpanNode[][] {
+  return nodes.reduce<SpanNode[][]>((groups: SpanNode[][], node: SpanNode) => {
+    const previousGroup = R.last(groups);
+    if (previousGroup) {
+      const included = previousGroup.some(nodeGroup => nodeGroup.isParentOf(node));
+      if (included) {
+        return R.init(groups).concat([previousGroup.concat(node)]);
+      } else {
+        const previousNode = R.last(previousGroup);
+        if (previousNode && p(previousNode, node)) {
+          return R.init(groups).concat([previousGroup.concat(node)]);
+        } else {
+          return groups.concat([[node]]);
+        }
+      }
+    } else {
+      return [[node]];
+    }
+  }, []);
+}
+
 function groupNodes(nodes: SpanNode[]): SpanNode[][] {
   const sortByStart = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.start - nodeB.start;
   const sortByEnd = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end - nodeB.end;
   const sortedNodes = R.sortWith([sortByStart, sortByEnd], nodes);
-  return R.groupWith((nodeA: SpanNode, nodeB: SpanNode) => nodeA.end >= nodeB.start, sortedNodes);
+  return groupWith((nodeA: SpanNode, nodeB: SpanNode) => nodeA.end >= nodeB.start, sortedNodes);
 }
 
 function electNode(candidates: SpanNode[]): Group {
@@ -90,31 +111,32 @@ function electNode(candidates: SpanNode[]): Group {
 
 function fill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode[] {
   return nodes.reduce((acc: SpanNode[], node, index) => {
+    let result: SpanNode[] = [];
     const fillStart = index === 0 && node.start > boundaries.lower;
     const fillEnd = index === nodes.length - 1 && boundaries.upper > node.end;
-    if (fillStart && fillEnd) {
-      const textNodeStart = new TextNode(boundaries.lower, node.start, text.slice(boundaries.lower, node.start));
-      const textNodeEnd = new TextNode(node.end, boundaries.upper, text.slice(node.end, boundaries.upper));
-      return [textNodeStart, node, textNodeEnd];
-    } else if (fillStart) {
+
+    if (fillStart) {
       const textNode = new TextNode(boundaries.lower, node.start, text.slice(boundaries.lower, node.start));
-      return [textNode, node];
-    } else if (fillEnd) {
-      const textNode = new TextNode(node.end, boundaries.upper, text.slice(node.end, boundaries.upper));
-      return acc.concat([node, textNode]);
+      result = result.concat(textNode);
     } else {
       const previousNode = nodes[index - 1];
       if (previousNode) {
-        const textStart = previousNode.end;
-        const textEnd = node.start;
-        if (textEnd > textStart) {
-          const subtext = text.slice(textStart, textEnd);
-          const textNode = new TextNode(textStart, textEnd, subtext);
-          return acc.concat([textNode, node]);
+        if (node.start > previousNode.end) {
+          const subtext = text.slice(previousNode.end, node.start);
+          const textNode = new TextNode(previousNode.end, node.start, subtext);
+          result = result.concat(textNode);
         }
       }
-      return acc.concat(node);
     }
+
+    result = result.concat(node);
+
+    if (fillEnd) {
+      const textNode = new TextNode(node.end, boundaries.upper, text.slice(node.end, boundaries.upper));
+      result = result.concat(textNode);
+    }
+
+    return acc.concat(result);
   }, []);
 }
 
