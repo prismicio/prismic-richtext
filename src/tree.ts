@@ -31,7 +31,9 @@ interface PartitionedGroup {
 
 function sortByPriorities(nodes: SpanNode[]): SpanNode[] {
   return nodes.sort((nodeA: SpanNode, nodeB: SpanNode): number => {
-    if (nodeB.isParentOf(nodeA)) {
+    if (nodeA.isParentOf(nodeB)) {
+      return -1;
+    } else if (nodeB.isParentOf(nodeA)) {
       return 1;
     } else {
       const result = PRIORITIES[nodeA.type] - PRIORITIES[nodeB.type];

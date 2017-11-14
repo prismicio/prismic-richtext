@@ -117,6 +117,7 @@ describe('Tree', function() {
       }];
 
       const tree = PrismicRichText.asTree(richText);
+
       const expectedSpans = [
         { type: 'label', start: 0, end: 43, children: [
           { type: 'span', start: 0, end: 15 },
@@ -134,6 +135,47 @@ describe('Tree', function() {
       expect(tree.children.length).to.equal(expectedTree.children.length);
       expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
       expect(tree.children[0].children[0].children.length).to.equal(expectedTree.children[0].children[0].children.length);
+    });
+
+    it('<label>Fusce comm<a>odo. <strong>Donec</strong> posuere <em>augue in</em> qu</a>am.</label>', function() {
+
+      const spans = [
+        { start: 0, end: 43, type: "label", data: "totoA"},
+        { start: 10, end: 40, type: "hyperlink", data: { preview: { title: "https://google.fr" }, url: "https://google.fr"} },
+        { start: 15, end: 20, type: "strong"},
+        { start: 29, end: 34, type: "em"}
+      ];
+
+      const richText = [{
+	    type: "paragraph",
+	    text: "Fusce commodo. Donec posuere augue in quam.",
+	    spans: spans
+      }];
+
+      const tree = PrismicRichText.asTree(richText);
+
+      const expectedSpans = [
+        { type: 'label', start: 0, end: 43, children: [
+          { type: 'span', start: 0, end: 10 },
+          { type: 'hyperlink', start: 10, end: 40, children: [
+            { type: 'span', start: 10, end: 15 },
+            { type: 'strong', start: 15, end: 20 },
+            { type: 'span', start: 20, end: 29 },
+            { type: 'em', start: 29, end: 34 },
+            { type: 'span', start: 34, end: 40 },
+          ]},
+          { type: 'span', start: 40, end: 43 },
+        ]}
+      ];
+
+      const expectedTree = buildExpectedTree(richText, expectedSpans);
+
+      expect(tree).to.containSubset(expectedTree);
+
+      expect(tree.children.length).to.equal(expectedTree.children.length);
+      expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
+      expect(tree.children[0].children[0].children.length).to.equal(expectedTree.children[0].children[0].children.length);
+      expect(tree.children[0].children[0].children[1].children.length).to.equal(expectedTree.children[0].children[0].children[1].children.length);
     });
   });
 });
