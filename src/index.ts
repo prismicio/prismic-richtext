@@ -1,14 +1,13 @@
-import { Tree } from '@root/generic';
-import Serialize from '@root/serialize';
-import { ElementKindAsObj } from '@root/elements';
+import Tree from "./tree";
+import Serialize from "./serialize";
 
 module.exports = {
-  asText: (richtext) => {
-    return richtext.reduce((acc, block) => {
+  asText: (richtext: any) => {
+    return richtext.reduce((acc: any, block: any) => {
       return `${acc} ${block.text}`;
     }, '\n');
   },
   asTree: Tree.fromRichText,
   serialize: Serialize,
-  Elements: ElementKindAsObj
-}
+  Elements: Tree.NODE_TYPES,
+};

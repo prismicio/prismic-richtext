@@ -1,28 +1,29 @@
-import { Tree, ITree, ILeaf } from '@root/generic';
+import Tree from './tree';
+import { Node, SpanNode, NodeElement } from './nodes';
+import { RichTextBlock } from './richtext';
 
-function fromRichText<T>(richText: any[], serialize: (type: string, data: any, text: string | null, children: T[] | null) => T, htmlSerializer: (data: any, text: string | null, children: T[] | null) => T): T[] {
-  const genericTree = Tree.fromRichText(richText);
-  const children: T[] = genericTree.root.children.map((leaf: ILeaf) => {
-    return serializeNode<T>(leaf, serialize, htmlSerializer);
-  })
-  return children;
+type Serializer<T> = (type: string, element: NodeElement, text: string | null, children: T[]) => T;
+
+function fromRichText<T>(richText: RichTextBlock[], serialize: Serializer<T>, htmlSerializer?: Serializer<T>): T[] {
+  const tree = Tree.fromRichText(richText);
+  return tree.children.map((node: Node) => {
+    return serializeNode<T>(node, serialize, htmlSerializer);
+  });
 }
 
-function serializeNode<T>(
-  node: ILeaf,
-  serialize: (type: string, data: any, text: string | null, children: T[] | null) => T,
-  htmlSerializer: (data: any, text?: string | null, children?: T[] | null) => T
-): T {
+function serializeNode<T>(parentNode: Node, serializer: Serializer<T>, htmlSerializer?: Serializer<T>): T {
 
-  function exec(node: ILeaf): T {
-    const serializedChildren = node.children.reduce<T[]>((acc: T[], node: ILeaf) => {
-      return acc.concat([exec(node)]);
+  function step(node: Node): T {
+    const text = node instanceof SpanNode ? node.text : null;
+    const serializedChildren = node.children.reduce<T[]>((acc: T[], node: Node) => {
+      return acc.concat([step(node)]);
     }, []);
 
-    return htmlSerializer && htmlSerializer(node.raw, node.text || null, serializedChildren) ||
-      serialize(node.type, node.raw, node.text || null, serializedChildren);
+    const maybeSerialized = htmlSerializer && htmlSerializer(node.type, node.element, text, serializedChildren);
+    return maybeSerialized || serializer(node.type, node.element, text, serializedChildren);
   }
-  return exec(node);
+
+  return step(parentNode);
 }
 
 export default fromRichText;
