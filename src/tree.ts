@@ -183,7 +183,7 @@ export default class Tree {
           return acc.concat(new BlockNode(block.type, block));
         } else {
           const textNodes = processTextBlock(block);
-          const previousBlock = acc[index - 1];
+          const previousBlock = acc[acc.length - 1];
           if (RichTextBlock.isListItem(block.type) && previousBlock && previousBlock instanceof ListBlockNode) {
             const listItem = new ListItemBlockNode(block, textNodes);
             const updatedPreviousBlock = previousBlock.addChild(listItem);
