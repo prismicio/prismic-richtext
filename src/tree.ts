@@ -161,7 +161,7 @@ function buildTree(text: string, nodes: SpanNode[]): SpanNode[] {
 }
 
 function processTextBlock(block: RichTextBlock): SpanNode[] {
-  const nodes = block.spans.map((span) => {
+  const nodes = (block.spans || []).map((span) => {
     const text = block.text.slice(span.start, span.end);
     return new SpanNode(span.start, span.end, span.type, text, [], span);
   });
