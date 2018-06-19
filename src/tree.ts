@@ -1,4 +1,8 @@
-import * as R from "ramda";
+import flatten from "ramda/es/flatten";
+import init from "ramda/es/init";
+import last from "ramda/es/last";
+import sortWith from "ramda/es/sortwith";
+import sortBy from "ramda/es/sortby";
 import uuid from './uuid';
 import { RichTextSpan, RichTextBlock } from './richtext';
 import { NODE_TYPES, PRIORITIES } from './types';
@@ -76,15 +80,15 @@ function partitionGroup(text: string, group: Group): SpanNode[] {
 
 function groupWith(p: (nodeA: SpanNode, nodeB: SpanNode) => boolean, nodes: SpanNode[]): SpanNode[][] {
   return nodes.reduce<SpanNode[][]>((groups: SpanNode[][], node: SpanNode) => {
-    const previousGroup = R.last(groups);
+    const previousGroup = last(groups);
     if (previousGroup) {
       const included = previousGroup.some(nodeGroup => nodeGroup.isParentOf(node));
       if (included) {
-        return R.init(groups).concat([previousGroup.concat(node)]);
+        return init(groups).concat([previousGroup.concat(node)]);
       } else {
-        const previousNode = R.last(previousGroup);
+        const previousNode = last(previousGroup);
         if (previousNode && p(previousNode, node)) {
-          return R.init(groups).concat([previousGroup.concat(node)]);
+          return init(groups).concat([previousGroup.concat(node)]);
         } else {
           return groups.concat([[node]]);
         }
@@ -98,13 +102,13 @@ function groupWith(p: (nodeA: SpanNode, nodeB: SpanNode) => boolean, nodes: Span
 function groupNodes(nodes: SpanNode[]): SpanNode[][] {
   const sortByStart = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.start - nodeB.start;
   const sortByEnd = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end - nodeB.end;
-  const sortedNodes = R.sortWith([sortByStart, sortByEnd], nodes);
+  const sortedNodes = sortWith([sortByStart, sortByEnd], nodes);
   return groupWith((nodeA: SpanNode, nodeB: SpanNode) => nodeA.end >= nodeB.start, sortedNodes);
 }
 
 function electNode(candidates: SpanNode[]): Group {
   if (candidates.length === 0) {
-    throw new Error('Unable to elect node on empty list');    
+    throw new Error('Unable to elect node on empty list');
   } else {
     const [elected, ...others] = sortByPriorities(candidates);
     return { elected, others };
@@ -153,11 +157,11 @@ function buildTreeAndFill(text: string, nodes: SpanNode[], boundaries: Boundarie
 }
 
 function buildTree(text: string, nodes: SpanNode[]): SpanNode[] {
-  const sortedNodes: SpanNode[] = R.sortBy((node: SpanNode) => node.start, nodes);
+  const sortedNodes: SpanNode[] = sortBy((node: SpanNode) => node.start, nodes);
   const groups: SpanNode[][] = groupNodes(sortedNodes);
   const postElection: Group[] = groups.map(electNode);
-  const tree: SpanNode[] = R.flatten<SpanNode>(postElection.map(group => partitionGroup(text, group)));
-  return R.sortBy((node: SpanNode) => node.start, tree);
+  const tree: SpanNode[] = flatten<SpanNode>(postElection.map(group => partitionGroup(text, group)));
+  return sortBy((node: SpanNode) => node.start, tree);
 }
 
 function processTextBlock(block: RichTextBlock): SpanNode[] {
@@ -187,11 +191,11 @@ export default class Tree {
           if (RichTextBlock.isListItem(block.type) && previousBlock && previousBlock instanceof ListBlockNode) {
             const listItem = new ListItemBlockNode(block, textNodes);
             const updatedPreviousBlock = previousBlock.addChild(listItem);
-            return R.init(acc).concat(updatedPreviousBlock);
+            return init(acc).concat(updatedPreviousBlock);
           } else if (RichTextBlock.isOrderedListItem(block.type) && previousBlock && previousBlock instanceof OrderedListBlockNode) {
             const orderedListItem = new OrderedListItemBlockNode(block, textNodes);
             const updatedPreviousBlock = previousBlock.addChild(orderedListItem);
-            return R.init(acc).concat(updatedPreviousBlock);
+            return init(acc).concat(updatedPreviousBlock);
           } else if (RichTextBlock.isListItem(block.type)) {
             const listItem = new ListItemBlockNode(block, textNodes);
             const list = new ListBlockNode(RichTextBlock.emptyList(), [listItem]);
