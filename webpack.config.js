@@ -8,7 +8,6 @@ var libraryName = 'PrismicRichtext',
     outputFile;
  
 if (yargs.argv.p) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
   outputFile = fileName + '.min.js';
 } else {
   outputFile = fileName + '.js';
@@ -35,8 +34,13 @@ var config = {
   },
   resolve: {
     extensions: ['.ts', '.js']
-  },
-  plugins: plugins
+  }
 };
+
+if(yargs.argv.p) {
+  optimization: {
+    minimize: true
+  }
+}
  
 module.exports = config;
