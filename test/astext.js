@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
-const PrismicRichText = require('../dist/prismic-richtext.min.js');
+const PrismicRichText = require('../dist/prismic-richtext.js');
 const expect = chai.expect;
 
 chai.use(chaiSubset);
