@@ -14,6 +14,7 @@ if (yargs.argv.p) {
 }
  
 var config = {
+  mode: yargs.argv.p ? 'production' : 'development',
   entry: [
     __dirname + '/src/index.ts'
   ],

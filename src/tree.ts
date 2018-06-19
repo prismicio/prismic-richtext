@@ -1,8 +1,8 @@
-import flatten from "ramda/es/flatten";
-import init from "ramda/es/init";
-import last from "ramda/es/last";
-import sortWith from "ramda/es/sortwith";
-import sortBy from "ramda/es/sortby";
+import flatten = require("ramda/src/flatten");
+import init = require("ramda/src/init");
+import last = require("ramda/src/last");
+import sortWith = require("ramda/src/sortWith");
+import sortBy = require("ramda/src/sortBy");
 import uuid from './uuid';
 import { RichTextSpan, RichTextBlock } from './richtext';
 import { NODE_TYPES, PRIORITIES } from './types';
