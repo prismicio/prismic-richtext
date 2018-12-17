@@ -66,19 +66,17 @@
 			<div class="tsd-panel tsd-typography">
 				<h2 id="a-helper-to-build-generic-tree-from-rich-text-raw-json">A helper to build generic tree from rich text raw json</h2>
 				<h3 id="get-a-generic-tree-from-a-richtext">Get a generic tree from a richtext</h3>
-				<pre><code class="lang-javascript">  <span class="hljs-keyword">import</span> PrismicRichText <span class="hljs-keyword">from</span> <span class="hljs-string">'prismic-richtext'</span>;
+				<pre><code class="language-javascript">  <span class="hljs-keyword">import</span> PrismicRichText <span class="hljs-keyword">from</span> <span class="hljs-string">'prismic-richtext'</span>;
 
-  PrismicRichText.asTree(doc.data.myRichText)
-</code></pre>
+  PrismicRichText.asTree(doc.data.myRichText)</code></pre>
 				<h3 id="get-a-serialized-tree-from-a-richtext">Get a serialized tree from a richtext</h3>
 				<p>You can find an example here: <a href="https://github.com/prismicio/prismic-dom/blob/master/src/index.js">https://github.com/prismicio/prismic-dom/blob/master/src/index.js</a></p>
-				<pre><code class="lang-javascript">  <span class="hljs-keyword">import</span> PrismicRichText <span class="hljs-keyword">from</span> <span class="hljs-string">'prismic-richtext'</span>;
+				<pre><code class="language-javascript">  <span class="hljs-keyword">import</span> PrismicRichText <span class="hljs-keyword">from</span> <span class="hljs-string">'prismic-richtext'</span>;
   <span class="hljs-comment">// define a serialize function to manage your fragment</span>
   <span class="hljs-comment">// you can use the 'Element' Helper from PrismicRichText to match the different fragments</span>
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">serialize</span>(<span class="hljs-params"></span>) </span>{...}
 
-  PrismicRichText.serialize(doc.data.myRichText, serialize, htmlSerializer)
-</code></pre>
+  PrismicRichText.serialize(doc.data.myRichText, serialize, htmlSerializer)</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -139,8 +137,11 @@
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#nodeelement" class="tsd-kind-icon">Node<wbr>Element</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-not-exported">
 						<a href="globals.html#serializer" class="tsd-kind-icon">Serializer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#astext" class="tsd-kind-icon">as<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#buildtree" class="tsd-kind-icon">build<wbr>Tree</a>
