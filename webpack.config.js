@@ -1,42 +1,59 @@
-var webpack = require('webpack'),
-    path = require('path'),
-    yargs = require('yargs');
- 
-var libraryName = 'PrismicRichtext',
-    fileName = 'prismic-richtext',
-    plugins = [],
-    outputFile;
- 
+var webpack = require("webpack"),
+  path = require("path"),
+  yargs = require("yargs");
+
+var libraryName = "PrismicRichtext",
+  fileName = "prismic-richtext",
+  plugins = [],
+  outputFile,
+  mode,
+  optimization;
+
 if (yargs.argv.p) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
-  outputFile = fileName + '.min.js';
+  outputFile = fileName + ".min.js";
+  mode = "production";
+  optimization = {
+    minimize: true,
+  };
 } else {
-  outputFile = fileName + '.js';
+  outputFile = fileName + ".js";
+  mode = "development";
 }
- 
+
 var config = {
-  entry: [
-    __dirname + '/src/index.ts'
-  ],
+  mode: mode,
+  entry: [__dirname + "/src/index.ts"],
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, "/dist"),
     filename: outputFile,
     library: libraryName,
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader'
-      }
-    ]
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/typescript"],
+          plugins: [
+            [
+              "@babel/plugin-transform-modules-commonjs",
+              {
+                allowTopLevelThis: true,
+              },
+            ],
+            "ramda",
+          ],
+        },
+      },
+    ],
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: [".ts", ".js"],
   },
-  plugins: plugins
+  plugins: plugins,
 };
- 
+
 module.exports = config;
