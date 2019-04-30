@@ -42,7 +42,6 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "ramda": "^0.26.1",
     "uuid": "^3.3.2"
   }
 }
