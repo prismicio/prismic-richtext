@@ -37,7 +37,16 @@ var config = {
         test: /\.ts$/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/typescript"],
+          presets: [
+            ["@babel/preset-env", {
+              corejs: '3.0.0',
+              useBuiltIns: "entry",
+              targets: {
+                ie: "11"
+              }
+            }],
+            "@babel/typescript",
+          ],
           plugins: [
             [
               "@babel/plugin-transform-modules-commonjs",
@@ -46,7 +55,7 @@ var config = {
               },
             ],
             "ramda",
-          ],
+          ]
         },
       },
     ],
