@@ -1,6 +1,6 @@
 {
   "name": "prismic-richtext",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization",
   "main": "dist/prismic-richtext.min.js",
   "scripts": {
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.1.0",
     "@types/ramda": "0.25.44",
     "babel-loader": "^8.0.4",
@@ -40,8 +41,5 @@
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "yargs": "^10.0.3"
-  },
-  "dependencies": {
-    "uuid": "^3.3.2"
   }
 }
