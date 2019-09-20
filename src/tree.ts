@@ -1,18 +1,18 @@
-import { init, sortBy, sortWith, last, flatten } from "ramda";
-import uuid from "./uuid";
-import { RichTextSpan, RichTextBlock } from "./richtext";
-import { NODE_TYPES, PRIORITIES } from "./types";
+import { flatten, init, last, sort } from "./helpers";
 import {
-  Boundaries,
-  Node,
-  SpanNode,
-  TextNode,
   BlockNode,
+  Boundaries,
   ListBlockNode,
   ListItemBlockNode,
+  Node,
   OrderedListBlockNode,
   OrderedListItemBlockNode,
+  SpanNode,
+  TextNode,
 } from "./nodes";
+import { RichTextBlock } from "./richtext";
+import { PRIORITIES } from "./types";
+import uuid from "./uuid";
 
 export interface Group {
   elected: SpanNode;
@@ -115,7 +115,10 @@ function groupNodes(nodes: SpanNode[]): SpanNode[][] {
   const sortByStart = (nodeA: SpanNode, nodeB: SpanNode) =>
     nodeA.start - nodeB.start;
   const sortByEnd = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end - nodeB.end;
-  const sortedNodes = sortWith([sortByStart, sortByEnd], nodes);
+  const sortedNodes = sort(
+    nodes,
+    (a, b) => sortByStart(a, b) || sortByEnd(a, b),
+  );
   return groupWith(
     (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end >= nodeB.start,
     sortedNodes,
@@ -189,13 +192,13 @@ function buildTreeAndFill(
 }
 
 function buildTree(text: string, nodes: SpanNode[]): SpanNode[] {
-  const sortedNodes: SpanNode[] = sortBy((node: SpanNode) => node.start, nodes);
+  const sortedNodes = sort(nodes, (a, b) => a.start - b.start);
   const groups: SpanNode[][] = groupNodes(sortedNodes);
   const postElection: Group[] = groups.map(electNode);
-  const tree: SpanNode[] = flatten<SpanNode>(
+  const tree = flatten(
     postElection.map((group) => partitionGroup(text, group)),
   );
-  return sortBy((node: SpanNode) => node.start, tree);
+  return sort(tree, (a, b) => a.start - b.start);
 }
 
 function processTextBlock(block: RichTextBlock): SpanNode[] {
@@ -208,10 +211,8 @@ function processTextBlock(block: RichTextBlock): SpanNode[] {
 }
 
 export default class Tree {
-  key: string;
-  children: Node[];
 
-  static fromRichText(richText: RichTextBlock[]): Tree {
+  public static fromRichText(richText: RichTextBlock[]): Tree {
     return {
       key: uuid(),
       children: richText.reduce<Node[]>((acc, block, index) => {
@@ -267,4 +268,6 @@ export default class Tree {
       }, []),
     };
   }
+  public key: string;
+  public children: Node[];
 }
