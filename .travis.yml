@@ -12,3 +12,10 @@ before_script:
 script:
   - npm run lint
   - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: ./docs
+  on:
+    branch: master

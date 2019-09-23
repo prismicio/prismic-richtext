@@ -27,6 +27,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/node": "^12.7.5",
     "@types/ramda": "0.25.44",
     "babel-loader": "^8.0.4",
     "babel-plugin-ramda": "^2.0.0",
