@@ -3,7 +3,6 @@ cache: npm
 notifications:
   email: false
 node_js:
-  - '9'
   - '10'
 script:
   - npm run build
