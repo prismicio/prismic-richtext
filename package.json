@@ -3,7 +3,9 @@
   "version": "0.0.0-development",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization, with ability to pass down parent node props to child nodes",
   "main": "dist/prismic-richtext.min.js",
+  "typings": "typings/index",
   "scripts": {
+    "prebuild": "tsc",
     "build": "webpack --debug; webpack -p",
     "dev": "webpack -d --watch",
     "docs": "typedoc --mode file --out ./docs/ ./src/",

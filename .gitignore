@@ -164,3 +164,5 @@ typings/
 # End of https://www.gitignore.io/api/node,macos,intellij,visualstudiocode
 /docs
 .nyc_output
+typings
+dist

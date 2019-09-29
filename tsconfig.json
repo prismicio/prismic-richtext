@@ -4,7 +4,7 @@
     "target": "esnext",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "./lib/typings",
+    "declarationDir": "./typings",
     "noImplicitAny": false,
     "downlevelIteration": true,
     "strictNullChecks": true,
