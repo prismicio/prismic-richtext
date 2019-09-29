@@ -11,7 +11,7 @@
     "posttest": "tslint lib",
     "test": "nyc --reporter=html --reporter=text mocha  -r jsdom-global/register",
     "semantic-release": "semantic-release",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "report-coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
