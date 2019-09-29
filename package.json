@@ -6,7 +6,6 @@
   "scripts": {
     "build": "webpack --debug; webpack -p",
     "dev": "webpack -d --watch",
-    "prepublish": "npm run build; npm run docs",
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
     "posttest": "tslint lib",
