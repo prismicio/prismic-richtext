@@ -1,7 +1,7 @@
 {
-  "name": "prismic-richtext",
-  "version": "1.1.0",
-  "description": "Convert Rich Text raw data to generic tree to simplify serialization",
+  "name": "prismic-richtext-jsx",
+  "version": "0.0.0-development",
+  "description": "Convert Rich Text raw data to generic tree to simplify serialization, with ability to pass down parent node props to child nodes",
   "main": "dist/prismic-richtext.min.js",
   "scripts": {
     "build": "webpack --debug; webpack -p",
@@ -9,18 +9,16 @@
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
     "posttest": "tslint lib",
-    "test": "mocha -r jsdom-global/register"
+    "test": "nyc --reporter=html --reporter=text mocha  -r jsdom-global/register",
+    "semantic-release": "semantic-release",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prismicio/prismic-richtext.git"
+    "url": "https://github.com/harrison-ifeanyichukwu/prismic-richtext-jsx.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prismicio/prismic-richtext/issues"
-  },
-  "homepage": "https://github.com/prismicio/prismic-richtext#readme",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
@@ -35,11 +33,14 @@
     "jsdom": "^13.1.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^4.0.1",
+    "nyc": "14.1.1",
+    "semantic-release-cli": "5.2.1",
     "tslint": "^5.11.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.2.2",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
-    "yargs": "^10.0.3"
+    "yargs": "^10.0.3",
+    "semantic-release": "^15.13.24"
   }
 }

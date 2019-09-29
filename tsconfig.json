@@ -1,15 +1,14 @@
 {
-  "files": ["./src/index.ts"],
   "compilerOptions": {
-    "noImplicitAny": true,
-    "preserveConstEnums": true,
-    "target": "es5",
-    "removeComments": false,
-    "sourceMap": true,
-    "module": "commonjs",
-    "lib": ["es5", "dom", "es2015.promise"],
+    "moduleResolution": "node",
+    "target": "esnext",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./lib/typings",
+    "noImplicitAny": false,
+    "downlevelIteration": true,
     "strictNullChecks": true,
-    "baseUrl": ".",
-    "skipLibCheck": true
-  }
+    "lib": ["dom", "es5", "es2015.collection", "es2015.iterable"]
+  },
+  "include": ["src"]
 }
