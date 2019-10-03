@@ -1,11 +1,8 @@
 import asText from "./astext";
 import Tree from "./tree";
-import Serialize from "./serialize";
-import { NODE_TYPES } from "./types";
+import serialize from "./serialize";
+import { NODE_TYPES as Elements } from "./types";
 
-module.exports = {
-  asText,
-  asTree: Tree.fromRichText,
-  serialize: Serialize,
-  Elements: NODE_TYPES,
-};
+const asTree = Tree.fromRichText;
+
+export { asText, asTree, serialize, Elements };

@@ -3,12 +3,14 @@
   "version": "1.1.0",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization",
   "main": "dist/prismic-richtext.min.js",
+  "types": "d.ts/index.d.ts",
   "scripts": {
-    "build": "webpack --debug; webpack -p",
+    "build": "npm run tsc; webpack --debug; webpack -p",
     "dev": "webpack -d --watch",
     "prepublish": "npm run build; npm run docs",
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
+    "tsc": "tsc --project tsconfig.json",
     "posttest": "tslint lib",
     "test": "mocha -r jsdom-global/register"
   },
