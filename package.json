@@ -3,13 +3,16 @@
   "version": "1.1.0",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization",
   "main": "dist/prismic-richtext.min.js",
+  "types": "dist/index.d.ts",
+  "source": "src/index.ts",
   "scripts": {
-    "build": "webpack --debug; webpack -p",
-    "dev": "webpack -d --watch",
-    "prepublish": "npm run build; npm run docs",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "microbundle --sourcemap false --compress false -o dist/prismic-richtext.js --no-pkg-main -f umd",
+    "build:prod": "microbundle --sourcemap false -o dist/prismic-richtext.min.js --no-pkg-main -f umd",
+    "dev": "microbundle --sourcemap false --compress false -o dist/prismic-richtext.js --no-pkg-main -f umd -w",
+    "prepublish": "npm run build && npm run docs",
     "docs": "typedoc --mode file --out ./docs/ ./src/",
     "lint": "tslint src",
-    "posttest": "tslint lib",
     "test": "mocha -r jsdom-global/register"
   },
   "repository": {
@@ -23,24 +26,16 @@
   },
   "homepage": "https://github.com/prismicio/prismic-richtext#readme",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.4.5",
-    "@babel/preset-typescript": "^7.1.0",
-    "@types/node": "^12.7.5",
-    "@types/ramda": "0.25.44",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-ramda": "^2.0.0",
     "chai": "^4.1.2",
     "chai-subset": "^1.6.0",
     "jsdom": "^13.1.0",
     "jsdom-global": "^3.0.2",
+    "microbundle": "^0.12.2",
     "mocha": "^4.0.1",
     "tslint": "^5.11.0",
     "typedoc": "^0.15.0",
-    "typescript": "^3.2.2",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2",
-    "yargs": "^10.0.3"
+    "typescript": "^3.2.2"
   }
 }

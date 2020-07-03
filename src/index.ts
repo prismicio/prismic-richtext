@@ -3,7 +3,7 @@ import Tree from "./tree";
 import Serialize from "./serialize";
 import { NODE_TYPES } from "./types";
 
-module.exports = {
+export default {
   asText,
   asTree: Tree.fromRichText,
   serialize: Serialize,
