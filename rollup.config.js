@@ -33,6 +33,7 @@ export default {
       presets: [
         "@babel/typescript",
         ["@babel/env", {
+          loose: true,
           // transpile class properties
           shippedProposals: true,
         }],
