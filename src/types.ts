@@ -114,7 +114,7 @@ export interface RTTextNode {
 		| NodeType.SPAN
 		| NodeType.STRONG;
 	text: string;
-	spans?: RTSpanNode[];
+	spans: RTSpanNode[];
 }
 
 interface RTImageNode {
