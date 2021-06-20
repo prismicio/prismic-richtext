@@ -2,6 +2,7 @@ import { uuid } from "./lib/uuid";
 import {
 	NodeType,
 	RTListGroupItemNode,
+	RTListGroupNode,
 	RTNode,
 	RTSpanNode,
 	RTTextNode,
@@ -12,9 +13,14 @@ import {
 export function toTree(nodes: RTNode[]): Tree {
 	const preparedNodes = prepareNodes(nodes);
 
+	const children: TreeNode[] = [];
+	for (let i = 0; i < preparedNodes.length; i++) {
+		children.push(nodeToTreeNode(preparedNodes[i]));
+	}
+
 	return {
 		key: uuid(),
-		children: preparedNodes.map((node) => nodeToTreeNode(node)),
+		children,
 	};
 }
 
@@ -39,8 +45,18 @@ function createTextTreeNode(text: string): TreeNode {
 	});
 }
 
+function createRTListGroupNode(
+	type: NodeType.list | NodeType.oList,
+	items: RTListGroupItemNode[],
+): RTListGroupNode {
+	return {
+		type,
+		items,
+	};
+}
+
 function prepareNodes(nodes: RTNode[]): RTNode[] {
-	const mutNodes = [...nodes];
+	const mutNodes = nodes.slice(0);
 
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
@@ -48,19 +64,15 @@ function prepareNodes(nodes: RTNode[]): RTNode[] {
 		if (node.type === NodeType.listItem || node.type === NodeType.oListItem) {
 			const childItems: RTListGroupItemNode[] = [node as RTListGroupItemNode];
 
-			while (
-				mutNodes[i + 1] &&
-				(mutNodes[i + 1].type === NodeType.listItem ||
-					mutNodes[i + 1].type === NodeType.oListItem)
-			) {
+			while (mutNodes[i + 1] && mutNodes[i + 1].type === node.type) {
 				childItems.push(mutNodes[i + 1] as RTListGroupItemNode);
 				mutNodes.splice(i, 1);
 			}
 
-			mutNodes[i] = {
-				type: node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
-				listItems: childItems,
-			};
+			mutNodes[i] = createRTListGroupNode(
+				node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
+				childItems,
+			);
 		}
 	}
 
@@ -75,8 +87,8 @@ function nodeToTreeNode(node: RTNode): TreeNode {
 		);
 	}
 
-	if ("listItems" in node) {
-		return createTreeNode(node, node.listItems.map(nodeToTreeNode));
+	if ("items" in node) {
+		return createTreeNode(node, node.items.map(nodeToTreeNode));
 	}
 
 	return createTreeNode(node);
@@ -87,7 +99,7 @@ function textNodeSpansToTreeNodeChildren(
 	node: RTTextNode,
 	parentSpan?: RTSpanNode,
 ): TreeNode[] {
-	if (spans.length < 1) {
+	if (!spans.length) {
 		return [createTextTreeNode(node.text)];
 	}
 

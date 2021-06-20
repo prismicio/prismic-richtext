@@ -138,7 +138,7 @@ interface RTEmbedNode {
 
 export interface RTListGroupNode {
 	type: NodeType.list | NodeType.oList;
-	listItems: RTListGroupItemNode[];
+	items: RTListGroupItemNode[];
 }
 
 export interface RTListGroupItemNode extends RTTextNode {

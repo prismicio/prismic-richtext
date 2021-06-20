@@ -13,18 +13,20 @@ export function serialize<T>(
 	richText: RichText,
 	serializer: RichTextSerializer<T>,
 ): T[] {
-	const tree = toTree(richText);
-
-	return serializeTreeNodes(tree.children, serializer);
+	return serializeTreeNodes(toTree(richText).children, serializer);
 }
 
 function serializeTreeNodes<T>(
 	nodes: TreeNode[],
 	serializer: RichTextSerializer<T>,
 ): T[] {
-	return nodes.map((node) => {
-		return serializeTreeNode(node, serializer);
-	});
+	const serializedTreeNodes: T[] = [];
+
+	for (let i = 0; i < nodes.length; i++) {
+		serializedTreeNodes.push(serializeTreeNode(nodes[i], serializer));
+	}
+
+	return serializedTreeNodes;
 }
 
 function serializeTreeNode<T>(
