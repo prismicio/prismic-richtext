@@ -1,12 +1,13 @@
-import { RTNode } from "./types";
+import { RTNode, RTTextNode } from "./types";
 
-export function asText(nodes: RTNode[], separator = " "): string {
-	return nodes
-		.map((node) => {
-			if ("text" in node) {
-				return node.text;
-			}
-		})
-		.filter(Boolean)
-		.join(separator);
-}
+export const asText = (nodes: RTNode[], separator = " "): string => {
+	let res = "";
+
+	for (let i = 0; i < nodes.length; i++) {
+		if ((nodes[i] as RTTextNode).text) {
+			res += (i > 0 ? separator : "") + (nodes[i] as RTTextNode).text;
+		}
+	}
+
+	return res;
+};

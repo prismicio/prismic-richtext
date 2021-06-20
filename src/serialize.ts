@@ -9,17 +9,17 @@ export type RichTextSerializer<T> = (
 	key: string,
 ) => T;
 
-export function serialize<T>(
+export const serialize = <T>(
 	richText: RichText,
 	serializer: RichTextSerializer<T>,
-): T[] {
+): T[] => {
 	return serializeTreeNodes(toTree(richText).children, serializer);
-}
+};
 
-function serializeTreeNodes<T>(
+const serializeTreeNodes = <T>(
 	nodes: TreeNode[],
 	serializer: RichTextSerializer<T>,
-): T[] {
+): T[] => {
 	const serializedTreeNodes: T[] = [];
 
 	for (let i = 0; i < nodes.length; i++) {
@@ -27,12 +27,12 @@ function serializeTreeNodes<T>(
 	}
 
 	return serializedTreeNodes;
-}
+};
 
-function serializeTreeNode<T>(
+const serializeTreeNode = <T>(
 	node: TreeNode,
 	serializer: RichTextSerializer<T>,
-): T {
+): T => {
 	return serializer(
 		node.type,
 		node.node,
@@ -40,4 +40,4 @@ function serializeTreeNode<T>(
 		serializeTreeNodes(node.children, serializer),
 		node.key,
 	);
-}
+};

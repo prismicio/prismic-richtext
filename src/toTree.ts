@@ -1,8 +1,6 @@
-import { uuid } from "./lib/uuid";
 import {
 	NodeType,
 	RTListGroupItemNode,
-	RTListGroupNode,
 	RTNode,
 	RTSpanNode,
 	RTTextNode,
@@ -10,7 +8,12 @@ import {
 	TreeNode,
 } from "./types";
 
-export function toTree(nodes: RTNode[]): Tree {
+export const uuid = (): string => {
+	return (++uuid.i).toString();
+};
+uuid.i = 0;
+
+export const toTree = (nodes: RTNode[]): Tree => {
 	const preparedNodes = prepareNodes(nodes);
 
 	const children: TreeNode[] = [];
@@ -22,12 +25,12 @@ export function toTree(nodes: RTNode[]): Tree {
 		key: uuid(),
 		children,
 	};
-}
+};
 
-function createTreeNode(
+const createTreeNode = (
 	node: RTNode | RTSpanNode,
 	children: TreeNode[] = [],
-): TreeNode {
+): TreeNode => {
 	return {
 		key: uuid(),
 		type: node.type,
@@ -35,51 +38,41 @@ function createTreeNode(
 		node,
 		children,
 	};
-}
+};
 
-function createTextTreeNode(text: string): TreeNode {
+const createTextTreeNode = (text: string): TreeNode => {
 	return createTreeNode({
 		type: NodeType.span,
 		text,
 		spans: [],
 	});
-}
+};
 
-function createRTListGroupNode(
-	type: NodeType.list | NodeType.oList,
-	items: RTListGroupItemNode[],
-): RTListGroupNode {
-	return {
-		type,
-		items,
-	};
-}
-
-function prepareNodes(nodes: RTNode[]): RTNode[] {
+const prepareNodes = (nodes: RTNode[]): RTNode[] => {
 	const mutNodes = nodes.slice(0);
 
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
 
 		if (node.type === NodeType.listItem || node.type === NodeType.oListItem) {
-			const childItems: RTListGroupItemNode[] = [node as RTListGroupItemNode];
+			const items: RTListGroupItemNode[] = [node as RTListGroupItemNode];
 
 			while (mutNodes[i + 1] && mutNodes[i + 1].type === node.type) {
-				childItems.push(mutNodes[i + 1] as RTListGroupItemNode);
+				items.push(mutNodes[i + 1] as RTListGroupItemNode);
 				mutNodes.splice(i, 1);
 			}
 
-			mutNodes[i] = createRTListGroupNode(
-				node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
-				childItems,
-			);
+			mutNodes[i] = {
+				type: node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
+				items,
+			};
 		}
 	}
 
 	return mutNodes;
-}
+};
 
-function nodeToTreeNode(node: RTNode): TreeNode {
+const nodeToTreeNode = (node: RTNode): TreeNode => {
 	if ("text" in node) {
 		return createTreeNode(
 			node,
@@ -88,17 +81,22 @@ function nodeToTreeNode(node: RTNode): TreeNode {
 	}
 
 	if ("items" in node) {
-		return createTreeNode(node, node.items.map(nodeToTreeNode));
+		const children: TreeNode[] = [];
+		for (let i = 0; i < node.items.length; i++) {
+			children.push(nodeToTreeNode(node.items[i]));
+		}
+
+		return createTreeNode(node, children);
 	}
 
 	return createTreeNode(node);
-}
+};
 
-function textNodeSpansToTreeNodeChildren(
+const textNodeSpansToTreeNodeChildren = (
 	spans: RTSpanNode[],
 	node: RTTextNode,
 	parentSpan?: RTSpanNode,
-): TreeNode[] {
+): TreeNode[] => {
 	if (!spans.length) {
 		return [createTextTreeNode(node.text)];
 	}
@@ -107,8 +105,9 @@ function textNodeSpansToTreeNodeChildren(
 
 	for (let i = 0; i < spans.length; i++) {
 		const span = spans[i];
-		const spanStart = span.start - (parentSpan?.start || 0);
-		const spanEnd = span.end - (parentSpan?.start || 0);
+		const parentSpanStart = (parentSpan && parentSpan.start) || 0;
+		const spanStart = span.start - parentSpanStart;
+		const spanEnd = span.end - parentSpanStart;
 
 		const childSpans: RTSpanNode[] = [];
 		for (let j = 0; j < spans.length; j++) {
@@ -121,7 +120,7 @@ function textNodeSpansToTreeNodeChildren(
 			) {
 				childSpans.push(siblingSpan);
 				spans.splice(j, 1);
-				j = -1;
+				j--;
 			}
 		}
 
@@ -144,18 +143,16 @@ function textNodeSpansToTreeNodeChildren(
 		);
 
 		if (spanEnd < node.text.length) {
-			const nextSpan: RTSpanNode | undefined = spans[i + 1];
-
-			if (nextSpan) {
-				const nextSpanStart = nextSpan.start - (parentSpan?.start || 0);
-				children.push(
-					createTextTreeNode(node.text.slice(spanEnd, nextSpanStart)),
-				);
-			} else {
-				children.push(createTextTreeNode(node.text.slice(spanEnd)));
-			}
+			children.push(
+				createTextTreeNode(
+					node.text.slice(
+						spanEnd,
+						spans[i + 1] ? spans[i + 1].start - parentSpanStart : undefined,
+					),
+				),
+			);
 		}
 	}
 
 	return children;
-}
+};
