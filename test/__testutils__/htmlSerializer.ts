@@ -1,4 +1,4 @@
-import { HyperlinkType, NodeType, RichTextSerializer } from "../../src";
+import { HyperlinkType, Element, RichTextSerializer } from "../../src";
 
 export const htmlSerializer: RichTextSerializer<string> = (
 	_type,
@@ -7,68 +7,68 @@ export const htmlSerializer: RichTextSerializer<string> = (
 	children,
 ) => {
 	switch (node.type) {
-		case NodeType.HEADING_1: {
+		case Element.heading1: {
 			return `<h1>${children.join("")}</h1>`;
 		}
 
-		case NodeType.HEADING_2: {
+		case Element.heading2: {
 			return `<h2>${children.join("")}</h2>`;
 		}
 
-		case NodeType.HEADING_3: {
+		case Element.heading3: {
 			return `<h3>${children.join("")}</h3>`;
 		}
 
-		case NodeType.HEADING_4: {
+		case Element.heading4: {
 			return `<h4>${children.join("")}</h4>`;
 		}
 
-		case NodeType.HEADING_5: {
+		case Element.heading5: {
 			return `<h5>${children.join("")}</h5>`;
 		}
 
-		case NodeType.HEADING_6: {
+		case Element.heading6: {
 			return `<h6>${children.join("")}</h6>`;
 		}
 
-		case NodeType.PARAGRAPH: {
+		case Element.paragraph: {
 			return `<p>${children.join("")}</p>`;
 		}
 
-		case NodeType.PREFORMATTED: {
+		case Element.preformatted: {
 			return `<pre>${children.join("")}</pre>`;
 		}
 
-		case NodeType.STRONG: {
+		case Element.string: {
 			return `<strong>${children.join("")}</strong>`;
 		}
 
-		case NodeType.EM: {
+		case Element.em: {
 			return `<em>${children.join("")}</em>`;
 		}
 
-		case NodeType.LIST: {
+		case Element.list: {
 			return `<ul>${children.join("")}</ul>`;
 		}
 
-		case NodeType.ORDERED_LIST: {
+		case Element.oList: {
 			return `<ol>${children.join("")}</ol>`;
 		}
 
-		case NodeType.LIST_ITEM:
-		case NodeType.ORDERED_LIST_ITEM: {
+		case Element.listItem:
+		case Element.oListItem: {
 			return `<li>${children.join("")}</li>`;
 		}
 
-		case NodeType.IMAGE: {
+		case Element.image: {
 			return `<img src="${node.url}" alt="${node.alt}" />`;
 		}
 
-		case NodeType.EMBED: {
+		case Element.embed: {
 			return node.oembed.html;
 		}
 
-		case NodeType.HYPERLINK: {
+		case Element.hyperlink: {
 			switch (node.data.link_type) {
 				case HyperlinkType.WEB: {
 					return `<a href="${node.data.url}" target="${
@@ -88,7 +88,7 @@ export const htmlSerializer: RichTextSerializer<string> = (
 			}
 		}
 
-		case NodeType.LABEL: {
+		case Element.label: {
 			return `<span class="${node.data.label}">${children.join("")}</span>`;
 		}
 

@@ -1,23 +1,23 @@
 export const enum NodeType {
-	HEADING_1 = "heading1",
-	HEADING_2 = "heading2",
-	HEADING_3 = "heading3",
-	HEADING_4 = "heading4",
-	HEADING_5 = "heading5",
-	HEADING_6 = "heading6",
-	PARAGRAPH = "paragraph",
-	PREFORMATTED = "preformatted",
-	STRONG = "strong",
-	EM = "em",
-	LIST_ITEM = "list-item",
-	ORDERED_LIST_ITEM = "o-list-item",
-	LIST = "group-list-item",
-	ORDERED_LIST = "group-o-list-item",
-	IMAGE = "image",
-	EMBED = "embed",
-	HYPERLINK = "hyperlink",
-	LABEL = "label",
-	SPAN = "span",
+	heading1 = "heading1",
+	heading2 = "heading2",
+	heading3 = "heading3",
+	heading4 = "heading4",
+	heading5 = "heading5",
+	heading6 = "heading6",
+	paragraph = "paragraph",
+	preformatted = "preformatted",
+	string = "strong",
+	em = "em",
+	listItem = "list-item",
+	oListItem = "o-list-item",
+	list = "group-list-item",
+	oList = "group-o-list-item",
+	image = "image",
+	embed = "embed",
+	hyperlink = "hyperlink",
+	label = "label",
+	span = "span",
 }
 
 export type RichText = RTNode[];
@@ -30,18 +30,18 @@ interface RTSpanNodeBase {
 }
 
 interface RTLabelSpanNode extends RTSpanNodeBase {
-	type: NodeType.LABEL;
+	type: NodeType.label;
 	data: {
 		label: string;
 	};
 }
 
 interface RTTextSpanNode extends RTSpanNodeBase {
-	type: NodeType.EM | NodeType.SPAN | NodeType.STRONG;
+	type: NodeType.em | NodeType.span | NodeType.string;
 }
 
 interface RTHyperlinkSpanNode extends RTSpanNodeBase {
-	type: NodeType.HYPERLINK;
+	type: NodeType.hyperlink;
 	data: RTHyperlinkData;
 }
 
@@ -101,25 +101,25 @@ interface RTHyperlinkWebData {
 
 export interface RTTextNode {
 	type:
-		| NodeType.HEADING_1
-		| NodeType.HEADING_2
-		| NodeType.HEADING_3
-		| NodeType.HEADING_4
-		| NodeType.HEADING_5
-		| NodeType.HEADING_6
-		| NodeType.PARAGRAPH
-		| NodeType.EM
-		| NodeType.LIST_ITEM
-		| NodeType.ORDERED_LIST_ITEM
-		| NodeType.PREFORMATTED
-		| NodeType.SPAN
-		| NodeType.STRONG;
+		| NodeType.heading1
+		| NodeType.heading2
+		| NodeType.heading3
+		| NodeType.heading4
+		| NodeType.heading5
+		| NodeType.heading6
+		| NodeType.paragraph
+		| NodeType.em
+		| NodeType.listItem
+		| NodeType.oListItem
+		| NodeType.preformatted
+		| NodeType.span
+		| NodeType.string;
 	text: string;
 	spans: RTSpanNode[];
 }
 
 interface RTImageNode {
-	type: NodeType.IMAGE;
+	type: NodeType.image;
 	url: string;
 	alt: string;
 	copyright: string;
@@ -130,19 +130,19 @@ interface RTImageNode {
 }
 
 interface RTEmbedNode {
-	type: NodeType.EMBED;
+	type: NodeType.embed;
 	oembed: Record<string, string | number | null> & {
 		html: string;
 	};
 }
 
 export interface RTListGroupNode {
-	type: NodeType.LIST | NodeType.ORDERED_LIST;
+	type: NodeType.list | NodeType.oList;
 	listItems: RTListGroupItemNode[];
 }
 
 export interface RTListGroupItemNode extends RTTextNode {
-	type: NodeType.LIST_ITEM | NodeType.ORDERED_LIST_ITEM;
+	type: NodeType.listItem | NodeType.oListItem;
 }
 
 export interface Tree {

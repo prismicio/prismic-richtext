@@ -4,4 +4,8 @@ export { toTree } from "./toTree";
 export { serialize } from "./serialize";
 export type { RichTextSerializer } from "./serialize";
 
-export { NodeType, HyperlinkType, HyperlinkMediaKind } from "./types";
+export {
+	NodeType as Element,
+	HyperlinkType,
+	HyperlinkMediaKind,
+} from "./types";

@@ -33,7 +33,7 @@ function createTreeNode(
 
 function createTextTreeNode(text: string): TreeNode {
 	return createTreeNode({
-		type: NodeType.SPAN,
+		type: NodeType.span,
 		text,
 		spans: [],
 	});
@@ -45,26 +45,20 @@ function prepareNodes(nodes: RTNode[]): RTNode[] {
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
 
-		if (
-			node.type === NodeType.LIST_ITEM ||
-			node.type === NodeType.ORDERED_LIST_ITEM
-		) {
+		if (node.type === NodeType.listItem || node.type === NodeType.oListItem) {
 			const childItems: RTListGroupItemNode[] = [node as RTListGroupItemNode];
 
 			while (
 				mutNodes[i + 1] &&
-				(mutNodes[i + 1].type === NodeType.LIST_ITEM ||
-					mutNodes[i + 1].type === NodeType.ORDERED_LIST_ITEM)
+				(mutNodes[i + 1].type === NodeType.listItem ||
+					mutNodes[i + 1].type === NodeType.oListItem)
 			) {
 				childItems.push(mutNodes[i + 1] as RTListGroupItemNode);
 				mutNodes.splice(i, 1);
 			}
 
 			mutNodes[i] = {
-				type:
-					node.type === NodeType.LIST_ITEM
-						? NodeType.LIST
-						: NodeType.ORDERED_LIST,
+				type: node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
 				listItems: childItems,
 			};
 		}
