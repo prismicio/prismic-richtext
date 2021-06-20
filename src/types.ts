@@ -20,6 +20,7 @@ export const enum NodeType {
 	SPAN = "span",
 }
 
+export type RichText = RTNode[];
 export type RTNode = RTTextNode | RTImageNode | RTEmbedNode | RTListGroupNode;
 export type RTSpanNode = RTLabelSpanNode | RTTextSpanNode | RTHyperlinkSpanNode;
 

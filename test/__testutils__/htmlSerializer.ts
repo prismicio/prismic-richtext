@@ -1,6 +1,6 @@
-import { HyperlinkType, NodeType, Serializer } from "../../src";
+import { HyperlinkType, NodeType, RichTextSerializer } from "../../src";
 
-export const htmlSerializer: Serializer<string> = (
+export const htmlSerializer: RichTextSerializer<string> = (
 	_type,
 	node,
 	text,
