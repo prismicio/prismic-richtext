@@ -1,5 +1,5 @@
 import { NodeType, RichText, RTNode, RTSpanNode, TreeNode } from "./types";
-import { toTree } from "./toTree";
+import { asTree } from "./asTree";
 
 export type RichTextSerializer<T> = (
 	type: NodeType,
@@ -13,7 +13,7 @@ export const serialize = <T>(
 	richText: RichText,
 	serializer: RichTextSerializer<T>,
 ): T[] => {
-	return serializeTreeNodes(toTree(richText).children, serializer);
+	return serializeTreeNodes(asTree(richText).children, serializer);
 };
 
 const serializeTreeNodes = <T>(

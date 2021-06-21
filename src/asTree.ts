@@ -13,7 +13,7 @@ export const uuid = (): string => {
 };
 uuid.i = 0;
 
-export const toTree = (nodes: RTNode[]): Tree => {
+export const asTree = (nodes: RTNode[]): Tree => {
 	const preparedNodes = prepareNodes(nodes);
 
 	const children: TreeNode[] = [];
