@@ -4,7 +4,7 @@ import * as url from "url";
 import Benchmark from "benchmark";
 import v1 from "@prismicio/richtext";
 import * as v2 from "@prismicio/richtext-v2";
-import * as assert from "assert";
+// import * as assert from "assert";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
