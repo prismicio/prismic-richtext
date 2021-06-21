@@ -1,13 +1,4 @@
-<!--
-
-TODO: Replace all on all files:
-- package_name
-- package_description
-- github_org_slash_github_repo
-
--->
-
-# package_name
+# @prismicio/richtext
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -16,24 +7,22 @@ TODO: Replace all on all files:
 [![Conventional Commits][conventional-commits-src]][conventional-commits-href]
 [![License][license-src]][license-href]
 
-<!-- TODO: Replacing link to Prismic with [Prismic][prismic] is useful here -->
+A parser and serializer for [Prismic][prismic]'s Rich Text format.
 
-package_description.
+- 🌳 Builds a generic tree from Rich Text
+- 🧬 Serializes Rich Text into a different format (e.g. HTML or React components)
+- ✂️ Strips formatting from Rich Text to extract raw text
 
-<!--
+You probably do not need to use this package directly. The following libraries provide a more accessible API:
 
-TODO: Create a small list of package features:
-
-- 🤔 &nbsp;A usefull feature;
-- 🥴 &nbsp;Another usefull feature;
-- 🙃 &nbsp;A final usefull feature.
-
- -->
+- [`@prismicio/helpers`](https://github.com/prismicio/prismic-helpers): `asText`, `asHTML`
+- [`@prismicio/react`](https://github.com/prismicio/prismic-reactjs): `<PrismicText>`, `<PrismicRichText>`
+- [`@prismicio/vue`](https://github.com/prismicio/prismic-vue): `<prismic-rich-text>`
 
 ## Install
 
 ```bash
-npm install package_name
+npm install @prismicio/richtext
 ```
 
 ## Documentation
@@ -82,21 +71,21 @@ Whether you're helping us fix bugs, improve the docs, or spread the word, we'd l
 <!-- TODO: Replace link with a more useful one if available -->
 
 [forum-question]: https://community.prismic.io
-[repo-bug-report]: https://github.com/github_org_slash_github_repo/issues/new?assignees=&labels=bug&template=bug_report.md&title=
-[repo-feature-request]: https://github.com/github_org_slash_github_repo/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=
-[repo-pull-requests]: https://github.com/github_org_slash_github_repo/pulls
+[repo-bug-report]: https://github.com/prismicio/prismic-richtext/issues/new?assignees=&labels=bug&template=bug_report.md&title=
+[repo-feature-request]: https://github.com/prismicio/prismic-richtext/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=
+[repo-pull-requests]: https://github.com/prismicio/prismic-richtext/pulls
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/package_name/latest.svg
-[npm-version-href]: https://npmjs.com/package/package_name
-[npm-downloads-src]: https://img.shields.io/npm/dm/package_name.svg
-[npm-downloads-href]: https://npmjs.com/package/package_name
-[github-actions-ci-src]: https://github.com/github_org_slash_github_repo/workflows/ci/badge.svg
-[github-actions-ci-href]: https://github.com/github_org_slash_github_repo/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/github/github_org_slash_github_repo.svg
-[codecov-href]: https://codecov.io/gh/github_org_slash_github_repo
+[npm-version-src]: https://img.shields.io/npm/v/@prismicio/richtext/latest.svg
+[npm-version-href]: https://npmjs.com/package/@prismicio/richtext
+[npm-downloads-src]: https://img.shields.io/npm/dm/@prismicio/richtext.svg
+[npm-downloads-href]: https://npmjs.com/package/@prismicio/richtext
+[github-actions-ci-src]: https://github.com/prismicio/prismic-richtext/workflows/ci/badge.svg
+[github-actions-ci-href]: https://github.com/prismicio/prismic-richtext/actions?query=workflow%3Aci
+[codecov-src]: https://img.shields.io/codecov/c/github/prismicio/prismic-richtext.svg
+[codecov-href]: https://codecov.io/gh/prismicio/prismic-richtext
 [conventional-commits-src]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [conventional-commits-href]: https://conventionalcommits.org
-[license-src]: https://img.shields.io/npm/l/package_name.svg
-[license-href]: https://npmjs.com/package/package_name
+[license-src]: https://img.shields.io/npm/l/@prismicio/richtext.svg
+[license-href]: https://npmjs.com/package/@prismicio/richtext
