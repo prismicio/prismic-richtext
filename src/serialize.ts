@@ -23,21 +23,18 @@ const serializeTreeNodes = <T>(
 	const serializedTreeNodes: T[] = [];
 
 	for (let i = 0; i < nodes.length; i++) {
-		serializedTreeNodes.push(serializeTreeNode(nodes[i], serializer));
+		const node = nodes[i];
+
+		serializedTreeNodes.push(
+			serializer(
+				node.type,
+				node.node,
+				node.text,
+				serializeTreeNodes(node.children, serializer),
+				node.key,
+			),
+		);
 	}
 
 	return serializedTreeNodes;
-};
-
-const serializeTreeNode = <T>(
-	node: TreeNode,
-	serializer: RichTextSerializer<T>,
-): T => {
-	return serializer(
-		node.type,
-		node.node,
-		node.text,
-		serializeTreeNodes(node.children, serializer),
-		node.key,
-	);
 };
