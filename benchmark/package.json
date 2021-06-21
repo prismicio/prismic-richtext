@@ -1,0 +1,12 @@
+{
+	"type": "module",
+	"devDependencies": {
+		"@types/benchmark": "^2.1.0",
+		"benchmark": "^2.1.4",
+		"ts-node": "^10.0.0"
+	},
+	"dependencies": {
+		"@prismicio/richtext": "^1.1.0",
+		"@prismicio/richtext-v2": "file:.."
+	}
+}
