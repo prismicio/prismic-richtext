@@ -2,6 +2,7 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import * as url from "url";
 import Benchmark from "benchmark";
+import { LinkType } from "@prismicio/types";
 import v1 from "@prismicio/richtext";
 import * as v2 from "@prismicio/richtext-v2";
 // import * as assert from "assert";
@@ -10,7 +11,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 const richTextJSON = JSON.parse(
 	await fs.readFile(
-		path.resolve(__dirname, "../test/__fixtures__/richText.json"),
+		path.resolve(__dirname, "../test/__fixtures__/enRichText.json"),
 		"utf8",
 	),
 );
@@ -49,7 +50,7 @@ const htmlSerializer = (_type, node, text, children) => {
 			return `<pre>${children.join("")}</pre>`;
 		}
 
-		case v2.Element.string: {
+		case v2.Element.strong: {
 			return `<strong>${children.join("")}</strong>`;
 		}
 
@@ -80,19 +81,19 @@ const htmlSerializer = (_type, node, text, children) => {
 
 		case v2.Element.hyperlink: {
 			switch (node.data.link_type) {
-				case v2.HyperlinkType.WEB: {
+				case LinkType.Web: {
 					return `<a href="${node.data.url}" target="${
 						node.data.target
 					}">${children.join("")}</a>`;
 				}
 
-				case v2.HyperlinkType.DOCUMENT: {
+				case LinkType.Document: {
 					return `<a href="linkResolver(${node.data.id})">${children.join(
 						"",
 					)}</a>`;
 				}
 
-				case v2.HyperlinkType.MEDIA: {
+				case LinkType.Media: {
 					return `<a href="${node.data.url}">${children.join("")}</a>`;
 				}
 			}

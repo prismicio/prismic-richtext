@@ -1,9 +1,13 @@
 import {
 	NodeType,
-	RTListGroupItemNode,
+	RTAnyNode,
+	RTBlockNode,
+	RTEmbedNode,
+	RTImageNode,
+	RTInlineNode,
+	RTListItemNode,
 	RTNode,
-	RTSpanNode,
-	RTTextNode,
+	RTOListItemNode,
 	Tree,
 	TreeNode,
 } from "./types";
@@ -28,7 +32,7 @@ export const asTree = (nodes: RTNode[]): Tree => {
 };
 
 const createTreeNode = (
-	node: RTNode | RTSpanNode,
+	node: RTAnyNode,
 	children: TreeNode[] = [],
 ): TreeNode => {
 	return {
@@ -48,31 +52,40 @@ const createTextTreeNode = (text: string): TreeNode => {
 	});
 };
 
-const prepareNodes = (nodes: RTNode[]): RTNode[] => {
-	const mutNodes = nodes.slice(0);
+const prepareNodes = (nodes: RTNode[]): RTBlockNode[] => {
+	const mutNodes: RTBlockNode[] = nodes.slice(0);
 
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
 
 		if (node.type === NodeType.listItem || node.type === NodeType.oListItem) {
-			const items: RTListGroupItemNode[] = [node as RTListGroupItemNode];
+			const items: (RTListItemNode | RTOListItemNode)[] = [
+				node as RTListItemNode | RTOListItemNode,
+			];
 
 			while (mutNodes[i + 1] && mutNodes[i + 1].type === node.type) {
-				items.push(mutNodes[i + 1] as RTListGroupItemNode);
+				items.push(mutNodes[i + 1] as RTListItemNode | RTOListItemNode);
 				mutNodes.splice(i, 1);
 			}
 
-			mutNodes[i] = {
-				type: node.type === NodeType.listItem ? NodeType.list : NodeType.oList,
-				items,
-			};
+			if (node.type === NodeType.listItem) {
+				mutNodes[i] = {
+					type: NodeType.list,
+					items: items as RTListItemNode[],
+				};
+			} else {
+				mutNodes[i] = {
+					type: NodeType.oList,
+					items: items as RTOListItemNode[],
+				};
+			}
 		}
 	}
 
 	return mutNodes;
 };
 
-const nodeToTreeNode = (node: RTNode): TreeNode => {
+const nodeToTreeNode = (node: RTBlockNode): TreeNode => {
 	if ("text" in node) {
 		return createTreeNode(
 			node,
@@ -93,9 +106,9 @@ const nodeToTreeNode = (node: RTNode): TreeNode => {
 };
 
 const textNodeSpansToTreeNodeChildren = (
-	spans: RTSpanNode[],
-	node: RTTextNode,
-	parentSpan?: RTSpanNode,
+	spans: RTInlineNode[],
+	node: Exclude<RTNode, RTImageNode | RTEmbedNode>,
+	parentSpan?: RTInlineNode,
 ): TreeNode[] => {
 	if (!spans.length) {
 		return [createTextTreeNode(node.text)];
@@ -109,7 +122,7 @@ const textNodeSpansToTreeNodeChildren = (
 		const spanStart = span.start - parentSpanStart;
 		const spanEnd = span.end - parentSpanStart;
 
-		const childSpans: RTSpanNode[] = [];
+		const childSpans: RTInlineNode[] = [];
 		for (let j = 0; j < spans.length; j++) {
 			const siblingSpan = spans[j];
 

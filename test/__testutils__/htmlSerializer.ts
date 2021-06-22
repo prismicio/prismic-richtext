@@ -1,6 +1,8 @@
-import { HyperlinkType, Element, RichTextSerializer } from "../../src";
+import { Element, RichTextFunctionSerializer } from "../../src";
 
-export const htmlSerializer: RichTextSerializer<string> = (
+import { LinkType } from "@prismicio/types";
+
+export const htmlSerializer: RichTextFunctionSerializer<string> = (
 	_type,
 	node,
 	text,
@@ -39,7 +41,7 @@ export const htmlSerializer: RichTextSerializer<string> = (
 			return `<pre>${children.join("")}</pre>`;
 		}
 
-		case Element.string: {
+		case Element.strong: {
 			return `<strong>${children.join("")}</strong>`;
 		}
 
@@ -70,19 +72,19 @@ export const htmlSerializer: RichTextSerializer<string> = (
 
 		case Element.hyperlink: {
 			switch (node.data.link_type) {
-				case HyperlinkType.WEB: {
+				case LinkType.Web: {
 					return `<a href="${node.data.url}" target="${
 						node.data.target
 					}">${children.join("")}</a>`;
 				}
 
-				case HyperlinkType.DOCUMENT: {
+				case LinkType.Document: {
 					return `<a href="linkResolver(${node.data.id})">${children.join(
 						"",
 					)}</a>`;
 				}
 
-				case HyperlinkType.MEDIA: {
+				case LinkType.Media: {
 					return `<a href="${node.data.url}">${children.join("")}</a>`;
 				}
 			}

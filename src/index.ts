@@ -1,11 +1,15 @@
 export { asTree } from "./asTree";
 export { asText } from "./asText";
 
-export { serialize } from "./serialize";
-export type { RichTextSerializer } from "./serialize";
-
 export {
-	NodeType as Element,
-	HyperlinkType,
-	HyperlinkMediaKind,
+	wrapObjectSerializer,
+	buildFinalSerializer,
+	serialize,
+} from "./serialize";
+
+export { NodeType as Element } from "./types";
+
+export type {
+	RichTextFunctionSerializer,
+	RichTextObjectSerializer,
 } from "./types";

@@ -4,9 +4,9 @@ import { htmlSerializer } from "./__testutils__/htmlSerializer";
 
 import { serialize } from "../src";
 import { richTextFixture } from "./__fixtures__/richText";
-import { RichText } from "../src/types";
+import { RichTextField } from "../src/types";
 
-const serializeMacro = (t: ExecutionContext, richText: RichText) => {
+const serializeMacro = (t: ExecutionContext, richText: RichTextField) => {
 	t.snapshot(serialize(richText, htmlSerializer));
 };
 
