@@ -1,16 +1,17 @@
-import { RichTextField } from "./types";
+import { RichTextField, RTTextNode } from "./types";
 
 export const asText = (
 	richTextField: RichTextField,
 	separator = " ",
 ): string => {
-	let res = "";
+	let result = "";
 
-	richTextField.forEach((node, i) => {
-		if ("text" in node) {
-			res += (i > 0 ? separator : "") + node.text;
+	for (let i = 0; i < richTextField.length; i++) {
+		if ("text" in richTextField[i]) {
+			result +=
+				(result ? separator : "") + (richTextField[i] as RTTextNode).text;
 		}
-	});
+	}
 
-	return res;
+	return result;
 };

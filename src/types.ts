@@ -190,6 +190,18 @@ export type RTNode =
 	| RTImageNode
 	| RTEmbedNode;
 
+export type RTTextNode =
+	| RTHeading1Node
+	| RTHeading2Node
+	| RTHeading3Node
+	| RTHeading4Node
+	| RTHeading5Node
+	| RTHeading6Node
+	| RTParagraphNode
+	| RTPreformattedNode
+	| RTListItemNode
+	| RTOListItemNode;
+
 export type RTAnyNode = RTBlockNode | RTInlineNode | RTBlockSpanNode;
 
 export type RTBlockNode =
