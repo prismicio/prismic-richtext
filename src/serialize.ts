@@ -1,81 +1,58 @@
+import { RichTextField } from "@prismicio/types";
 import {
-	NodeType,
-	ReversedNodeType,
-	RichTextField,
 	RichTextFunctionSerializer,
-	RichTextObjectSerializer,
-	RTAnyNode,
+	RichTextMapSerializer,
+	RichTextReversedNoteType,
 	TreeNode,
 } from "./types";
 import { asTree } from "./asTree";
+import { RichTextError } from "./RichTextError";
 
-export const wrapObjectSerializer = <T>(
-	serializer: RichTextObjectSerializer<T>,
-): RichTextFunctionSerializer<T | undefined> => {
-	return (
-		type: NodeType,
-		node: RTAnyNode,
-		text: string | undefined,
-		children: (T | undefined)[],
-		key: string,
-	): T | undefined => {
-		const tagSerializer = serializer[ReversedNodeType[type]];
+export const wrapMapSerializer = <T>(
+	serializer: RichTextMapSerializer<T>,
+): RichTextFunctionSerializer<T | null> => {
+	return (type, node, text, children, key) => {
+		const tagSerializer: RichTextMapSerializer<T>[keyof RichTextMapSerializer<T>] =
+			// @ts-expect-error if not at reversed map then at type itself
+			serializer[RichTextReversedNoteType[type] || type];
 
-		return tagSerializer
-			? tagSerializer({
-					// @ts-expect-error things will be fine?
-					type,
-					// @ts-expect-error things will be fine?
-					node,
-					// @ts-expect-error things will be fine?
-					text,
-					// @ts-expect-error things will be fine?
-					children,
-					// @ts-expect-error things will be fine?
-					key,
-			  })
-			: undefined;
+		if (tagSerializer) {
+			return tagSerializer({
+				// @ts-expect-error cannot type check here
+				type,
+				// @ts-expect-error cannot type check here
+				node,
+				// @ts-expect-error cannot type check here
+				text,
+				// @ts-expect-error cannot type check here
+				children,
+				// @ts-expect-error cannot type check here
+				key,
+			});
+		}
+
+		return null;
 	};
 };
 
-export const buildFinalSerializer = <T>(
-	defaultSerializer:
-		| RichTextFunctionSerializer<T>
-		| Required<RichTextObjectSerializer<T>>,
-	...serializers: (
-		| RichTextFunctionSerializer<T>
-		| RichTextObjectSerializer<T>
-	)[]
-): RichTextFunctionSerializer<T> => {
-	const wrappedDefaultSerizlier =
-		typeof defaultSerializer === "object"
-			? (wrapObjectSerializer<T>(
-					defaultSerializer,
-			  ) as RichTextFunctionSerializer<T>) // Assumed "as" statement because default object is required
-			: defaultSerializer;
+export const composeSerializers = <T>(
+	...serializers: [
+		RichTextFunctionSerializer<T>,
+		...RichTextFunctionSerializer<T>[]
+	]
+) => {
+	return (...args: Parameters<RichTextFunctionSerializer<T>>): T => {
+		for (let i = 0; i < serializers.length; i++) {
+			const res = serializers[i](...args);
 
-	const wrappedSerializers = serializers.map((serializer) =>
-		typeof serializer === "object"
-			? wrapObjectSerializer<T>(serializer)
-			: serializer,
-	);
-
-	return (
-		type: NodeType,
-		node: RTAnyNode,
-		text: string | undefined,
-		children: T[],
-		key: string,
-	): T => {
-		for (const serializer of wrappedSerializers) {
-			const result = serializer(type, node, text, children, key);
-
-			if (typeof result !== "undefined") {
-				return result;
+			if (res !== null) {
+				return res;
 			}
 		}
 
-		return wrappedDefaultSerizlier(type, node, text, children, key);
+		throw new RichTextError(
+			`Rich Text Node of type ${args[0]} does not have a serializer`,
+		);
 	};
 };
 
