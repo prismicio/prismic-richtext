@@ -12,6 +12,7 @@ import {
 	RTImageNode,
 	RTInlineNode,
 	RTLabelNode,
+	RTLinkNode,
 	RTListItemNode,
 	RTListNode,
 	RTOListItemNode,
@@ -62,9 +63,9 @@ export type RichTextMapSerializer<T> = {
 	oList?: RTMapSerializerFunction<RTOListNode, T, undefined>;
 	image?: RTMapSerializerFunction<RTImageNode, T, undefined, never>;
 	embed?: RTMapSerializerFunction<RTEmbedNode, T, undefined, never>;
-	hyperlink?: RTMapSerializerFunction<RTImageNode, T, string>;
+	hyperlink?: RTMapSerializerFunction<RTLinkNode, T, string>;
 	label?: RTMapSerializerFunction<RTLabelNode, T, string>;
-	span?: RTMapSerializerFunction<RTSpanNode, T, never>;
+	span?: RTMapSerializerFunction<RTSpanNode, T, string, never>;
 };
 
 // Tree
@@ -89,9 +90,9 @@ export interface RTBlockSpanNode extends RTTextNodeBase {
 	type: RichTextNodeType.span;
 }
 
-export const RichTextReversedNoteType = {
-	[RichTextNodeType.listItem]: "list-item",
-	[RichTextNodeType.oListItem]: "o-list-item",
-	[RichTextNodeType.list]: "group-list-item",
-	[RichTextNodeType.oList]: "group-o-list-item",
+export const RichTextReversedNodeType = {
+	[RichTextNodeType.listItem]: "listItem",
+	[RichTextNodeType.oListItem]: "oListItem",
+	[RichTextNodeType.list]: "list",
+	[RichTextNodeType.oList]: "oList",
 } as const;

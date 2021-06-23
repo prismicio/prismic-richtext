@@ -2,7 +2,7 @@ import { RichTextField } from "@prismicio/types";
 import {
 	RichTextFunctionSerializer,
 	RichTextMapSerializer,
-	RichTextReversedNoteType,
+	RichTextReversedNodeType,
 	TreeNode,
 } from "./types";
 import { asTree } from "./asTree";
@@ -14,7 +14,7 @@ export const wrapMapSerializer = <T>(
 	return (type, node, text, children, key) => {
 		const tagSerializer: RichTextMapSerializer<T>[keyof RichTextMapSerializer<T>] =
 			// @ts-expect-error if not at reversed map then at type itself
-			serializer[RichTextReversedNoteType[type] || type];
+			serializer[RichTextReversedNodeType[type] || type];
 
 		if (tagSerializer) {
 			return tagSerializer({
