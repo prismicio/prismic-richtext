@@ -1,6 +1,5 @@
 import {
-	NodeType,
-	RTAnyNode,
+	RichTextNodeType,
 	RTBlockNode,
 	RTEmbedNode,
 	RTImageNode,
@@ -8,9 +7,8 @@ import {
 	RTListItemNode,
 	RTNode,
 	RTOListItemNode,
-	Tree,
-	TreeNode,
-} from "./types";
+} from "@prismicio/types";
+import { RTAnyNode, Tree, TreeNode } from "./types";
 
 export const uuid = (): string => {
 	return (++uuid.i).toString();
@@ -46,7 +44,7 @@ const createTreeNode = (
 
 const createTextTreeNode = (text: string): TreeNode => {
 	return createTreeNode({
-		type: NodeType.span,
+		type: RichTextNodeType.span,
 		text,
 		spans: [],
 	});
@@ -58,7 +56,10 @@ const prepareNodes = (nodes: RTNode[]): RTBlockNode[] => {
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
 
-		if (node.type === NodeType.listItem || node.type === NodeType.oListItem) {
+		if (
+			node.type === RichTextNodeType.listItem ||
+			node.type === RichTextNodeType.oListItem
+		) {
 			const items: (RTListItemNode | RTOListItemNode)[] = [
 				node as RTListItemNode | RTOListItemNode,
 			];
@@ -68,14 +69,14 @@ const prepareNodes = (nodes: RTNode[]): RTBlockNode[] => {
 				mutNodes.splice(i, 1);
 			}
 
-			if (node.type === NodeType.listItem) {
+			if (node.type === RichTextNodeType.listItem) {
 				mutNodes[i] = {
-					type: NodeType.list,
+					type: RichTextNodeType.list,
 					items: items as RTListItemNode[],
 				};
 			} else {
 				mutNodes[i] = {
-					type: NodeType.oList,
+					type: RichTextNodeType.oList,
 					items: items as RTOListItemNode[],
 				};
 			}

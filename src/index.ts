@@ -1,15 +1,13 @@
 export { asTree } from "./asTree";
 export { asText } from "./asText";
 
-export {
-	wrapObjectSerializer,
-	buildFinalSerializer,
-	serialize,
-} from "./serialize";
+export { wrapMapSerializer, composeSerializers, serialize } from "./serialize";
 
-export { NodeType as Element } from "./types";
+export { RichTextNodeType as Element } from "@prismicio/types";
+
+export { RichTextError } from "./RichTextError";
 
 export type {
 	RichTextFunctionSerializer,
-	RichTextObjectSerializer,
+	RichTextMapSerializer,
 } from "./types";

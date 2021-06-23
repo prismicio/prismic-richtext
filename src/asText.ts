@@ -1,4 +1,4 @@
-import { RichTextField, RTTextNode } from "./types";
+import { RichTextField, RTTextNode } from "@prismicio/types";
 
 export const asText = (
 	richTextField: RichTextField,
