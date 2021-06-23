@@ -33,9 +33,9 @@ export type RichTextFunctionSerializer<T> = (
 	key: string,
 ) => T;
 
-export type RTMapSerializerFunction<
-	Node extends { type: RichTextNodeType },
+export type RichTextMapSerializerFunction<
 	T,
+	Node extends { type: RichTextNodeType } = RTBlockNode | RTInlineNode,
 	TextType = string | undefined,
 	ChildrenType = T,
 > = (payload: {
@@ -47,25 +47,29 @@ export type RTMapSerializerFunction<
 }) => T;
 
 export type RichTextMapSerializer<T> = {
-	heading1?: RTMapSerializerFunction<RTHeading1Node, T, undefined>;
-	heading2?: RTMapSerializerFunction<RTHeading2Node, T, undefined>;
-	heading3?: RTMapSerializerFunction<RTHeading3Node, T, undefined>;
-	heading4?: RTMapSerializerFunction<RTHeading4Node, T, undefined>;
-	heading5?: RTMapSerializerFunction<RTHeading5Node, T, undefined>;
-	heading6?: RTMapSerializerFunction<RTHeading6Node, T, undefined>;
-	paragraph?: RTMapSerializerFunction<RTParagraphNode, T, undefined>;
-	preformatted?: RTMapSerializerFunction<RTPreformattedNode, T, undefined>;
-	strong?: RTMapSerializerFunction<RTStrongNode, T, string>;
-	em?: RTMapSerializerFunction<RTEmNode, T, string>;
-	listItem?: RTMapSerializerFunction<RTListItemNode, T, undefined>;
-	oListItem?: RTMapSerializerFunction<RTOListItemNode, T, undefined>;
-	list?: RTMapSerializerFunction<RTListNode, T, undefined>;
-	oList?: RTMapSerializerFunction<RTOListNode, T, undefined>;
-	image?: RTMapSerializerFunction<RTImageNode, T, undefined, never>;
-	embed?: RTMapSerializerFunction<RTEmbedNode, T, undefined, never>;
-	hyperlink?: RTMapSerializerFunction<RTLinkNode, T, string>;
-	label?: RTMapSerializerFunction<RTLabelNode, T, string>;
-	span?: RTMapSerializerFunction<RTSpanNode, T, string, never>;
+	heading1?: RichTextMapSerializerFunction<T, RTHeading1Node, undefined>;
+	heading2?: RichTextMapSerializerFunction<T, RTHeading2Node, undefined>;
+	heading3?: RichTextMapSerializerFunction<T, RTHeading3Node, undefined>;
+	heading4?: RichTextMapSerializerFunction<T, RTHeading4Node, undefined>;
+	heading5?: RichTextMapSerializerFunction<T, RTHeading5Node, undefined>;
+	heading6?: RichTextMapSerializerFunction<T, RTHeading6Node, undefined>;
+	paragraph?: RichTextMapSerializerFunction<T, RTParagraphNode, undefined>;
+	preformatted?: RichTextMapSerializerFunction<
+		T,
+		RTPreformattedNode,
+		undefined
+	>;
+	strong?: RichTextMapSerializerFunction<T, RTStrongNode, string>;
+	em?: RichTextMapSerializerFunction<T, RTEmNode, string>;
+	listItem?: RichTextMapSerializerFunction<T, RTListItemNode, undefined>;
+	oListItem?: RichTextMapSerializerFunction<T, RTOListItemNode, undefined>;
+	list?: RichTextMapSerializerFunction<T, RTListNode, undefined>;
+	oList?: RichTextMapSerializerFunction<T, RTOListNode, undefined>;
+	image?: RichTextMapSerializerFunction<T, RTImageNode, undefined, never>;
+	embed?: RichTextMapSerializerFunction<T, RTEmbedNode, undefined, never>;
+	hyperlink?: RichTextMapSerializerFunction<T, RTLinkNode, string>;
+	label?: RichTextMapSerializerFunction<T, RTLabelNode, string>;
+	span?: RichTextMapSerializerFunction<T, RTSpanNode, string, never>;
 };
 
 // Tree
