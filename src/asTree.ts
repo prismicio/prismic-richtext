@@ -115,17 +115,19 @@ const textNodeSpansToTreeNodeChildren = (
 		return [createTextTreeNode(node.text)];
 	}
 
+	const mutSpans: RTInlineNode[] = spans.slice(0);
+
 	const children: TreeNode[] = [];
 
-	for (let i = 0; i < spans.length; i++) {
-		const span = spans[i];
+	for (let i = 0; i < mutSpans.length; i++) {
+		const span = mutSpans[i];
 		const parentSpanStart = (parentSpan && parentSpan.start) || 0;
 		const spanStart = span.start - parentSpanStart;
 		const spanEnd = span.end - parentSpanStart;
 
 		const childSpans: RTInlineNode[] = [];
-		for (let j = 0; j < spans.length; j++) {
-			const siblingSpan = spans[j];
+		for (let j = 0; j < mutSpans.length; j++) {
+			const siblingSpan = mutSpans[j];
 
 			if (
 				siblingSpan !== span &&
@@ -133,7 +135,7 @@ const textNodeSpansToTreeNodeChildren = (
 				siblingSpan.end <= span.end
 			) {
 				childSpans.push(siblingSpan);
-				spans.splice(j, 1);
+				mutSpans.splice(j, 1);
 				j--;
 			}
 		}
@@ -161,7 +163,9 @@ const textNodeSpansToTreeNodeChildren = (
 				createTextTreeNode(
 					node.text.slice(
 						spanEnd,
-						spans[i + 1] ? spans[i + 1].start - parentSpanStart : undefined,
+						mutSpans[i + 1]
+							? mutSpans[i + 1].start - parentSpanStart
+							: undefined,
 					),
 				),
 			);
