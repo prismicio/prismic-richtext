@@ -1,7 +1,7 @@
 {
 	"name": "@prismicio/richtext",
 	"version": "0.0.0",
-	"description": "A parser and serializer for Prismic's Rich Text format.",
+	"description": "A parser and serializer for Prismic's Rich Text format",
 	"keywords": [
 		"typescript",
 		"prismic"
@@ -40,16 +40,19 @@
 		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava",
 		"test": "npm run lint && npm run unit"
 	},
+	"dependencies": {
+		"@prismicio/types": "^0.0.10"
+	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.27.0",
-		"@typescript-eslint/parser": "^4.27.0",
+		"@typescript-eslint/eslint-plugin": "^4.28.0",
+		"@typescript-eslint/parser": "^4.28.0",
 		"ava": "^3.15.0",
 		"eslint": "^7.29.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^3.4.0",
 		"nyc": "^15.1.0",
 		"prettier": "^2.3.1",
-		"siroc": "^0.11.0",
+		"siroc": "^0.11.1",
 		"standard-version": "^9.3.0",
 		"ts-eager": "^2.0.2",
 		"typescript": "^4.3.4"

@@ -1,150 +1,149 @@
-export const enum NodeType {
-	heading1 = "heading1",
-	heading2 = "heading2",
-	heading3 = "heading3",
-	heading4 = "heading4",
-	heading5 = "heading5",
-	heading6 = "heading6",
-	paragraph = "paragraph",
-	preformatted = "preformatted",
-	string = "strong",
-	em = "em",
-	listItem = "list-item",
-	oListItem = "o-list-item",
-	list = "group-list-item",
-	oList = "group-o-list-item",
-	image = "image",
-	embed = "embed",
-	hyperlink = "hyperlink",
-	label = "label",
-	span = "span",
-}
+import {
+	RichTextNodeType,
+	RTBlockNode,
+	RTEmbedNode,
+	RTEmNode,
+	RTHeading1Node,
+	RTHeading2Node,
+	RTHeading3Node,
+	RTHeading4Node,
+	RTHeading5Node,
+	RTHeading6Node,
+	RTImageNode,
+	RTInlineNode,
+	RTLabelNode,
+	RTLinkNode,
+	RTListItemNode,
+	RTListNode,
+	RTOListItemNode,
+	RTOListNode,
+	RTParagraphNode,
+	RTPreformattedNode,
+	RTSpanNode,
+	RTStrongNode,
+	RTTextNodeBase,
+} from "@prismicio/types";
 
-export type RichText = RTNode[];
-export type RTNode = RTTextNode | RTImageNode | RTEmbedNode | RTListGroupNode;
-export type RTSpanNode = RTLabelSpanNode | RTTextSpanNode | RTHyperlinkSpanNode;
+// Serializers
 
-interface RTSpanNodeBase {
-	start: number;
-	end: number;
-}
+/**
+ * Serializes a node from a rich text or title field with a function
+ *
+ * @typeParam ReturnType - Return type of the function serializer
+ *
+ * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
+ */
+export type RichTextFunctionSerializer<ReturnType> = (
+	type: RichTextNodeType,
+	node: RTAnyNode,
+	text: string | undefined,
+	children: ReturnType[],
+	key: string,
+) => ReturnType;
 
-interface RTLabelSpanNode extends RTSpanNodeBase {
-	type: NodeType.label;
-	data: {
-		label: string;
-	};
-}
+/**
+ * Map serializer's tag function serializer, can be helpful for typing those handlers
+ *
+ * @typeParam ReturnType - Return type of the tag serializer
+ */
+export type RichTextMapSerializerFunction<
+	ReturnType,
+	Node extends { type: RichTextNodeType } = RTBlockNode | RTInlineNode,
+	TextType = string | undefined,
+	ChildrenType = ReturnType,
+> = (payload: {
+	type: Node["type"];
+	node: Node;
+	text: TextType;
+	children: ChildrenType[];
+	key: string;
+}) => ReturnType;
 
-interface RTTextSpanNode extends RTSpanNodeBase {
-	type: NodeType.em | NodeType.span | NodeType.string;
-}
+/**
+ * Serializes a node from a rich text or title field with a map
+ *
+ * @typeParam ReturnType - Return type of the map serializer
+ *
+ * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
+ *
+ * @remarks
+ *
+ * This type of serializer needs to be processed through {@link wrapMapSerializer}
+ * before being used with {@link serialize}
+ */
+export type RichTextMapSerializer<ReturnType> = {
+	heading1?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading1Node,
+		undefined
+	>;
+	heading2?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading2Node,
+		undefined
+	>;
+	heading3?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading3Node,
+		undefined
+	>;
+	heading4?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading4Node,
+		undefined
+	>;
+	heading5?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading5Node,
+		undefined
+	>;
+	heading6?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading6Node,
+		undefined
+	>;
+	paragraph?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTParagraphNode,
+		undefined
+	>;
+	preformatted?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTPreformattedNode,
+		undefined
+	>;
+	strong?: RichTextMapSerializerFunction<ReturnType, RTStrongNode, string>;
+	em?: RichTextMapSerializerFunction<ReturnType, RTEmNode, string>;
+	listItem?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTListItemNode,
+		undefined
+	>;
+	oListItem?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTOListItemNode,
+		undefined
+	>;
+	list?: RichTextMapSerializerFunction<ReturnType, RTListNode, undefined>;
+	oList?: RichTextMapSerializerFunction<ReturnType, RTOListNode, undefined>;
+	image?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTImageNode,
+		undefined,
+		never
+	>;
+	embed?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTEmbedNode,
+		undefined,
+		never
+	>;
+	hyperlink?: RichTextMapSerializerFunction<ReturnType, RTLinkNode, string>;
+	label?: RichTextMapSerializerFunction<ReturnType, RTLabelNode, string>;
+	span?: RichTextMapSerializerFunction<ReturnType, RTSpanNode, string, never>;
+};
 
-interface RTHyperlinkSpanNode extends RTSpanNodeBase {
-	type: NodeType.hyperlink;
-	data: RTHyperlinkData;
-}
-
-type RTHyperlinkData =
-	| RTHyperlinkDocumentData
-	| RTHyperlinkMediaData
-	| RTHyperlinkWebData;
-
-export const enum HyperlinkType {
-	DOCUMENT = "Document",
-	MEDIA = "Media",
-	WEB = "Web",
-}
-
-interface RTHyperlinkDocumentData {
-	link_type: HyperlinkType.DOCUMENT;
-	id: string;
-	type: string;
-	tags: string[];
-	slug: string;
-	lang: string;
-	uid: string | null;
-}
-
-type RTHyperlinkMediaData =
-	| RTHyperlinkMediaDocumentData
-	| RTHyperlinkMediaImageData;
-
-export const enum HyperlinkMediaKind {
-	IMAGE = "image",
-	DOCUMENT = "document",
-}
-
-interface RTHyperlinkMediaDocumentData {
-	link_type: HyperlinkType.MEDIA;
-	kind: HyperlinkMediaKind.DOCUMENT;
-	name: string;
-	url: string;
-	size: number;
-}
-
-interface RTHyperlinkMediaImageData {
-	link_type: HyperlinkType.MEDIA;
-	kind: HyperlinkMediaKind.IMAGE;
-	name: string;
-	url: string;
-	size: number;
-	height: number;
-	width: number;
-}
-
-interface RTHyperlinkWebData {
-	link_type: HyperlinkType.WEB;
-	url: string;
-	target: string | null;
-}
-
-export interface RTTextNode {
-	type:
-		| NodeType.heading1
-		| NodeType.heading2
-		| NodeType.heading3
-		| NodeType.heading4
-		| NodeType.heading5
-		| NodeType.heading6
-		| NodeType.paragraph
-		| NodeType.em
-		| NodeType.listItem
-		| NodeType.oListItem
-		| NodeType.preformatted
-		| NodeType.span
-		| NodeType.string;
-	text: string;
-	spans: RTSpanNode[];
-}
-
-interface RTImageNode {
-	type: NodeType.image;
-	url: string;
-	alt: string;
-	copyright: string;
-	dimensions: {
-		width: number;
-		height: number;
-	};
-}
-
-interface RTEmbedNode {
-	type: NodeType.embed;
-	oembed: Record<string, string | number | null> & {
-		html: string;
-	};
-}
-
-export interface RTListGroupNode {
-	type: NodeType.list | NodeType.oList;
-	items: RTListGroupItemNode[];
-}
-
-export interface RTListGroupItemNode extends RTTextNode {
-	type: NodeType.listItem | NodeType.oListItem;
-}
-
+// Tree
 export interface Tree {
 	key: string;
 	children: TreeNode[];
@@ -152,8 +151,23 @@ export interface Tree {
 
 export interface TreeNode {
 	key: string;
-	type: NodeType;
+	type: RichTextNodeType;
 	text?: string;
-	node: RTNode | RTSpanNode;
+	node: RTAnyNode;
 	children: TreeNode[];
 }
+
+// Helpers
+export type RTAnyNode = RTBlockNode | RTInlineNode | RTBlockSpanNode;
+
+// Internal node type used when building the tree
+export interface RTBlockSpanNode extends RTTextNodeBase {
+	type: RichTextNodeType.span;
+}
+
+export const RichTextReversedNodeType = {
+	[RichTextNodeType.listItem]: "listItem",
+	[RichTextNodeType.oListItem]: "oListItem",
+	[RichTextNodeType.list]: "list",
+	[RichTextNodeType.oList]: "oList",
+} as const;

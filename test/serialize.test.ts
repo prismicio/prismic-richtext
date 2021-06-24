@@ -1,17 +1,27 @@
 import test, { ExecutionContext } from "ava";
 
-import { htmlSerializer } from "./__testutils__/htmlSerializer";
-
-import { serialize } from "../src";
+import {
+	htmlFunctionSerializer,
+	htmlMapSerializer,
+} from "./__testutils__/htmlSerializer";
 import { richTextFixture } from "./__fixtures__/richText";
-import { RichText } from "../src/types";
 
-const serializeMacro = (t: ExecutionContext, richText: RichText) => {
-	t.snapshot(serialize(richText, htmlSerializer));
+import { serialize, wrapMapSerializer } from "../src";
+import { RichTextField } from "@prismicio/types";
+
+const serializeMacro = (t: ExecutionContext, richText: RichTextField) => {
+	const functionSerialization = serialize(richText, htmlFunctionSerializer);
+	const mapSerialization = serialize(
+		richText,
+		wrapMapSerializer(htmlMapSerializer),
+	);
+
+	t.snapshot(functionSerialization);
+	t.snapshot(mapSerialization);
 };
 
 test(
-	"serializes a rich text field value using a given serializer function",
+	"serializes a rich text field value using given serializers",
 	serializeMacro,
 	richTextFixture.en,
 );
