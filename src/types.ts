@@ -25,51 +25,122 @@ import {
 } from "@prismicio/types";
 
 // Serializers
-export type RichTextFunctionSerializer<T> = (
+
+/**
+ * Serializes a node from a rich text or title field with a function
+ *
+ * @typeParam ReturnType - Return type of the function serializer
+ *
+ * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
+ */
+export type RichTextFunctionSerializer<ReturnType> = (
 	type: RichTextNodeType,
 	node: RTAnyNode,
 	text: string | undefined,
-	children: T[],
+	children: ReturnType[],
 	key: string,
-) => T;
+) => ReturnType;
 
+/**
+ * Map serializer's tag function serializer, can be helpful for typing those handlers
+ *
+ * @typeParam ReturnType - Return type of the tag serializer
+ */
 export type RichTextMapSerializerFunction<
-	T,
+	ReturnType,
 	Node extends { type: RichTextNodeType } = RTBlockNode | RTInlineNode,
 	TextType = string | undefined,
-	ChildrenType = T,
+	ChildrenType = ReturnType,
 > = (payload: {
 	type: Node["type"];
 	node: Node;
 	text: TextType;
 	children: ChildrenType[];
 	key: string;
-}) => T;
+}) => ReturnType;
 
-export type RichTextMapSerializer<T> = {
-	heading1?: RichTextMapSerializerFunction<T, RTHeading1Node, undefined>;
-	heading2?: RichTextMapSerializerFunction<T, RTHeading2Node, undefined>;
-	heading3?: RichTextMapSerializerFunction<T, RTHeading3Node, undefined>;
-	heading4?: RichTextMapSerializerFunction<T, RTHeading4Node, undefined>;
-	heading5?: RichTextMapSerializerFunction<T, RTHeading5Node, undefined>;
-	heading6?: RichTextMapSerializerFunction<T, RTHeading6Node, undefined>;
-	paragraph?: RichTextMapSerializerFunction<T, RTParagraphNode, undefined>;
+/**
+ * Serializes a node from a rich text or title field with a map
+ *
+ * @typeParam ReturnType - Return type of the map serializer
+ *
+ * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
+ *
+ * @remarks
+ *
+ * This type of serializer needs to be processed through {@link wrapMapSerializer}
+ * before being used with {@link serialize}
+ */
+export type RichTextMapSerializer<ReturnType> = {
+	heading1?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading1Node,
+		undefined
+	>;
+	heading2?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading2Node,
+		undefined
+	>;
+	heading3?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading3Node,
+		undefined
+	>;
+	heading4?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading4Node,
+		undefined
+	>;
+	heading5?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading5Node,
+		undefined
+	>;
+	heading6?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTHeading6Node,
+		undefined
+	>;
+	paragraph?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTParagraphNode,
+		undefined
+	>;
 	preformatted?: RichTextMapSerializerFunction<
-		T,
+		ReturnType,
 		RTPreformattedNode,
 		undefined
 	>;
-	strong?: RichTextMapSerializerFunction<T, RTStrongNode, string>;
-	em?: RichTextMapSerializerFunction<T, RTEmNode, string>;
-	listItem?: RichTextMapSerializerFunction<T, RTListItemNode, undefined>;
-	oListItem?: RichTextMapSerializerFunction<T, RTOListItemNode, undefined>;
-	list?: RichTextMapSerializerFunction<T, RTListNode, undefined>;
-	oList?: RichTextMapSerializerFunction<T, RTOListNode, undefined>;
-	image?: RichTextMapSerializerFunction<T, RTImageNode, undefined, never>;
-	embed?: RichTextMapSerializerFunction<T, RTEmbedNode, undefined, never>;
-	hyperlink?: RichTextMapSerializerFunction<T, RTLinkNode, string>;
-	label?: RichTextMapSerializerFunction<T, RTLabelNode, string>;
-	span?: RichTextMapSerializerFunction<T, RTSpanNode, string, never>;
+	strong?: RichTextMapSerializerFunction<ReturnType, RTStrongNode, string>;
+	em?: RichTextMapSerializerFunction<ReturnType, RTEmNode, string>;
+	listItem?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTListItemNode,
+		undefined
+	>;
+	oListItem?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTOListItemNode,
+		undefined
+	>;
+	list?: RichTextMapSerializerFunction<ReturnType, RTListNode, undefined>;
+	oList?: RichTextMapSerializerFunction<ReturnType, RTOListNode, undefined>;
+	image?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTImageNode,
+		undefined,
+		never
+	>;
+	embed?: RichTextMapSerializerFunction<
+		ReturnType,
+		RTEmbedNode,
+		undefined,
+		never
+	>;
+	hyperlink?: RichTextMapSerializerFunction<ReturnType, RTLinkNode, string>;
+	label?: RichTextMapSerializerFunction<ReturnType, RTLabelNode, string>;
+	span?: RichTextMapSerializerFunction<ReturnType, RTSpanNode, string, never>;
 };
 
 // Tree

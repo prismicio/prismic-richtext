@@ -4,13 +4,27 @@ import {
 	RichTextReversedNodeType,
 } from "./types";
 
-export const wrapMapSerializer = <T>(
-	serializer: RichTextMapSerializer<T>,
-): RichTextFunctionSerializer<T | null> => {
+/**
+ * Wraps a map serializer into a regular function serializer
+ *
+ * @param mapSerializer - Map serializer to wrap
+ *
+ * @return A regular function serializer
+ *
+ * @typeParam SerializerReturnType - Return type of the map serializer
+ *
+ * @remarks
+ *
+ * This is a low level helper mainly intended to be used by higher level packages
+ * Most users aren't expected to this function directly
+ */
+export const wrapMapSerializer = <SerializerReturnType>(
+	mapSerializer: RichTextMapSerializer<SerializerReturnType>,
+): RichTextFunctionSerializer<SerializerReturnType | null> => {
 	return (type, node, text, children, key) => {
-		const tagSerializer: RichTextMapSerializer<T>[keyof RichTextMapSerializer<T>] =
+		const tagSerializer: RichTextMapSerializer<SerializerReturnType>[keyof RichTextMapSerializer<SerializerReturnType>] =
 			// @ts-expect-error if not at reversed map then at type itself
-			serializer[RichTextReversedNodeType[type] || type];
+			mapSerializer[RichTextReversedNodeType[type] || type];
 
 		if (tagSerializer) {
 			return tagSerializer({

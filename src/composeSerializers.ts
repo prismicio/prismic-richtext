@@ -1,13 +1,32 @@
 import { RichTextError } from "./RichTextError";
 import { RichTextFunctionSerializer } from "./types";
 
-export const composeSerializers = <T>(
+/**
+ * Takes an array of serializers and returns a serializer applying
+ * provided serializers sequentially until a result is returned
+ *
+ * @param serializers - Serializers to compose
+ *
+ * @returns Composed serializer
+ *
+ * @typeParam SerializerReturnType - Return type of serializers
+ *
+ * @throws {@link RichTextError} when no values are returned by all provided serializers
+ *
+ * @remarks
+ *
+ * This is a low level helper mainly intended to be used by higher level packages
+ * Most users aren't expected to this function directly
+ */
+export const composeSerializers = <SerializerReturnType>(
 	...serializers: [
-		RichTextFunctionSerializer<T>,
-		...RichTextFunctionSerializer<T>[]
+		RichTextFunctionSerializer<SerializerReturnType>,
+		...RichTextFunctionSerializer<SerializerReturnType>[]
 	]
 ) => {
-	return (...args: Parameters<RichTextFunctionSerializer<T>>): T => {
+	return (
+		...args: Parameters<RichTextFunctionSerializer<SerializerReturnType>>
+	): SerializerReturnType => {
 		for (let i = 0; i < serializers.length; i++) {
 			const res = serializers[i](...args);
 
