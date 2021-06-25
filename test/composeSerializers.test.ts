@@ -1,7 +1,7 @@
 import test from "ava";
 
+import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
-import { richTextFixture } from "./__fixtures__/richText";
 
 import {
 	RichTextError,
@@ -11,6 +11,8 @@ import {
 } from "../src";
 
 test("composes multiple serializers", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+
 	const mapSerializer1 = { ...htmlMapSerializer };
 	delete mapSerializer1.heading1;
 
@@ -21,17 +23,19 @@ test("composes multiple serializers", (t) => {
 		wrapMapSerializer(mapSerializer2),
 	);
 
-	const composedSerialization = serialize(richTextFixture.en, serializer);
+	const composedSerialization = serialize(richTextFixtures.en, serializer);
 
 	t.snapshot(composedSerialization);
 });
 
 test("throws when no serializer is available for a given node", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+
 	t.throws(
 		() => {
 			const serializer = composeSerializers(wrapMapSerializer({}));
 
-			serialize(richTextFixture.en, serializer);
+			serialize(richTextFixtures.en, serializer);
 		},
 		{ instanceOf: RichTextError },
 	);
@@ -43,7 +47,7 @@ test("throws when no serializer is available for a given node", (t) => {
 
 			const serializer = composeSerializers(wrapMapSerializer(mapSerializer));
 
-			serialize(richTextFixture.en, serializer);
+			serialize(richTextFixtures.en, serializer);
 		},
 		{ instanceOf: RichTextError },
 	);
