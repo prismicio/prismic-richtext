@@ -22,22 +22,29 @@ export const composeSerializers = <SerializerReturnType>(
 	...serializers: [
 		(
 			| RichTextFunctionSerializer<SerializerReturnType>
-			| RichTextFunctionSerializer<SerializerReturnType | null>
+			| RichTextFunctionSerializer<
+					SerializerReturnType | null,
+					SerializerReturnType
+			  >
 		),
 		...(
 			| RichTextFunctionSerializer<SerializerReturnType>
-			| RichTextFunctionSerializer<SerializerReturnType | null>
+			| RichTextFunctionSerializer<
+					SerializerReturnType | null,
+					SerializerReturnType
+			  >
 		)[]
 	]
 ) => {
 	return (
 		...args: Parameters<RichTextFunctionSerializer<SerializerReturnType>>
-	): SerializerReturnType => {
+	): NonNullable<SerializerReturnType> => {
 		for (let i = 0; i < serializers.length; i++) {
 			const res = serializers[i](...args);
 
-			if (res !== null) {
-				return res;
+			if (res != null) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				return res!;
 			}
 		}
 

@@ -28,14 +28,18 @@ import {
  * Serializes a node from a rich text or title field with a function
  *
  * @typeParam ReturnType - Return type of the function serializer
+ * @typeParam ChildrenType - Type of children, defaults to provided ReturnType
  *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
-export type RichTextFunctionSerializer<ReturnType> = (
+export type RichTextFunctionSerializer<
+	ReturnType,
+	ChildrenType = ReturnType,
+> = (
 	type: RichTextNodeType,
 	node: RTAnyNode,
 	text: string | undefined,
-	children: ReturnType[],
+	children: ChildrenType[],
 	key: string,
 ) => ReturnType;
 
