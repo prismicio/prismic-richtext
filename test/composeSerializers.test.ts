@@ -1,6 +1,6 @@
 import test from "ava";
 
-import { htmlMapSerializer } from "./__testutils__/htmlSerializer";
+import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
 import { richTextFixture } from "./__fixtures__/richText";
 
 import {
@@ -26,7 +26,7 @@ test("composes multiple serializers", (t) => {
 	t.snapshot(composedSerialization);
 });
 
-test("throws when no no serializer is available for a given node", (t) => {
+test("throws when no serializer is available for a given node", (t) => {
 	t.throws(
 		() => {
 			const serializer = composeSerializers(wrapMapSerializer({}));

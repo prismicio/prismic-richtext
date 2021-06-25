@@ -4,13 +4,17 @@ import { richTextFixture } from "./__fixtures__/richText";
 
 import { asTree } from "../src";
 
-// Keep this test first so that we're sure it's the first one to access the fixture
 test("does not mutate the provided rich text field", (t) => {
-	const richTextJSON = JSON.stringify(richTextFixture.en);
+	const richText = richTextFixture.en;
 
-	asTree(richTextFixture.en);
+	// We will run `asTree` on `clonedRichText` and compare the object to the
+	// original value.
+	const originalRichText = JSON.parse(JSON.stringify(richText));
+	const clonedRichText = JSON.parse(JSON.stringify(richText));
 
-	t.deepEqual(JSON.parse(richTextJSON), richTextFixture.en);
+	asTree(clonedRichText);
+
+	t.deepEqual(originalRichText, clonedRichText);
 });
 
 test("converts a rich text field value to a tree", (t) => {

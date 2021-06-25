@@ -1,13 +1,11 @@
 import test, { ExecutionContext } from "ava";
+import { RichTextField } from "@prismicio/types";
 
-import {
-	htmlFunctionSerializer,
-	htmlMapSerializer,
-} from "./__testutils__/htmlSerializer";
+import { htmlFunctionSerializer } from "./__testutils__/htmlFunctionSerializer";
+import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
 import { richTextFixture } from "./__fixtures__/richText";
 
 import { serialize, wrapMapSerializer } from "../src";
-import { RichTextField } from "@prismicio/types";
 
 const serializeMacro = (t: ExecutionContext, richText: RichTextField) => {
 	const functionSerialization = serialize(richText, htmlFunctionSerializer);
