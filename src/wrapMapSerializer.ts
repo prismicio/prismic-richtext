@@ -23,8 +23,11 @@ export const wrapMapSerializer = <SerializerReturnType>(
 ): RichTextFunctionSerializer<SerializerReturnType | null> => {
 	return (type, node, text, children, key) => {
 		const tagSerializer: RichTextMapSerializer<SerializerReturnType>[keyof RichTextMapSerializer<SerializerReturnType>] =
-			// @ts-expect-error if not at reversed map then at type itself
-			mapSerializer[RichTextReversedNodeType[type] || type];
+			mapSerializer[
+				(RichTextReversedNodeType[
+					type as keyof typeof RichTextReversedNodeType
+				] || type) as keyof RichTextMapSerializer<SerializerReturnType>
+			];
 
 		if (tagSerializer) {
 			return tagSerializer({
