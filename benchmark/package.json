@@ -1,5 +1,8 @@
 {
 	"type": "module",
+	"scripts": {
+		"test": "node ./test.js"
+	},
 	"devDependencies": {
 		"benchmark": "^2.1.4"
 	},
