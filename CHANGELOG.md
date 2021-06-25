@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2021-06-25)
+
+
+### Bug Fixes
+
+* fixed exposed types ([25ea4a0](https://github.com/prismicio/prismic-richtext/commit/25ea4a04fe0d63238432fbfc29cf36c7590cda0f))
+* type definition for spans ([1bd7907](https://github.com/prismicio/prismic-richtext/commit/1bd79079a9898ce4b6b45cb6f81fdcf9ca862d6b))
+
 ## [2.0.0-alpha.0](https://github.com/prismicio/prismic-richtext/compare/v1.0.3...v2.0.0-alpha.0) (2021-06-25)
 
 
