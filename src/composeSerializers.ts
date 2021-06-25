@@ -20,8 +20,14 @@ import { RichTextFunctionSerializer } from "./types";
  */
 export const composeSerializers = <SerializerReturnType>(
 	...serializers: [
-		RichTextFunctionSerializer<SerializerReturnType>,
-		...RichTextFunctionSerializer<SerializerReturnType>[]
+		(
+			| RichTextFunctionSerializer<SerializerReturnType>
+			| RichTextFunctionSerializer<SerializerReturnType | null>
+		),
+		...(
+			| RichTextFunctionSerializer<SerializerReturnType>
+			| RichTextFunctionSerializer<SerializerReturnType | null>
+		)[]
 	]
 ) => {
 	return (

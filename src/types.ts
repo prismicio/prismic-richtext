@@ -35,7 +35,7 @@ import {
  */
 export type RichTextFunctionSerializer<ReturnType> = (
 	type: RichTextNodeType,
-	node: RTAnyNode,
+	node: RTBlockNode | RTInlineNode,
 	text: string | undefined,
 	children: ReturnType[],
 	key: string,

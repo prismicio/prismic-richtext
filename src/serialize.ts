@@ -1,4 +1,4 @@
-import { RichTextField } from "@prismicio/types";
+import { RichTextField, RTBlockNode, RTInlineNode } from "@prismicio/types";
 import { RichTextFunctionSerializer, TreeNode } from "./types";
 import { asTree } from "./asTree";
 
@@ -41,7 +41,8 @@ const serializeTreeNodes = <T>(
 		serializedTreeNodes.push(
 			serializer(
 				node.type,
-				node.node,
+				// FIXME: asTree should return a tree of only those nodes, not RTAnyNode that also contains the weird RTBlockSpanNode
+				node.node as RTBlockNode | RTInlineNode,
 				node.text,
 				serializeTreeNodes(node.children, serializer),
 				node.key,
