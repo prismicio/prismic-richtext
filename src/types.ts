@@ -1,6 +1,6 @@
 import {
 	RichTextNodeType,
-	RTBlockNode,
+	RTAnyNode,
 	RTEmbedNode,
 	RTEmNode,
 	RTHeading1Node,
@@ -10,7 +10,6 @@ import {
 	RTHeading5Node,
 	RTHeading6Node,
 	RTImageNode,
-	RTInlineNode,
 	RTLabelNode,
 	RTLinkNode,
 	RTListItemNode,
@@ -21,7 +20,6 @@ import {
 	RTPreformattedNode,
 	RTSpanNode,
 	RTStrongNode,
-	RTTextNodeBase,
 } from "@prismicio/types";
 
 // Serializers
@@ -35,7 +33,7 @@ import {
  */
 export type RichTextFunctionSerializer<ReturnType> = (
 	type: RichTextNodeType,
-	node: RTBlockNode | RTInlineNode,
+	node: RTAnyNode,
 	text: string | undefined,
 	children: ReturnType[],
 	key: string,
@@ -48,7 +46,7 @@ export type RichTextFunctionSerializer<ReturnType> = (
  */
 export type RichTextMapSerializerFunction<
 	ReturnType,
-	Node extends { type: RichTextNodeType } = RTBlockNode | RTInlineNode,
+	Node extends RTAnyNode = RTAnyNode,
 	TextType = string | undefined,
 	ChildrenType = ReturnType,
 > = (payload: {
@@ -158,13 +156,6 @@ export interface TreeNode {
 }
 
 // Helpers
-export type RTAnyNode = RTBlockNode | RTInlineNode | RTBlockSpanNode;
-
-// Internal node type used when building the tree
-export interface RTBlockSpanNode extends RTTextNodeBase {
-	type: RichTextNodeType.span;
-}
-
 export const RichTextReversedNodeType = {
 	[RichTextNodeType.listItem]: "listItem",
 	[RichTextNodeType.oListItem]: "oListItem",

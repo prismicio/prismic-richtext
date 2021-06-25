@@ -1,14 +1,14 @@
 import {
 	RichTextNodeType,
+	RTAnyNode,
 	RTBlockNode,
-	RTEmbedNode,
-	RTImageNode,
 	RTInlineNode,
 	RTListItemNode,
 	RTNode,
 	RTOListItemNode,
+	RTTextNode,
 } from "@prismicio/types";
-import { RTAnyNode, Tree, TreeNode } from "./types";
+import { Tree, TreeNode } from "./types";
 
 const uuid = (): string => {
 	return (++uuid.i).toString();
@@ -120,7 +120,7 @@ const nodeToTreeNode = (node: RTBlockNode): TreeNode => {
 
 const textNodeSpansToTreeNodeChildren = (
 	spans: RTInlineNode[],
-	node: Exclude<RTNode, RTImageNode | RTEmbedNode>,
+	node: RTTextNode,
 	parentSpan?: RTInlineNode,
 ): TreeNode[] => {
 	if (!spans.length) {
