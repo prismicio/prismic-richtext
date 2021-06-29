@@ -20,7 +20,7 @@ import {
  */
 export const wrapMapSerializer = <SerializerReturnType>(
 	mapSerializer: RichTextMapSerializer<SerializerReturnType>,
-): RichTextFunctionSerializer<SerializerReturnType | null> => {
+): RichTextFunctionSerializer<SerializerReturnType> => {
 	return (type, node, text, children, key) => {
 		const tagSerializer: RichTextMapSerializer<SerializerReturnType>[keyof RichTextMapSerializer<SerializerReturnType>] =
 			mapSerializer[
@@ -43,7 +43,5 @@ export const wrapMapSerializer = <SerializerReturnType>(
 				key,
 			});
 		}
-
-		return null;
 	};
 };

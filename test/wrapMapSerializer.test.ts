@@ -14,11 +14,11 @@ test("serializes a rich text field value using a given serializer map", (t) => {
 	t.snapshot(serialization);
 });
 
-test("returns `null` when serializer does not handle given tag", (t) => {
+test("returns `undefined` when serializer does not handle given tag", (t) => {
 	const richTextFixtures = createRichTextFixtures();
 
 	const serializer = wrapMapSerializer({});
 	const serialization = serialize(richTextFixtures.en, serializer);
 
-	t.true(serialization.every((element) => element === null));
+	t.true(serialization.every((element) => element === undefined));
 });

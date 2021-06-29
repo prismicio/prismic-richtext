@@ -1,4 +1,3 @@
-import { RichTextError } from "./RichTextError";
 import { RichTextFunctionSerializer } from "./types";
 
 /**
@@ -11,8 +10,6 @@ import { RichTextFunctionSerializer } from "./types";
  *
  * @typeParam SerializerReturnType - Return type of serializers
  *
- * @throws {@link RichTextError} when no values are returned by all provided serializers
- *
  * @remarks
  *
  * This is a low level helper mainly intended to be used by higher level packages
@@ -20,36 +17,17 @@ import { RichTextFunctionSerializer } from "./types";
  */
 export const composeSerializers = <SerializerReturnType>(
 	...serializers: [
-		(
-			| RichTextFunctionSerializer<SerializerReturnType>
-			| RichTextFunctionSerializer<
-					SerializerReturnType | null,
-					SerializerReturnType
-			  >
-		),
-		...(
-			| RichTextFunctionSerializer<SerializerReturnType>
-			| RichTextFunctionSerializer<
-					SerializerReturnType | null,
-					SerializerReturnType
-			  >
-		)[]
+		RichTextFunctionSerializer<SerializerReturnType>,
+		...RichTextFunctionSerializer<SerializerReturnType>[]
 	]
-) => {
-	return (
-		...args: Parameters<RichTextFunctionSerializer<SerializerReturnType>>
-	): NonNullable<SerializerReturnType> => {
+): RichTextFunctionSerializer<SerializerReturnType> => {
+	return (...args) => {
 		for (let i = 0; i < serializers.length; i++) {
 			const res = serializers[i](...args);
 
 			if (res != null) {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				return res!;
+				return res;
 			}
 		}
-
-		throw new RichTextError(
-			`Rich Text Node of type ${args[0]} does not have a serializer`,
-		);
 	};
 };

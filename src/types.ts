@@ -28,20 +28,16 @@ import {
  * Serializes a node from a rich text or title field with a function
  *
  * @typeParam ReturnType - Return type of the function serializer
- * @typeParam ChildrenType - Type of children, defaults to provided ReturnType
  *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
-export type RichTextFunctionSerializer<
-	ReturnType,
-	ChildrenType = ReturnType,
-> = (
+export type RichTextFunctionSerializer<ReturnType> = (
 	type: RichTextNodeType,
 	node: RTAnyNode,
 	text: string | undefined,
-	children: ChildrenType[],
+	children: ReturnType[],
 	key: string,
-) => ReturnType;
+) => ReturnType | null | undefined;
 
 /**
  * Map serializer's tag function serializer, can be helpful for typing those handlers
@@ -52,14 +48,13 @@ export type RichTextMapSerializerFunction<
 	ReturnType,
 	Node extends RTAnyNode = RTAnyNode,
 	TextType = string | undefined,
-	ChildrenType = ReturnType,
 > = (payload: {
 	type: Node["type"];
 	node: Node;
 	text: TextType;
-	children: ChildrenType[];
+	children: ReturnType[];
 	key: string;
-}) => ReturnType;
+}) => ReturnType | null | undefined;
 
 /**
  * Serializes a node from a rich text or title field with a map
@@ -128,21 +123,11 @@ export type RichTextMapSerializer<ReturnType> = {
 	>;
 	list?: RichTextMapSerializerFunction<ReturnType, RTListNode, undefined>;
 	oList?: RichTextMapSerializerFunction<ReturnType, RTOListNode, undefined>;
-	image?: RichTextMapSerializerFunction<
-		ReturnType,
-		RTImageNode,
-		undefined,
-		never
-	>;
-	embed?: RichTextMapSerializerFunction<
-		ReturnType,
-		RTEmbedNode,
-		undefined,
-		never
-	>;
+	image?: RichTextMapSerializerFunction<ReturnType, RTImageNode, undefined>;
+	embed?: RichTextMapSerializerFunction<ReturnType, RTEmbedNode, undefined>;
 	hyperlink?: RichTextMapSerializerFunction<ReturnType, RTLinkNode, string>;
 	label?: RichTextMapSerializerFunction<ReturnType, RTLabelNode, string>;
-	span?: RichTextMapSerializerFunction<ReturnType, RTSpanNode, string, never>;
+	span?: RichTextMapSerializerFunction<ReturnType, RTSpanNode, string>;
 };
 
 // Tree
