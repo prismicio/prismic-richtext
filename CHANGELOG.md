@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2021-06-29)
+
+
+### Features
+
+* omit nullish serialized values ([55593a7](https://github.com/prismicio/prismic-richtext/commit/55593a721b5194381871d1ec135439c0bd75e679))
+
 ## [2.0.0-alpha.2](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2021-06-25)
 
 
