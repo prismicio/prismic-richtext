@@ -7,8 +7,6 @@ export { composeSerializers } from "./composeSerializers";
 
 export { RichTextNodeType as Element } from "@prismicio/types";
 
-export { RichTextError } from "./RichTextError";
-
 export type {
 	RichTextFunctionSerializer,
 	RichTextMapSerializer,

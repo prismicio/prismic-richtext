@@ -36,17 +36,18 @@ const serializeTreeNodes = <T>(
 	const serializedTreeNodes: T[] = [];
 
 	for (let i = 0; i < nodes.length; i++) {
-		const node = nodes[i];
-
-		serializedTreeNodes.push(
-			serializer(
-				node.type,
-				node.node,
-				node.text,
-				serializeTreeNodes(node.children, serializer),
-				node.key,
-			),
+		const treeNode = nodes[i];
+		const serializedTreeNode = serializer(
+			treeNode.type,
+			treeNode.node,
+			treeNode.text,
+			serializeTreeNodes(treeNode.children, serializer),
+			treeNode.key,
 		);
+
+		if (serializedTreeNode != null) {
+			serializedTreeNodes.push(serializedTreeNode);
+		}
 	}
 
 	return serializedTreeNodes;

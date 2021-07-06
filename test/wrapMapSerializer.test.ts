@@ -1,20 +1,24 @@
 import test from "ava";
 
+import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
-import { richTextFixture } from "./__fixtures__/richText";
 
 import { serialize, wrapMapSerializer } from "../src";
 
 test("serializes a rich text field value using a given serializer map", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+
 	const serializer = wrapMapSerializer(htmlMapSerializer);
-	const serialization = serialize(richTextFixture.en, serializer);
+	const serialization = serialize(richTextFixtures.en, serializer);
 
 	t.snapshot(serialization);
 });
 
-test("returns `null` when serializer does not handle given tag", (t) => {
-	const serializer = wrapMapSerializer({});
-	const serialization = serialize(richTextFixture.en, serializer);
+test("returns `undefined` when serializer does not handle given tag", (t) => {
+	const richTextFixtures = createRichTextFixtures();
 
-	t.true(serialization.every((element) => element === null));
+	const serializer = wrapMapSerializer({});
+	const serialization = serialize(richTextFixtures.en, serializer);
+
+	t.true(serialization.every((element) => element === undefined));
 });

@@ -24,8 +24,7 @@ uuid.i = 0;
  *
  * @remarks
  *
- * This is a low level helper mainly intended to be used by higher level packages
- * Most users aren't expected to this function directly
+ * This is a low level helper mainly intended to be used by higher level packages. Most users aren't expected to this function directly.
  */
 export const asTree = (nodes: RTNode[]): Tree => {
 	const preparedNodes = prepareNodes(nodes);

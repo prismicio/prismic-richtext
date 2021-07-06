@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.5](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2021-07-03)
+
+
+### Chore
+
+* update dependencies ([106ddb2](https://github.com/prismicio/prismic-richtext/commit/106ddb29d7df728fa12986efaa65b8cea5e8ccdd))
+
+## [2.0.0-alpha.4](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2021-07-01)
+
+
+### Chore
+
+* update dependencies ([5e42465](https://github.com/prismicio/prismic-richtext/commit/5e42465bea21a008e2cdc5e3aa1397fb9a7fb38b))
+
+## [2.0.0-alpha.3](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2021-06-29)
+
+
+### Features
+
+* omit nullish serialized values ([55593a7](https://github.com/prismicio/prismic-richtext/commit/55593a721b5194381871d1ec135439c0bd75e679))
+
 ## [2.0.0-alpha.2](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2021-06-25)
 
 
