@@ -1,8 +1,14 @@
-import Tree from "./tree";
-import { NODE_TYPES } from "./types";
+export { asTree } from "./asTree";
+export { asText } from "./asText";
 
-export { default as asText } from "./astext";
-export { default as  serialize } from "./serialize";
+export { serialize } from "./serialize";
+export { wrapMapSerializer } from "./wrapMapSerializer";
+export { composeSerializers } from "./composeSerializers";
 
-export const asTree = Tree.fromRichText;
-export const Elements = NODE_TYPES;
+export { RichTextNodeType as Element } from "@prismicio/types";
+
+export type {
+	RichTextFunctionSerializer,
+	RichTextMapSerializer,
+	RichTextMapSerializerFunction,
+} from "./types";

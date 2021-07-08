@@ -1,15 +1,20 @@
 {
-  "files": ["./src/index.ts"],
-  "compilerOptions": {
-    "noImplicitAny": true,
-    "preserveConstEnums": true,
-    "target": "es5",
-    "removeComments": false,
-    "sourceMap": true,
-    "module": "commonjs",
-    "lib": ["es5", "dom", "es2015.promise"],
-    "strictNullChecks": true,
-    "baseUrl": ".",
-    "skipLibCheck": true
-  }
+	"compilerOptions": {
+		"strict": true,
+		"skipLibCheck": true,
+
+		"target": "esnext",
+		"module": "esnext",
+		"declaration": false,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "preserve",
+		"lib": ["esnext", "dom"],
+		"types": ["node"]
+	},
+	"exclude": ["node_modules", "dist", "examples"]
 }
