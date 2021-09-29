@@ -7,16 +7,13 @@ import {
 /**
  * Wraps a map serializer into a regular function serializer
  *
+ * @remarks
+ * This is a low level helper mainly intended to be used by higher level
+ * packages Most users aren't expected to this function directly
+ * @typeParam SerializerReturnType - Return type of the map serializer
  * @param mapSerializer - Map serializer to wrap
  *
- * @return A regular function serializer
- *
- * @typeParam SerializerReturnType - Return type of the map serializer
- *
- * @remarks
- *
- * This is a low level helper mainly intended to be used by higher level packages
- * Most users aren't expected to this function directly
+ * @returns A regular function serializer
  */
 export const wrapMapSerializer = <SerializerReturnType>(
 	mapSerializer: RichTextMapSerializer<SerializerReturnType>,

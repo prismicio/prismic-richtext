@@ -1,3 +1,13 @@
+<!--
+
+Replace all on all files (README.md, CONTRIBUTING.md, bug_report.md, package.json):
+- @prismicio/richtext
+- A parser and serializer for Prismic's Rich Text format
+- prismicio/prismic-richtext
+- prismic-richtext
+
+-->
+
 # @prismicio/richtext
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -9,15 +19,17 @@
 
 A parser and serializer for [Prismic][prismic]'s Rich Text format.
 
-- 🌳 Builds a generic tree from Rich Text
-- 🧬 Serializes Rich Text into a different format (e.g. HTML or React components)
-- ✂️ Strips formatting from Rich Text to extract raw text
+<!--
 
-You probably do not need to use this package directly. The following libraries provide a more accessible API:
+TODO: Create a small list of package features:
 
-- [`@prismicio/helpers`](https://github.com/prismicio/prismic-helpers): `asText`, `asHTML`
-- [`@prismicio/react`](https://github.com/prismicio/prismic-reactjs): `<PrismicText>`, `<PrismicRichText>`
-- [`@prismicio/vue`](https://github.com/prismicio/prismic-vue): `<prismic-rich-text>`
+- 🤔 &nbsp;A useful feature;
+- 🥴 &nbsp;Another useful feature;
+- 🙃 &nbsp;A final useful feature.
+
+Non-breaking space: &nbsp; are here on purpose to fix emoji rendering on certain systems.
+
+-->
 
 ## Install
 
@@ -39,7 +51,9 @@ Whether you're helping us fix bugs, improve the docs, or spread the word, we'd l
 
 **Suggesting an improvement**: [Open an issue][repo-feature-request] explaining your improvement or feature so we can discuss and learn more.
 
-**Submitting code changes**: For small fixes, feel free to [open a PR][repo-pull-requests] with a description of your changes. For large changes, please first [open an issue][repo-feature-request] so we can discuss if and how the changes should be implemented.
+**Submitting code changes**: For small fixes, feel free to [open a pull request][repo-pull-requests] with a description of your changes. For large changes, please first [open an issue][repo-feature-request] so we can discuss if and how the changes should be implemented.
+
+For more clarity on this project and its structure you can also check out the detailed [CONTRIBUTING.md][contributing] document.
 
 ## License
 
@@ -66,7 +80,8 @@ Whether you're helping us fix bugs, improve the docs, or spread the word, we'd l
 <!-- TODO: Replace link with a more useful one if available -->
 
 [prismic-docs]: https://prismic.io/docs
-[changelog]: /CHANGELOG.md
+[changelog]: ./CHANGELOG.md
+[contributing]: ./CONTRIBUTING.md
 
 <!-- TODO: Replace link with a more useful one if available -->
 
