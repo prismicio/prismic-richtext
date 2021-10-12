@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.1](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2021-10-12)
+
+
+### Chore
+
+* **deps:** update dependencies ([26c05f7](https://github.com/prismicio/prismic-richtext/commit/26c05f7f3cef66c999581dba011cc5fb315492a2))
+* mark package as side effect free ([12e9422](https://github.com/prismicio/prismic-richtext/commit/12e94221650b5eb7974f5dbb9309831eb9ebc47c))
+
 ## [2.0.0-beta.0](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-alpha.7...v2.0.0-beta.0) (2021-09-29)
 
 
