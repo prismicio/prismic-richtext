@@ -10,13 +10,15 @@ const deepCloneJSON = <T>(json: T): T => {
 };
 
 export const createRichTextFixtures = (): Record<
-	"en" | "cn" | "ko" | "emoji",
-	RichTextField
+	"en" | "cn" | "ko" | "emoji" | "undefined" | "null",
+	RichTextField | undefined | null
 > => {
 	return {
 		en: deepCloneJSON(enRichTextJSON) as RichTextField,
 		cn: deepCloneJSON(cnRichTextJSON) as RichTextField,
 		ko: deepCloneJSON(koRichTextJSON) as RichTextField,
 		emoji: deepCloneJSON(emojiRichTextJSON) as RichTextField,
+		undefined: undefined,
+		null: null,
 	};
 };

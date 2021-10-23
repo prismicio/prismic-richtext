@@ -20,3 +20,15 @@ test("converts a rich text field value to a tree", (t) => {
 
 	t.snapshot(asTree(richTextFixtures.en));
 });
+
+test("does not throw when rich text field is undefined", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+	t.notThrows(() => asTree(richTextFixtures.undefined));
+	t.snapshot(asTree(richTextFixtures.undefined));
+});
+
+test("does not throw when rich text field is null", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+	t.notThrows(() => asTree(richTextFixtures.null));
+	t.snapshot(asTree(richTextFixtures.null));
+});
