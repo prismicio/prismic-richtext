@@ -25,7 +25,7 @@ uuid.i = 0;
  *
  * @returns Tree from given rich text or title field
  */
-export const asTree = (nodes: RTNode[]): Tree => {
+export const asTree = (nodes: RTNode[] | null | undefined): Tree => {
 	const preparedNodes = prepareNodes(nodes);
 
 	const children: TreeNode[] = [];
@@ -60,8 +60,8 @@ const createTextTreeNode = (text: string): TreeNode => {
 	});
 };
 
-const prepareNodes = (nodes: RTNode[]): RTBlockNode[] => {
-	const mutNodes: RTBlockNode[] = nodes.slice(0);
+const prepareNodes = (nodes: RTNode[] | null | undefined): RTBlockNode[] => {
+	const mutNodes: RTBlockNode[] = nodes?.slice(0) ?? [];
 
 	for (let i = 0; i < mutNodes.length; i++) {
 		const node = mutNodes[i];
