@@ -11,7 +11,7 @@ const deepCloneJSON = <T>(json: T): T => {
 
 export const createRichTextFixtures = (): Record<
 	"en" | "cn" | "ko" | "emoji" | "undefined" | "null",
-	RichTextField | undefined | null
+	RichTextField | null | undefined
 > => {
 	return {
 		en: deepCloneJSON(enRichTextJSON) as RichTextField,
