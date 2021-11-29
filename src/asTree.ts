@@ -125,31 +125,36 @@ const textNodeSpansToTreeNodeChildren = (
 		return [createTextTreeNode(node.text)];
 	}
 
-	const mutSpans: RTInlineNode[] = spans.slice(0).sort((a, b) => {
-		if (a.start < b.start) {
-			return -1;
-		} else if (a.start > b.start) {
-			return 1;
-		} else {
-			if (a.end < b.end) {
-				return 1;
-			} else {
-				return -1;
-			}
-		}
-	});
+	const mutSpans: RTInlineNode[] = spans.slice(0);
 
 	const children: TreeNode[] = [];
 
 	for (let i = 0; i < mutSpans.length; i++) {
 		const span = mutSpans[i];
+		if (i + 1 < mutSpans.length) {
+			const nextSpan = mutSpans[i + 1];
+			if (
+				// If next span starts at the same index and end after the current span
+				(nextSpan.start === span.start && nextSpan.end >= span.end) ||
+				// If the next span starts before the current span and ends at the same index (theoretically not possible from the API)
+				(nextSpan.start <= span.start && nextSpan.end === span.end)
+			) {
+				continue;
+			}
+		}
+
 		const parentSpanStart = (parentSpan && parentSpan.start) || 0;
 		const spanStart = span.start - parentSpanStart;
 		const spanEnd = span.end - parentSpanStart;
 
 		const childSpans: RTInlineNode[] = [];
+		let passedCurrent = false;
 		for (let j = 0; j < mutSpans.length; j++) {
 			const siblingSpan = mutSpans[j];
+
+			if (siblingSpan === span) {
+				passedCurrent = true;
+			}
 
 			if (
 				siblingSpan !== span &&
@@ -159,6 +164,10 @@ const textNodeSpansToTreeNodeChildren = (
 				childSpans.push(siblingSpan);
 				mutSpans.splice(j, 1);
 				j--;
+
+				if (!passedCurrent) {
+					i--;
+				}
 			}
 		}
 
