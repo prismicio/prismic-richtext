@@ -134,9 +134,9 @@ const textNodeSpansToTreeNodeChildren = (
 		if (i + 1 < mutSpans.length) {
 			const nextSpan = mutSpans[i + 1];
 			if (
-				// If next span starts at the same index and end after the current span
+				// If next span starts at the same index of current span and ends after
 				(nextSpan.start === span.start && nextSpan.end >= span.end) ||
-				// If the next span starts before the current span and ends at the same index (theoretically not possible from the API)
+				// If next span starts before current span and ends at the same index (theoretically not possible from the API)
 				(nextSpan.start <= span.start && nextSpan.end === span.end)
 			) {
 				continue;
