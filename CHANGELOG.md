@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.2](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* overlapping text styling duplicate ([#51](https://github.com/prismicio/prismic-richtext/issues/51)) ([4cc025b](https://github.com/prismicio/prismic-richtext/commit/4cc025bac5ce3826f0a88243fad38998ad26167b))
+* use updated RichTextNodeType enum-like type ([f5aff0c](https://github.com/prismicio/prismic-richtext/commit/f5aff0c5794729ea9ce14a2f0b1adece092269c1))
+
+
+### Chore
+
+* **deps:** update all dependencies ([df8b19a](https://github.com/prismicio/prismic-richtext/commit/df8b19a843d1cd0c77acd4eb0aec082ee9dde93d))
+* **deps:** update dependencies ([e385226](https://github.com/prismicio/prismic-richtext/commit/e3852265c2dbc447f086bc39bb8b506cc0517fac))
+
 ## [2.0.0-beta.1](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2021-10-12)
 
 
