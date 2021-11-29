@@ -125,7 +125,19 @@ const textNodeSpansToTreeNodeChildren = (
 		return [createTextTreeNode(node.text)];
 	}
 
-	const mutSpans: RTInlineNode[] = spans.slice(0);
+	const mutSpans: RTInlineNode[] = spans.slice(0).sort((a, b) => {
+		if (a.start < b.start) {
+			return -1;
+		} else if (a.start > b.start) {
+			return 1;
+		} else {
+			if (a.end < b.end) {
+				return 1;
+			} else {
+				return -1;
+			}
+		}
+	});
 
 	const children: TreeNode[] = [];
 
