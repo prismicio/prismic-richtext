@@ -43,6 +43,9 @@ test("handles Korean characters correctly", serializeMacro, "ko");
 
 test("handles emoji characters correctly", serializeMacro, "emoji");
 
+// See: https://github.com/prismicio/prismic-client/issues/198
+test("handles overlapped styling correctly", serializeMacro, "overlapped");
+
 test("nullish serialized values are omitted from the result", (t) => {
 	const richTextFixtures = createRichTextFixtures();
 
