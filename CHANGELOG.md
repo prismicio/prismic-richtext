@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.4](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-12-16)
+
+
+### Features
+
+* allow undefined serializer in `composeSerializers` ([a646491](https://github.com/prismicio/prismic-richtext/commit/a64649154c43e8cefca6cd4e1a8f1c8dff70acca))
+
 ## [2.0.0-beta.3](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-12-03)
 
 
