@@ -13,17 +13,21 @@ import { RichTextFunctionSerializer } from "./types";
  * @returns Composed serializer
  */
 export const composeSerializers = <SerializerReturnType>(
-	...serializers: [
-		RichTextFunctionSerializer<SerializerReturnType>,
-		...RichTextFunctionSerializer<SerializerReturnType>[]
-	]
+	...serializers: (
+		| RichTextFunctionSerializer<SerializerReturnType>
+		| undefined
+	)[]
 ): RichTextFunctionSerializer<SerializerReturnType> => {
 	return (...args) => {
 		for (let i = 0; i < serializers.length; i++) {
-			const res = serializers[i](...args);
+			const serializer = serializers[i];
 
-			if (res != null) {
-				return res;
+			if (serializer) {
+				const res = serializer(...args);
+
+				if (res != null) {
+					return res;
+				}
 			}
 		}
 	};

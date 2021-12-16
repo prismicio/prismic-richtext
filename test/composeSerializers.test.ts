@@ -22,3 +22,14 @@ test("composes multiple serializers", (t) => {
 
 	t.snapshot(composedSerialization);
 });
+
+test("undefined serializers are ignored", (t) => {
+	const richTextFixtures = createRichTextFixtures();
+
+	const serializer = wrapMapSerializer(htmlMapSerializer);
+
+	t.deepEqual(
+		serialize(richTextFixtures.en, composeSerializers(undefined, serializer)),
+		serialize(richTextFixtures.en, serializer),
+	);
+});
