@@ -1,44 +1,69 @@
 {
-  "name": "@prismicio/richtext",
-  "version": "1.1.0",
-  "description": "Convert Rich Text raw data to generic tree to simplify serialization",
-  "main": "dist/prismic-richtext.js",
-  "module": "dist/prismic-richtext.esm.js",
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c --watch",
-    "prepublish": "npm run build; npm run docs",
-    "docs": "typedoc --mode file --out ./docs/ ./src/",
-    "lint": "tslint src",
-    "posttest": "tslint lib",
-    "test": "mocha -r jsdom-global/register"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prismicio/prismic-richtext.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prismicio/prismic-richtext/issues"
-  },
-  "homepage": "https://github.com/prismicio/prismic-richtext#readme",
-  "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-typescript": "^7.10.4",
-    "@rollup/plugin-babel": "^5.1.0",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@types/node": "^12.7.5",
-    "chai": "^4.1.2",
-    "chai-subset": "^1.6.0",
-    "jsdom": "^13.1.0",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^4.0.1",
-    "rollup": "^2.23.1",
-    "rollup-plugin-terser": "^6.1.0",
-    "tslint": "^5.11.0",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.2.2"
-  }
+	"name": "@prismicio/richtext",
+	"version": "2.0.0-beta.4",
+	"description": "A parser and serializer for Prismic's Rich Text format",
+	"keywords": [
+		"typescript",
+		"prismic"
+	],
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/prismicio/prismic-richtext.git"
+	},
+	"license": "Apache-2.0",
+	"author": "Prismic <contact@prismic.io> (https://prismic.io)",
+	"sideEffects": false,
+	"type": "module",
+	"exports": {
+		".": {
+			"require": "./dist/index.cjs",
+			"import": "./dist/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "dist/index.cjs",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"src"
+	],
+	"scripts": {
+		"build": "siroc build",
+		"dev": "siroc build --watch",
+		"format": "prettier --write .",
+		"lint": "eslint --ext .js,.ts .",
+		"prepare": "npm run build",
+		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
+		"release:beta": "npm run build && npm run test && standard-version --release-as major --prerelease beta && git push --follow-tags && npm run build && npm publish --tag beta",
+		"release:beta:dry": "standard-version --release-as major --prerelease beta --dry-run",
+		"release:dry": "standard-version --dry-run",
+		"test": "npm run lint && npm run unit",
+		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava"
+	},
+	"dependencies": {
+		"@prismicio/types": "^0.1.19"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.5.0",
+		"@typescript-eslint/parser": "^5.5.0",
+		"ava": "^3.15.0",
+		"eslint": "^8.3.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-tsdoc": "^0.2.14",
+		"nyc": "^15.1.0",
+		"prettier": "^2.5.0",
+		"prettier-plugin-jsdoc": "^0.3.30",
+		"siroc": "^0.16.0",
+		"standard-version": "^9.3.2",
+		"ts-eager": "^2.0.2",
+		"typescript": "^4.5.2"
+	},
+	"engines": {
+		"node": ">=12.7.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
