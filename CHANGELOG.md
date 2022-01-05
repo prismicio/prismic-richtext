@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/prismicio/prismic-richtext/compare/v1.0.3...v2.0.0) (2022-01-05)
+
+
+### Features
+
+* v2.0.0 ([#46](https://github.com/prismicio/prismic-richtext/issues/46)) ([278c96d](https://github.com/prismicio/prismic-richtext/commit/278c96dd251775242cad10925d2662e0be4b30e0))
+
+
+### Bug Fixes
+
+* **tree:** null check in spans map ([3013810](https://github.com/prismicio/prismic-richtext/commit/30138102d62333c6cc82a83da4605163a2ecb9b4))
+
 ## [2.0.0-beta.4](https://github.com/prismicio/prismic-richtext/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-12-16)
 
 
