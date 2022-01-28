@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/prismicio/prismic-richtext/compare/v2.0.0...v2.0.1) (2022-01-28)
+
+
+### Chore
+
+* **deps:** update dependencies ([2150a73](https://github.com/prismicio/prismic-richtext/commit/2150a73bcf1cf1a81a4e475c68807e1ef80549ef))
+* support React Native's Metro bundler ([7a61556](https://github.com/prismicio/prismic-richtext/commit/7a6155631ff780fa472f75c56042a250f0c22808))
+
 ## [2.0.0](https://github.com/prismicio/prismic-richtext/compare/v1.0.3...v2.0.0) (2022-01-05)
 
 
