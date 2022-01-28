@@ -65,5 +65,6 @@
 	},
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"react-native": "dist/index.js"
 }
