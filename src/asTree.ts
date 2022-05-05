@@ -146,6 +146,7 @@ const textNodeSpansToTreeNodeChildren = (
 		const parentSpanStart = (parentSpan && parentSpan.start) || 0;
 		const spanStart = span.start - parentSpanStart;
 		const spanEnd = span.end - parentSpanStart;
+		const text = node.text.slice(spanStart, spanEnd);
 
 		const childSpans: RTInlineNode[] = [];
 		for (let j = i; j < mutSpans.length; j++) {
@@ -166,14 +167,15 @@ const textNodeSpansToTreeNodeChildren = (
 			children.push(createTextTreeNode(node.text.slice(0, spanStart)));
 		}
 
+		const spanWithText = { ...span, text };
 		children.push(
 			createTreeNode(
-				span,
+				spanWithText,
 				textNodeSpansToTreeNodeChildren(
 					childSpans,
 					{
 						...node,
-						text: node.text.slice(spanStart, spanEnd),
+						text,
 					},
 					span,
 				),
