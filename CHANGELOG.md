@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/prismicio/prismic-richtext/compare/v2.0.1...v2.1.0) (2022-05-05)
+
+
+### Features
+
+* make text available to all span tree nodes ([#55](https://github.com/prismicio/prismic-richtext/issues/55)) ([ea385cf](https://github.com/prismicio/prismic-richtext/commit/ea385cf63d2d0d2dfd2fdcae61e1c7ac9bed0afa))
+
+
+### Chore
+
+* fix test snapshots ([#53](https://github.com/prismicio/prismic-richtext/issues/53)) ([974bbed](https://github.com/prismicio/prismic-richtext/commit/974bbed1cfd5100c64629dfa991791eb090b89b2))
+* treat *.snap files as binary ([3264f4d](https://github.com/prismicio/prismic-richtext/commit/3264f4d13ce4443aa470637a59e4898c574d508e))
+* update license ([d3002c4](https://github.com/prismicio/prismic-richtext/commit/d3002c48f55be702a59900368066e3baf7408c36))
+
 ### [2.0.1](https://github.com/prismicio/prismic-richtext/compare/v2.0.0...v2.0.1) (2022-01-28)
 
 
