@@ -1,4 +1,4 @@
-import test, { ExecutionContext } from "ava";
+import { it, expect } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 import { htmlFunctionSerializer } from "./__testutils__/htmlFunctionSerializer";
@@ -11,42 +11,39 @@ import {
 	wrapMapSerializer,
 } from "../src";
 
-const serializeMacro = (
-	t: ExecutionContext,
-	richTextKey: keyof ReturnType<typeof createRichTextFixtures>,
-) => {
-	const richTextFixtures = createRichTextFixtures();
-	const richTextFixture = richTextFixtures[richTextKey];
+const serializeMacro =
+	(richTextKey: keyof ReturnType<typeof createRichTextFixtures>) => () => {
+		const richTextFixtures = createRichTextFixtures();
+		const richTextFixture = richTextFixtures[richTextKey];
 
-	const functionSerialization = serialize(
-		richTextFixture,
-		htmlFunctionSerializer,
-	);
-	const mapSerialization = serialize(
-		richTextFixture,
-		wrapMapSerializer(htmlMapSerializer),
-	);
+		const functionSerialization = serialize(
+			richTextFixture,
+			htmlFunctionSerializer,
+		);
+		const mapSerialization = serialize(
+			richTextFixture,
+			wrapMapSerializer(htmlMapSerializer),
+		);
 
-	t.snapshot(functionSerialization);
-	t.snapshot(mapSerialization);
-};
+		expect(functionSerialization).toMatchSnapshot();
+		expect(mapSerialization).toMatchSnapshot();
+	};
 
-test(
+it(
 	"serializes a rich text field value using given serializers",
-	serializeMacro,
-	"en",
+	serializeMacro("en"),
 );
 
-test("handles Chinese characters correctly", serializeMacro, "cn");
+it("handles Chinese characters correctly", serializeMacro("cn"));
 
-test("handles Korean characters correctly", serializeMacro, "ko");
+it("handles Korean characters correctly", serializeMacro("ko"));
 
-test("handles emoji characters correctly", serializeMacro, "emoji");
+it("handles emoji characters correctly", serializeMacro("emoji"));
 
 // See: https://github.com/prismicio/prismic-client/issues/198
-test("handles overlapped styling correctly", serializeMacro, "overlapped");
+it("handles overlapped styling correctly", serializeMacro("overlapped"));
 
-test("nullish serialized values are omitted from the result", (t) => {
+it("nullish serialized values are omitted from the result", () => {
 	const richTextFixtures = createRichTextFixtures();
 
 	// We are expecting only heading1 to be included in the serialized result.
@@ -72,5 +69,5 @@ test("nullish serialized values are omitted from the result", (t) => {
 
 	const serialization = serialize(richTextFixtures.en, serializer);
 
-	t.snapshot(serialization);
+	expect(serialization).toMatchSnapshot();
 });

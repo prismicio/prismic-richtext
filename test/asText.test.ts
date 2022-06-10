@@ -1,17 +1,17 @@
-import test from "ava";
+import { it, expect } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 
 import { asText } from "../src";
 
-test("returns a string representation of a rich text field value", (t) => {
+it("returns a string representation of a rich text field value", () => {
 	const richTextFixtures = createRichTextFixtures();
 
-	t.snapshot(asText(richTextFixtures.en));
+	expect(asText(richTextFixtures.en)).toMatchSnapshot();
 });
 
-test("allows for custom separator", (t) => {
+it("allows for custom separator", () => {
 	const richTextFixtures = createRichTextFixtures();
 
-	t.snapshot(asText(richTextFixtures.en, "SEPARATOR"));
+	expect(asText(richTextFixtures.en, "SEPARATOR")).toMatchSnapshot();
 });

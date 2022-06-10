@@ -1,0 +1,1108 @@
+// Vitest Snapshot v1
+
+exports[`converts a rich text field value to a tree 1`] = `
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "151",
+          "node": {
+            "spans": [],
+            "text": "This block has a line
+break just before the word \\"break\\"",
+            "type": "span",
+          },
+          "text": "This block has a line
+break just before the word \\"break\\"",
+          "type": "span",
+        },
+      ],
+      "key": "152",
+      "node": {
+        "spans": [],
+        "text": "This block has a line
+break just before the word \\"break\\"",
+        "type": "paragraph",
+      },
+      "text": "This block has a line
+break just before the word \\"break\\"",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "153",
+          "node": {
+            "spans": [],
+            "text": "Text before with a ",
+            "type": "span",
+          },
+          "text": "Text before with a ",
+          "type": "span",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "154",
+              "node": {
+                "spans": [],
+                "text": "multi-block span!",
+                "type": "span",
+              },
+              "text": "multi-block span!",
+              "type": "span",
+            },
+          ],
+          "key": "155",
+          "node": {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 36,
+            "start": 19,
+            "type": "label",
+          },
+          "text": undefined,
+          "type": "label",
+        },
+      ],
+      "key": "156",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 36,
+            "start": 19,
+            "type": "label",
+          },
+        ],
+        "text": "Text before with a multi-block span!",
+        "type": "paragraph",
+      },
+      "text": "Text before with a multi-block span!",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "157",
+              "node": {
+                "spans": [],
+                "text": "Heading",
+                "type": "span",
+              },
+              "text": "Heading",
+              "type": "span",
+            },
+          ],
+          "key": "158",
+          "node": {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 7,
+            "start": 0,
+            "type": "label",
+          },
+          "text": undefined,
+          "type": "label",
+        },
+        {
+          "children": [],
+          "key": "159",
+          "node": {
+            "spans": [],
+            "text": " 1 ",
+            "type": "span",
+          },
+          "text": " 1 ",
+          "type": "span",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "160",
+              "node": {
+                "spans": [],
+                "text": "bold text ",
+                "type": "span",
+              },
+              "text": "bold text ",
+              "type": "span",
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "key": "161",
+                  "node": {
+                    "spans": [],
+                    "text": "italic",
+                    "type": "span",
+                  },
+                  "text": "italic",
+                  "type": "span",
+                },
+              ],
+              "key": "162",
+              "node": {
+                "end": 26,
+                "start": 20,
+                "type": "em",
+              },
+              "text": undefined,
+              "type": "em",
+            },
+            {
+              "children": [],
+              "key": "163",
+              "node": {
+                "spans": [],
+                "text": " still bold",
+                "type": "span",
+              },
+              "text": " still bold",
+              "type": "span",
+            },
+          ],
+          "key": "164",
+          "node": {
+            "end": 37,
+            "start": 10,
+            "type": "strong",
+          },
+          "text": undefined,
+          "type": "strong",
+        },
+        {
+          "children": [],
+          "key": "165",
+          "node": {
+            "spans": [],
+            "text": " normal",
+            "type": "span",
+          },
+          "text": " normal",
+          "type": "span",
+        },
+      ],
+      "key": "166",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 7,
+            "start": 0,
+            "type": "label",
+          },
+          {
+            "end": 37,
+            "start": 10,
+            "type": "strong",
+          },
+          {
+            "end": 26,
+            "start": 20,
+            "type": "em",
+          },
+        ],
+        "text": "Heading 1 bold text italic still bold normal",
+        "type": "heading1",
+      },
+      "text": "Heading 1 bold text italic still bold normal",
+      "type": "heading1",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "167",
+          "node": {
+            "spans": [],
+            "text": "Paragraph",
+            "type": "span",
+          },
+          "text": "Paragraph",
+          "type": "span",
+        },
+      ],
+      "key": "168",
+      "node": {
+        "spans": [],
+        "text": "Paragraph",
+        "type": "paragraph",
+      },
+      "text": "Paragraph",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "169",
+          "node": {
+            "spans": [],
+            "text": "A paragraph with a ",
+            "type": "span",
+          },
+          "text": "A paragraph with a ",
+          "type": "span",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "170",
+              "node": {
+                "spans": [],
+                "text": "nested",
+                "type": "span",
+              },
+              "text": "nested",
+              "type": "span",
+            },
+          ],
+          "key": "171",
+          "node": {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 25,
+            "start": 19,
+            "type": "label",
+          },
+          "text": undefined,
+          "type": "label",
+        },
+        {
+          "children": [],
+          "key": "172",
+          "node": {
+            "spans": [],
+            "text": " label",
+            "type": "span",
+          },
+          "text": " label",
+          "type": "span",
+        },
+      ],
+      "key": "173",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "label": "label_1",
+            },
+            "end": 25,
+            "start": 19,
+            "type": "label",
+          },
+        ],
+        "text": "A paragraph with a nested label",
+        "type": "paragraph",
+      },
+      "text": "A paragraph with a nested label",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "174",
+              "node": {
+                "spans": [],
+                "text": "First ordered list item",
+                "type": "span",
+              },
+              "text": "First ordered list item",
+              "type": "span",
+            },
+          ],
+          "key": "175",
+          "node": {
+            "spans": [],
+            "text": "First ordered list item",
+            "type": "o-list-item",
+          },
+          "text": "First ordered list item",
+          "type": "o-list-item",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "176",
+              "node": {
+                "spans": [],
+                "text": "Second ordered list item",
+                "type": "span",
+              },
+              "text": "Second ordered list item",
+              "type": "span",
+            },
+          ],
+          "key": "177",
+          "node": {
+            "spans": [],
+            "text": "Second ordered list item",
+            "type": "o-list-item",
+          },
+          "text": "Second ordered list item",
+          "type": "o-list-item",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "178",
+              "node": {
+                "spans": [],
+                "text": "Third ordered list item",
+                "type": "span",
+              },
+              "text": "Third ordered list item",
+              "type": "span",
+            },
+          ],
+          "key": "179",
+          "node": {
+            "spans": [],
+            "text": "Third ordered list item",
+            "type": "o-list-item",
+          },
+          "text": "Third ordered list item",
+          "type": "o-list-item",
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "key": "180",
+                  "node": {
+                    "spans": [],
+                    "text": "Bold and ",
+                    "type": "span",
+                  },
+                  "text": "Bold and ",
+                  "type": "span",
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "key": "181",
+                      "node": {
+                        "spans": [],
+                        "text": "now italic",
+                        "type": "span",
+                      },
+                      "text": "now italic",
+                      "type": "span",
+                    },
+                  ],
+                  "key": "182",
+                  "node": {
+                    "end": 19,
+                    "start": 9,
+                    "type": "em",
+                  },
+                  "text": undefined,
+                  "type": "em",
+                },
+                {
+                  "children": [],
+                  "key": "183",
+                  "node": {
+                    "spans": [],
+                    "text": " but not anymore",
+                    "type": "span",
+                  },
+                  "text": " but not anymore",
+                  "type": "span",
+                },
+              ],
+              "key": "184",
+              "node": {
+                "end": 35,
+                "start": 0,
+                "type": "strong",
+              },
+              "text": undefined,
+              "type": "strong",
+            },
+            {
+              "children": [],
+              "key": "185",
+              "node": {
+                "spans": [],
+                "text": " value in the ",
+                "type": "span",
+              },
+              "text": " value in the ",
+              "type": "span",
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "key": "186",
+                  "node": {
+                    "spans": [],
+                    "text": "last",
+                    "type": "span",
+                  },
+                  "text": "last",
+                  "type": "span",
+                },
+              ],
+              "key": "187",
+              "node": {
+                "end": 53,
+                "start": 49,
+                "type": "strong",
+              },
+              "text": undefined,
+              "type": "strong",
+            },
+            {
+              "children": [],
+              "key": "188",
+              "node": {
+                "spans": [],
+                "text": " list item",
+                "type": "span",
+              },
+              "text": " list item",
+              "type": "span",
+            },
+          ],
+          "key": "189",
+          "node": {
+            "spans": [
+              {
+                "end": 35,
+                "start": 0,
+                "type": "strong",
+              },
+              {
+                "end": 19,
+                "start": 9,
+                "type": "em",
+              },
+              {
+                "end": 53,
+                "start": 49,
+                "type": "strong",
+              },
+            ],
+            "text": "Bold and now italic but not anymore value in the last list item",
+            "type": "o-list-item",
+          },
+          "text": "Bold and now italic but not anymore value in the last list item",
+          "type": "o-list-item",
+        },
+      ],
+      "key": "190",
+      "node": {
+        "items": [
+          {
+            "spans": [],
+            "text": "First ordered list item",
+            "type": "o-list-item",
+          },
+          {
+            "spans": [],
+            "text": "Second ordered list item",
+            "type": "o-list-item",
+          },
+          {
+            "spans": [],
+            "text": "Third ordered list item",
+            "type": "o-list-item",
+          },
+          {
+            "spans": [
+              {
+                "end": 35,
+                "start": 0,
+                "type": "strong",
+              },
+              {
+                "end": 19,
+                "start": 9,
+                "type": "em",
+              },
+              {
+                "end": 53,
+                "start": 49,
+                "type": "strong",
+              },
+            ],
+            "text": "Bold and now italic but not anymore value in the last list item",
+            "type": "o-list-item",
+          },
+        ],
+        "type": "group-o-list-item",
+      },
+      "text": undefined,
+      "type": "group-o-list-item",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "191",
+          "node": {
+            "spans": [],
+            "text": "Paragraph",
+            "type": "span",
+          },
+          "text": "Paragraph",
+          "type": "span",
+        },
+      ],
+      "key": "192",
+      "node": {
+        "spans": [],
+        "text": "Paragraph",
+        "type": "paragraph",
+      },
+      "text": "Paragraph",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "193",
+              "node": {
+                "spans": [],
+                "text": "First list item",
+                "type": "span",
+              },
+              "text": "First list item",
+              "type": "span",
+            },
+          ],
+          "key": "194",
+          "node": {
+            "spans": [],
+            "text": "First list item",
+            "type": "list-item",
+          },
+          "text": "First list item",
+          "type": "list-item",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "195",
+              "node": {
+                "spans": [],
+                "text": "Second list item",
+                "type": "span",
+              },
+              "text": "Second list item",
+              "type": "span",
+            },
+          ],
+          "key": "196",
+          "node": {
+            "spans": [],
+            "text": "Second list item",
+            "type": "list-item",
+          },
+          "text": "Second list item",
+          "type": "list-item",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "197",
+              "node": {
+                "spans": [],
+                "text": "Third list item",
+                "type": "span",
+              },
+              "text": "Third list item",
+              "type": "span",
+            },
+          ],
+          "key": "198",
+          "node": {
+            "spans": [],
+            "text": "Third list item",
+            "type": "list-item",
+          },
+          "text": "Third list item",
+          "type": "list-item",
+        },
+      ],
+      "key": "199",
+      "node": {
+        "items": [
+          {
+            "spans": [],
+            "text": "First list item",
+            "type": "list-item",
+          },
+          {
+            "spans": [],
+            "text": "Second list item",
+            "type": "list-item",
+          },
+          {
+            "spans": [],
+            "text": "Third list item",
+            "type": "list-item",
+          },
+        ],
+        "type": "group-list-item",
+      },
+      "text": undefined,
+      "type": "group-list-item",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "200",
+          "node": {
+            "spans": [],
+            "text": "Paragraph",
+            "type": "span",
+          },
+          "text": "Paragraph",
+          "type": "span",
+        },
+      ],
+      "key": "201",
+      "node": {
+        "spans": [],
+        "text": "Paragraph",
+        "type": "paragraph",
+      },
+      "text": "Paragraph",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "202",
+              "node": {
+                "spans": [],
+                "text": "A web link",
+                "type": "span",
+              },
+              "text": "A web link",
+              "type": "span",
+            },
+          ],
+          "key": "203",
+          "node": {
+            "data": {
+              "link_type": "Web",
+              "target": "_blank",
+              "url": "https://prismic.io",
+            },
+            "end": 10,
+            "start": 0,
+            "type": "hyperlink",
+          },
+          "text": undefined,
+          "type": "hyperlink",
+        },
+      ],
+      "key": "204",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "link_type": "Web",
+              "target": "_blank",
+              "url": "https://prismic.io",
+            },
+            "end": 10,
+            "start": 0,
+            "type": "hyperlink",
+          },
+        ],
+        "text": "A web link",
+        "type": "paragraph",
+      },
+      "text": "A web link",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "205",
+              "node": {
+                "spans": [],
+                "text": "A document link",
+                "type": "span",
+              },
+              "text": "A document link",
+              "type": "span",
+            },
+          ],
+          "key": "206",
+          "node": {
+            "data": {
+              "id": "YCiU1hUAACQAxfaH",
+              "isBroken": false,
+              "lang": "en-us",
+              "link_type": "Document",
+              "slug": "about-edited-2",
+              "tags": [],
+              "type": "kitchen_sink",
+              "uid": "about",
+            },
+            "end": 15,
+            "start": 0,
+            "type": "hyperlink",
+          },
+          "text": undefined,
+          "type": "hyperlink",
+        },
+      ],
+      "key": "207",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "id": "YCiU1hUAACQAxfaH",
+              "isBroken": false,
+              "lang": "en-us",
+              "link_type": "Document",
+              "slug": "about-edited-2",
+              "tags": [],
+              "type": "kitchen_sink",
+              "uid": "about",
+            },
+            "end": 15,
+            "start": 0,
+            "type": "hyperlink",
+          },
+        ],
+        "text": "A document link",
+        "type": "paragraph",
+      },
+      "text": "A document link",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "208",
+              "node": {
+                "spans": [],
+                "text": "A media link",
+                "type": "span",
+              },
+              "text": "A media link",
+              "type": "span",
+            },
+          ],
+          "key": "209",
+          "node": {
+            "data": {
+              "height": "4061",
+              "kind": "image",
+              "link_type": "Media",
+              "name": "patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg",
+              "size": "3994190",
+              "url": "https://images.prismic.io/gatsby-source-prismic-v4/6234a400-2c25-4165-8b31-b17cfbefa0d2_patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg?auto=compress,format",
+              "width": "6091",
+            },
+            "end": 12,
+            "start": 0,
+            "type": "hyperlink",
+          },
+          "text": undefined,
+          "type": "hyperlink",
+        },
+      ],
+      "key": "210",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "height": "4061",
+              "kind": "image",
+              "link_type": "Media",
+              "name": "patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg",
+              "size": "3994190",
+              "url": "https://images.prismic.io/gatsby-source-prismic-v4/6234a400-2c25-4165-8b31-b17cfbefa0d2_patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg?auto=compress,format",
+              "width": "6091",
+            },
+            "end": 12,
+            "start": 0,
+            "type": "hyperlink",
+          },
+        ],
+        "text": "A media link",
+        "type": "paragraph",
+      },
+      "text": "A media link",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "211",
+              "node": {
+                "spans": [],
+                "text": "A non-image media link",
+                "type": "span",
+              },
+              "text": "A non-image media link",
+              "type": "span",
+            },
+          ],
+          "key": "212",
+          "node": {
+            "data": {
+              "kind": "document",
+              "link_type": "Media",
+              "name": "sample.pdf",
+              "size": "3028",
+              "url": "https://gatsby-source-prismic-v4.cdn.prismic.io/gatsby-source-prismic-v4/f68daae5-1e36-466d-9d8f-e51175eed7b3_sample.pdf",
+            },
+            "end": 22,
+            "start": 0,
+            "type": "hyperlink",
+          },
+          "text": undefined,
+          "type": "hyperlink",
+        },
+      ],
+      "key": "213",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "kind": "document",
+              "link_type": "Media",
+              "name": "sample.pdf",
+              "size": "3028",
+              "url": "https://gatsby-source-prismic-v4.cdn.prismic.io/gatsby-source-prismic-v4/f68daae5-1e36-466d-9d8f-e51175eed7b3_sample.pdf",
+            },
+            "end": 22,
+            "start": 0,
+            "type": "hyperlink",
+          },
+        ],
+        "text": "A non-image media link",
+        "type": "paragraph",
+      },
+      "text": "A non-image media link",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "214",
+          "node": {
+            "spans": [],
+            "text": "A paragraph with a ",
+            "type": "span",
+          },
+          "text": "A paragraph with a ",
+          "type": "span",
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "key": "215",
+              "node": {
+                "spans": [],
+                "text": "nested",
+                "type": "span",
+              },
+              "text": "nested",
+              "type": "span",
+            },
+          ],
+          "key": "216",
+          "node": {
+            "data": {
+              "id": "YCiU1hUAACQAxfaH",
+              "isBroken": false,
+              "lang": "en-us",
+              "link_type": "Document",
+              "slug": "about-edited-2",
+              "tags": [],
+              "type": "kitchen_sink",
+              "uid": "about",
+            },
+            "end": 25,
+            "start": 19,
+            "type": "hyperlink",
+          },
+          "text": undefined,
+          "type": "hyperlink",
+        },
+        {
+          "children": [],
+          "key": "217",
+          "node": {
+            "spans": [],
+            "text": " document link",
+            "type": "span",
+          },
+          "text": " document link",
+          "type": "span",
+        },
+      ],
+      "key": "218",
+      "node": {
+        "spans": [
+          {
+            "data": {
+              "id": "YCiU1hUAACQAxfaH",
+              "isBroken": false,
+              "lang": "en-us",
+              "link_type": "Document",
+              "slug": "about-edited-2",
+              "tags": [],
+              "type": "kitchen_sink",
+              "uid": "about",
+            },
+            "end": 25,
+            "start": 19,
+            "type": "hyperlink",
+          },
+        ],
+        "text": "A paragraph with a nested document link",
+        "type": "paragraph",
+      },
+      "text": "A paragraph with a nested document link",
+      "type": "paragraph",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "219",
+          "node": {
+            "spans": [],
+            "text": "Paragraph",
+            "type": "span",
+          },
+          "text": "Paragraph",
+          "type": "span",
+        },
+      ],
+      "key": "220",
+      "node": {
+        "spans": [],
+        "text": "Paragraph",
+        "type": "paragraph",
+      },
+      "text": "Paragraph",
+      "type": "paragraph",
+    },
+    {
+      "children": [],
+      "key": "221",
+      "node": {
+        "alt": "Alt text",
+        "copyright": "Copyright text",
+        "dimensions": {
+          "height": 4061,
+          "width": 6091,
+        },
+        "type": "image",
+        "url": "https://prismic-io.s3.amazonaws.com/gatsby-source-prismic-v4/6234a400-2c25-4165-8b31-b17cfbefa0d2_patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg",
+      },
+      "text": undefined,
+      "type": "image",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "key": "222",
+          "node": {
+            "spans": [],
+            "text": "Paragraph",
+            "type": "span",
+          },
+          "text": "Paragraph",
+          "type": "span",
+        },
+      ],
+      "key": "223",
+      "node": {
+        "spans": [],
+        "text": "Paragraph",
+        "type": "paragraph",
+      },
+      "text": "Paragraph",
+      "type": "paragraph",
+    },
+    {
+      "children": [],
+      "key": "224",
+      "node": {
+        "oembed": {
+          "author_name": "Hospital Records",
+          "author_url": "https://www.youtube.com/c/hospitalrecords",
+          "cache_age": null,
+          "embed_url": "https://www.youtube.com/watch?v=nRUZwmSMS8g",
+          "height": 113,
+          "html": "<iframe width=\\"200\\" height=\\"113\\" src=\\"https://www.youtube.com/embed/nRUZwmSMS8g?feature=oembed\\" frameborder=\\"0\\" allow=\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/nRUZwmSMS8g/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "Hospital Podcast 437 - Bop Takeover",
+          "type": "video",
+          "version": "1.0",
+          "width": 200,
+        },
+        "type": "embed",
+      },
+      "text": undefined,
+      "type": "embed",
+    },
+  ],
+  "key": "225",
+}
+`;
