@@ -43,7 +43,7 @@ it("handles emoji characters correctly", serializeMacro("emoji"));
 // See: https://github.com/prismicio/prismic-client/issues/198
 it("handles overlapped styling correctly", serializeMacro("overlapped"));
 
-it("nullish serialized values are omitted from the result", () => {
+it("omits nullish serialized values from the result", () => {
 	const richTextFixtures = createRichTextFixtures();
 
 	// We are expecting only heading1 to be included in the serialized result.

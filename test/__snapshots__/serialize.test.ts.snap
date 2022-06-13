@@ -70,7 +70,7 @@ exports[`handles overlapped styling correctly 2`] = `
 ]
 `;
 
-exports[`nullish serialized values are omitted from the result 1`] = `
+exports[`omits nullish serialized values from the result 1`] = `
 [
   "<h1>Heading 1 bold text italic still bold normal</h1>",
 ]

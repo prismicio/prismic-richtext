@@ -23,7 +23,7 @@ it("composes multiple serializers", () => {
 	expect(composedSerialization).toMatchSnapshot();
 });
 
-it("undefined serializers are ignored", () => {
+it("ignores undefined serializers", () => {
 	const richTextFixtures = createRichTextFixtures();
 
 	const serializer = wrapMapSerializer(htmlMapSerializer);
