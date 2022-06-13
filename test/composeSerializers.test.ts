@@ -1,11 +1,11 @@
-import test from "ava";
+import { it, expect } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
 
 import { composeSerializers, wrapMapSerializer, serialize } from "../src";
 
-test("composes multiple serializers", (t) => {
+it("composes multiple serializers", () => {
 	const richTextFixtures = createRichTextFixtures();
 
 	const mapSerializer1 = { ...htmlMapSerializer };
@@ -20,16 +20,15 @@ test("composes multiple serializers", (t) => {
 
 	const composedSerialization = serialize(richTextFixtures.en, serializer);
 
-	t.snapshot(composedSerialization);
+	expect(composedSerialization).toMatchSnapshot();
 });
 
-test("undefined serializers are ignored", (t) => {
+it("ignores undefined serializers", () => {
 	const richTextFixtures = createRichTextFixtures();
 
 	const serializer = wrapMapSerializer(htmlMapSerializer);
 
-	t.deepEqual(
+	expect(
 		serialize(richTextFixtures.en, composeSerializers(undefined, serializer)),
-		serialize(richTextFixtures.en, serializer),
-	);
+	).toStrictEqual(serialize(richTextFixtures.en, serializer));
 });

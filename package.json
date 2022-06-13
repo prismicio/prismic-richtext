@@ -35,31 +35,34 @@
 		"format": "prettier --write .",
 		"lint": "eslint --ext .js,.ts .",
 		"prepare": "npm run build",
-		"release": "npm run build && npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
-		"release:beta": "npm run build && npm run test && standard-version --release-as major --prerelease beta && git push --follow-tags && npm run build && npm publish --tag beta",
+		"release": "npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
+		"release:beta": "npm run test && standard-version --release-as major --prerelease beta && git push --follow-tags && npm run build && npm publish --tag beta",
 		"release:beta:dry": "standard-version --release-as major --prerelease beta --dry-run",
 		"release:dry": "standard-version --dry-run",
-		"test": "npm run lint && npm run unit",
-		"unit": "nyc --reporter=lcovonly --reporter=text --exclude-after-remap=false ava"
+		"size": "size-limit",
+		"test": "npm run lint && npm run unit && npm run build && npm run size",
+		"unit": "vitest run --coverage",
+		"unit:watch": "vitest watch"
 	},
 	"dependencies": {
-		"@prismicio/types": "^0.1.22"
+		"@prismicio/types": "^0.1.28"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.10.1",
-		"@typescript-eslint/parser": "^5.10.1",
-		"ava": "^4.0.1",
-		"esbuild-register": "^3.3.2",
-		"eslint": "^8.7.0",
-		"eslint-config-prettier": "^8.3.0",
+		"@size-limit/preset-small-lib": "^7.0.8",
+		"@typescript-eslint/eslint-plugin": "^5.27.1",
+		"@typescript-eslint/parser": "^5.27.1",
+		"c8": "^7.11.3",
+		"eslint": "^8.17.0",
+		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-tsdoc": "^0.2.14",
-		"nyc": "^15.1.0",
-		"prettier": "^2.5.1",
-		"prettier-plugin-jsdoc": "^0.3.30",
+		"eslint-plugin-tsdoc": "^0.2.16",
+		"prettier": "^2.6.2",
+		"prettier-plugin-jsdoc": "^0.3.38",
 		"siroc": "^0.16.0",
-		"standard-version": "^9.3.2",
-		"typescript": "^4.5.5"
+		"size-limit": "^7.0.8",
+		"standard-version": "^9.5.0",
+		"typescript": "^4.7.3",
+		"vitest": "^0.14.2"
 	},
 	"engines": {
 		"node": ">=12.7.0"

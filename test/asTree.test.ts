@@ -1,10 +1,10 @@
-import test from "ava";
+import { it, expect } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 
 import { asTree } from "../src";
 
-test("does not mutate the provided rich text field", (t) => {
+it("does not mutate the provided rich text field", () => {
 	const richTextFixturesUntouched = createRichTextFixtures();
 	const richTextFixturesMaybeMutated = createRichTextFixtures();
 
@@ -12,11 +12,13 @@ test("does not mutate the provided rich text field", (t) => {
 	asTree(richTextFixturesMaybeMutated.en);
 	asTree(richTextFixturesMaybeMutated.en);
 
-	t.deepEqual(richTextFixturesUntouched.en, richTextFixturesMaybeMutated.en);
+	expect(richTextFixturesUntouched.en).toStrictEqual(
+		richTextFixturesMaybeMutated.en,
+	);
 });
 
-test("converts a rich text field value to a tree", (t) => {
+it("converts a rich text field value to a tree", () => {
 	const richTextFixtures = createRichTextFixtures();
 
-	t.snapshot(asTree(richTextFixtures.en));
+	expect(asTree(richTextFixtures.en)).toMatchSnapshot();
 });
