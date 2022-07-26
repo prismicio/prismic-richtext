@@ -1,6 +1,6 @@
 {
 	"name": "@prismicio/richtext",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"description": "A parser and serializer for Prismic's Rich Text format",
 	"keywords": [
 		"typescript",
