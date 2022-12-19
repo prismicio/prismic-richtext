@@ -45,7 +45,7 @@
 		"unit:watch": "vitest watch"
 	},
 	"dependencies": {
-		"@prismicio/types": "^0.2.5"
+		"@prismicio/types": "^0.2.7"
 	},
 	"devDependencies": {
 		"@size-limit/preset-small-lib": "^8.1.0",
