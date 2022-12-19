@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/prismicio/prismic-richtext/compare/v2.1.1...v2.1.2) (2022-12-19)
+
+
+### Chore
+
+* **deps:** maintain dependencies ([feff198](https://github.com/prismicio/prismic-richtext/commit/feff198471e465f891fb82951717cd9dc3cb9298))
+
 ### [2.1.1](https://github.com/prismicio/prismic-richtext/compare/v2.1.0...v2.1.1) (2022-07-26)
 
 
