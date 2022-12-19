@@ -39,7 +39,8 @@ export type RichTextFunctionSerializer<ReturnType> = (
 ) => ReturnType | null | undefined;
 
 /**
- * Map serializer's tag function serializer, can be helpful for typing those handlers
+ * Map serializer's tag function serializer, can be helpful for typing those
+ * handlers
  *
  * @typeParam ReturnType - Return type of the tag serializer
  */
