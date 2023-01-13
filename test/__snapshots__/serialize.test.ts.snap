@@ -57,6 +57,7 @@ exports[`handles overlapped styling correctly 1`] = `
   "<p>Lorem ipsum dolor <strong>sit <em>amet</em></strong></p>",
   "<p>Lorem ipsum dolor <strong>sit <em>amet</em></strong></p>",
   "<p>Lorem ipsum dolor <em><strong>sit amet</strong></em></p>",
+  "<p>Lorem <em>ipsum <strong>dolor</strong></em><strong> sit</strong> amet</p>",
 ]
 `;
 
@@ -67,6 +68,7 @@ exports[`handles overlapped styling correctly 2`] = `
   "<p>Lorem ipsum dolor <strong>sit <em>amet</em></strong></p>",
   "<p>Lorem ipsum dolor <strong>sit <em>amet</em></strong></p>",
   "<p>Lorem ipsum dolor <em><strong>sit amet</strong></em></p>",
+  "<p>Lorem <em>ipsum <strong>dolor</strong></em><strong> sit</strong> amet</p>",
 ]
 `;
 
