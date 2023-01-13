@@ -22,3 +22,25 @@ exports[`composes multiple serializers 1`] = `
   "<iframe width=\\"200\\" height=\\"113\\" src=\\"https://www.youtube.com/embed/nRUZwmSMS8g?feature=oembed\\" frameborder=\\"0\\" allow=\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\" allowfullscreen></iframe>",
 ]
 `;
+
+exports[`supports serializers that return undefined 1`] = `
+[
+  "<p>This block has a line<br/>break just before the word \\"break\\"</p>",
+  "<p>Text before with a <span class=\\"label_1\\">multi-block span!</span></p>",
+  "<p>Paragraph</p>",
+  "<p>A paragraph with a <span class=\\"label_1\\">nested</span> label</p>",
+  "<ol><li>First ordered list item</li><li>Second ordered list item</li><li>Third ordered list item</li><li><strong>Bold and <em>now italic</em> but not anymore</strong> value in the <strong>last</strong> list item</li></ol>",
+  "<p>Paragraph</p>",
+  "<ul><li>First list item</li><li>Second list item</li><li>Third list item</li></ul>",
+  "<p>Paragraph</p>",
+  "<p><a href=\\"https://prismic.io\\" target=\\"_blank\\">A web link</a></p>",
+  "<p><a href=\\"linkResolver(YCiU1hUAACQAxfaH)\\">A document link</a></p>",
+  "<p><a href=\\"https://images.prismic.io/gatsby-source-prismic-v4/6234a400-2c25-4165-8b31-b17cfbefa0d2_patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg?auto=compress,format\\">A media link</a></p>",
+  "<p><a href=\\"https://gatsby-source-prismic-v4.cdn.prismic.io/gatsby-source-prismic-v4/f68daae5-1e36-466d-9d8f-e51175eed7b3_sample.pdf\\">A non-image media link</a></p>",
+  "<p>A paragraph with a <a href=\\"linkResolver(YCiU1hUAACQAxfaH)\\">nested</a> document link</p>",
+  "<p>Paragraph</p>",
+  "<img src=\\"https://prismic-io.s3.amazonaws.com/gatsby-source-prismic-v4/6234a400-2c25-4165-8b31-b17cfbefa0d2_patrick-robert-doyle-eb8dmXNOGP4-unsplash.jpg\\" alt=\\"Alt text\\" />",
+  "<p>Paragraph</p>",
+  "<iframe width=\\"200\\" height=\\"113\\" src=\\"https://www.youtube.com/embed/nRUZwmSMS8g?feature=oembed\\" frameborder=\\"0\\" allow=\\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\\" allowfullscreen></iframe>",
+]
+`;
