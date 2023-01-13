@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.4](https://github.com/prismicio/prismic-richtext/compare/v2.1.3...v2.1.4) (2023-01-13)
+
+
+### Bug Fixes
+
+* support overlapping spans that extend past the preceding span ([#59](https://github.com/prismicio/prismic-richtext/issues/59)) ([c9656db](https://github.com/prismicio/prismic-richtext/commit/c9656db03ae311a0ebafa4bd715e808428c41257))
+
+
+### Chore
+
+* **deps:** update dependencies ([#60](https://github.com/prismicio/prismic-richtext/issues/60)) ([4d1351b](https://github.com/prismicio/prismic-richtext/commit/4d1351b37660fbf21cc229919a82e3be041e3f6b))
+
 ### [2.1.3](https://github.com/prismicio/prismic-richtext/compare/v2.1.2...v2.1.3) (2022-12-19)
 
 
