@@ -152,14 +152,24 @@ const textNodeSpansToTreeNodeChildren = (
 		for (let j = i; j < mutSpans.length; j++) {
 			const siblingSpan = mutSpans[j];
 
-			if (
-				siblingSpan !== span &&
-				siblingSpan.start >= span.start &&
-				siblingSpan.end <= span.end
-			) {
-				childSpans.push(siblingSpan);
-				mutSpans.splice(j, 1);
-				j--;
+			if (siblingSpan !== span) {
+				if (siblingSpan.start >= span.start && siblingSpan.end <= span.end) {
+					childSpans.push(siblingSpan);
+					mutSpans.splice(j, 1);
+					j--;
+				} else if (
+					siblingSpan.start < span.end &&
+					siblingSpan.end > span.start
+				) {
+					childSpans.push({
+						...siblingSpan,
+						end: span.end,
+					});
+					mutSpans[j] = {
+						...siblingSpan,
+						start: span.end,
+					};
+				}
 			}
 		}
 

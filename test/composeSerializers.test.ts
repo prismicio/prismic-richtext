@@ -32,3 +32,24 @@ it("ignores undefined serializers", () => {
 		serialize(richTextFixtures.en, composeSerializers(undefined, serializer)),
 	).toStrictEqual(serialize(richTextFixtures.en, serializer));
 });
+
+it("composes serializers that do not support all node types", () => {
+	const richTextFixtures = createRichTextFixtures();
+
+	const mapSerializer1 = { ...htmlMapSerializer };
+	delete mapSerializer1.heading1;
+	delete mapSerializer1.heading2;
+
+	const mapSerializer2 = { ...htmlMapSerializer };
+	delete mapSerializer2.heading1;
+
+	// This serializer does not handle `heading1` nodes.
+	const serializer = composeSerializers(
+		wrapMapSerializer(mapSerializer1),
+		wrapMapSerializer(mapSerializer2),
+	);
+
+	const composedSerialization = serialize(richTextFixtures.en, serializer);
+
+	expect(composedSerialization).toMatchSnapshot();
+});

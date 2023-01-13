@@ -78,5 +78,21 @@
 				"type": "strong"
 			}
 		]
+	},
+	{
+		"type": "paragraph",
+		"text": "Lorem ipsum dolor sit amet",
+		"spans": [
+			{
+				"start": 6,
+				"end": 17,
+				"type": "em"
+			},
+			{
+				"start": 12,
+				"end": 21,
+				"type": "strong"
+			}
+		]
 	}
 ]
