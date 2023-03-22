@@ -12,12 +12,15 @@ import { RichTextFunctionSerializer } from "./types";
  *
  * @returns Composed serializer
  */
-export const composeSerializers = <SerializerReturnType>(
+export const composeSerializers = <
+	SerializerReturnType,
+	SerializerChildType = SerializerReturnType,
+>(
 	...serializers: (
-		| RichTextFunctionSerializer<SerializerReturnType>
+		| RichTextFunctionSerializer<SerializerReturnType, SerializerChildType>
 		| undefined
 	)[]
-): RichTextFunctionSerializer<SerializerReturnType> => {
+): RichTextFunctionSerializer<SerializerReturnType, SerializerChildType> => {
 	return (...args) => {
 		for (let i = 0; i < serializers.length; i++) {
 			const serializer = serializers[i];

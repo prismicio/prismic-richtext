@@ -15,11 +15,20 @@ import {
  *
  * @returns A regular function serializer
  */
-export const wrapMapSerializer = <SerializerReturnType>(
-	mapSerializer: RichTextMapSerializer<SerializerReturnType>,
-): RichTextFunctionSerializer<SerializerReturnType> => {
+export const wrapMapSerializer = <
+	SerializerReturnType,
+	SerializerChildType = SerializerReturnType,
+>(
+	mapSerializer: RichTextMapSerializer<
+		SerializerReturnType,
+		SerializerChildType
+	>,
+): RichTextFunctionSerializer<SerializerReturnType, SerializerChildType> => {
 	return (type, node, text, children, key) => {
-		const tagSerializer: RichTextMapSerializer<SerializerReturnType>[keyof RichTextMapSerializer<SerializerReturnType>] =
+		const tagSerializer: RichTextMapSerializer<
+			SerializerReturnType,
+			SerializerChildType
+		>[keyof RichTextMapSerializer<SerializerReturnType, SerializerChildType>] =
 			mapSerializer[
 				(RichTextReversedNodeType[
 					type as keyof typeof RichTextReversedNodeType
