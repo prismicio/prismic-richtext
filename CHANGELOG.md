@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.5](https://github.com/prismicio/prismic-richtext/compare/v2.1.4...v2.1.5) (2023-05-22)
+
+
+### Bug Fixes
+
+* properly resolve types when using TypeScript's latest module resolution strategy ([#62](https://github.com/prismicio/prismic-richtext/issues/62)) ([2041e53](https://github.com/prismicio/prismic-richtext/commit/2041e53255c1b52cf0d6f9376628b9c714a0dd49))
+
 ### [2.1.4](https://github.com/prismicio/prismic-richtext/compare/v2.1.3...v2.1.4) (2023-01-13)
 
 
