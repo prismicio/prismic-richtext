@@ -39,40 +39,43 @@
 		"build": "vite build",
 		"dev": "vite build --watch",
 		"format": "prettier --write .",
-		"lint": "eslint --ext .js,.ts .",
 		"prepare": "npm run build",
 		"release": "npm run test && standard-version && git push --follow-tags && npm run build && npm publish",
+		"release:dry": "standard-version --dry-run",
 		"release:beta": "npm run test && standard-version --release-as major --prerelease beta && git push --follow-tags && npm run build && npm publish --tag beta",
 		"release:beta:dry": "standard-version --release-as major --prerelease beta --dry-run",
-		"release:dry": "standard-version --dry-run",
-		"size": "size-limit",
-		"test": "npm run lint && npm run unit && npm run build && npm run size",
+		"lint": "eslint --ext .js,.ts .",
+		"types": "vitest typecheck --run && tsc --noEmit",
+		"types:watch": "vitest typecheck",
 		"unit": "vitest run --coverage",
-		"unit:watch": "vitest watch"
+		"unit:watch": "vitest watch",
+		"size": "size-limit",
+		"test": "npm run lint && npm run types && npm run unit && npm run build && npm run size"
 	},
 	"dependencies": {
 		"@prismicio/client": "^7.0.1"
 	},
 	"devDependencies": {
-		"@size-limit/preset-small-lib": "^8.1.1",
-		"@typescript-eslint/eslint-plugin": "^5.48.1",
-		"@typescript-eslint/parser": "^5.48.1",
-		"@vitest/coverage-c8": "^0.27.1",
-		"eslint": "^8.31.0",
-		"eslint-config-prettier": "^8.6.0",
+		"@size-limit/preset-small-lib": "^8.2.4",
+		"@trivago/prettier-plugin-sort-imports": "^4.1.1",
+		"@typescript-eslint/eslint-plugin": "^5.59.7",
+		"@typescript-eslint/parser": "^5.59.7",
+		"@vitest/coverage-c8": "^0.31.1",
+		"eslint": "^8.41.0",
+		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-tsdoc": "^0.2.17",
-		"prettier": "^2.8.2",
+		"prettier": "^2.8.8",
 		"prettier-plugin-jsdoc": "^0.4.2",
-		"size-limit": "^8.1.1",
+		"size-limit": "^8.2.4",
 		"standard-version": "^9.5.0",
-		"typescript": "^4.9.4",
-		"vite": "^4.0.4",
-		"vite-plugin-sdk": "^0.1.0",
-		"vitest": "^0.27.1"
+		"typescript": "^5.0.4",
+		"vite": "^4.3.8",
+		"vite-plugin-sdk": "^0.1.1",
+		"vitest": "^0.31.1"
 	},
 	"engines": {
-		"node": ">=12.7.0"
+		"node": ">=14.15.0"
 	},
 	"publishConfig": {
 		"access": "public"
