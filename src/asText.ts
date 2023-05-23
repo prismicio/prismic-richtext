@@ -1,4 +1,4 @@
-import type { RichTextField, RTTextNode } from "@prismicio/client";
+import type { RTTextNode, RichTextField } from "@prismicio/client";
 
 /**
  * Serializes a rich text or title field to a plain text string
@@ -7,6 +7,7 @@ import type { RichTextField, RTTextNode } from "@prismicio/client";
  * @param separator - Separator used to join each element, defaults to a space
  *
  * @returns Plain text equivalent of the provided rich text or title field
+ *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
 export const asText = (

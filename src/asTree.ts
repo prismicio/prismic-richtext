@@ -1,5 +1,4 @@
 import {
-	RichTextNodeType,
 	RTAnyNode,
 	RTBlockNode,
 	RTInlineNode,
@@ -7,7 +6,9 @@ import {
 	RTNode,
 	RTOListItemNode,
 	RTTextNode,
+	RichTextNodeType,
 } from "@prismicio/client";
+
 import { Tree, TreeNode } from "./types";
 
 const uuid = (): string => {

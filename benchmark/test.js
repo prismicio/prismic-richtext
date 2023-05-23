@@ -1,10 +1,12 @@
-import * as fs from "fs/promises";
+import * as v2 from "@prismicio/richtext-v2";
 import * as path from "path";
 import * as url from "url";
-import Benchmark from "benchmark";
 import { LinkType } from "@prismicio/client";
 import v1 from "@prismicio/richtext";
-import * as v2 from "@prismicio/richtext-v2";
+import Benchmark from "benchmark";
+
+import * as fs from "fs/promises";
+
 // import * as assert from "assert";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
