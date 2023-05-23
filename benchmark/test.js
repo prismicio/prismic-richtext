@@ -2,7 +2,7 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import * as url from "url";
 import Benchmark from "benchmark";
-import { LinkType } from "@prismicio/types";
+import { LinkType } from "@prismicio/client";
 import v1 from "@prismicio/richtext";
 import * as v2 from "@prismicio/richtext-v2";
 // import * as assert from "assert";

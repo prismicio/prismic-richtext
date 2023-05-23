@@ -1,6 +1,6 @@
 import { Element, RichTextFunctionSerializer } from "../../src";
 
-import { LinkType } from "@prismicio/types";
+import { LinkType } from "@prismicio/client";
 
 export const htmlFunctionSerializer: RichTextFunctionSerializer<string> = (
 	_type,

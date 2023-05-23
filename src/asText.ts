@@ -1,4 +1,4 @@
-import { RichTextField, RTTextNode } from "@prismicio/types";
+import type { RichTextField, RTTextNode } from "@prismicio/client";
 
 /**
  * Serializes a rich text or title field to a plain text string

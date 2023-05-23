@@ -1,4 +1,4 @@
-import { RichTextField } from "@prismicio/types";
+import type { RichTextField } from "@prismicio/client";
 import { RichTextFunctionSerializer, TreeNode } from "./types";
 import { asTree } from "./asTree";
 

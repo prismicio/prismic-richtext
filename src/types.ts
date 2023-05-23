@@ -20,7 +20,7 @@ import {
 	RTPreformattedNode,
 	RTSpanNode,
 	RTStrongNode,
-} from "@prismicio/types";
+} from "@prismicio/client";
 
 // Serializers
 

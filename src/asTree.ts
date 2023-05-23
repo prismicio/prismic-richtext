@@ -7,7 +7,7 @@ import {
 	RTNode,
 	RTOListItemNode,
 	RTTextNode,
-} from "@prismicio/types";
+} from "@prismicio/client";
 import { Tree, TreeNode } from "./types";
 
 const uuid = (): string => {

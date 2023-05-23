@@ -7,7 +7,7 @@
 		"benchmark": "^2.1.4"
 	},
 	"dependencies": {
-		"@prismicio/types": "^0.0.9",
+		"@prismicio/client": "^7.0.1",
 		"@prismicio/richtext": "^1.1.0",
 		"@prismicio/richtext-v2": "file:.."
 	}
