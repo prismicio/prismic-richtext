@@ -15,21 +15,33 @@ import { asTree } from "./asTree";
  * @returns An array of serialized nodes
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
-export const serialize = <SerializerReturnType>(
+export const serialize = <
+	SerializerReturnType,
+	SerializerChildType = SerializerReturnType,
+>(
 	richTextField: RichTextField,
-	serializer: RichTextFunctionSerializer<SerializerReturnType>,
+	serializer: RichTextFunctionSerializer<
+		SerializerReturnType,
+		SerializerChildType
+	>,
 ): SerializerReturnType[] => {
-	return serializeTreeNodes<SerializerReturnType>(
+	return serializeTreeNodes<SerializerReturnType, SerializerChildType>(
 		asTree(richTextField).children,
 		serializer,
 	);
 };
 
-const serializeTreeNodes = <T>(
+const serializeTreeNodes = <
+	SerializerReturnType,
+	SerializerChildType = SerializerReturnType,
+>(
 	nodes: TreeNode[],
-	serializer: RichTextFunctionSerializer<T>,
-): T[] => {
-	const serializedTreeNodes: T[] = [];
+	serializer: RichTextFunctionSerializer<
+		SerializerReturnType,
+		SerializerChildType
+	>,
+): SerializerReturnType[] => {
+	const serializedTreeNodes: SerializerReturnType[] = [];
 
 	for (let i = 0; i < nodes.length; i++) {
 		const treeNode = nodes[i];

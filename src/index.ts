@@ -11,4 +11,6 @@ export type {
 	RichTextFunctionSerializer,
 	RichTextMapSerializer,
 	RichTextMapSerializerFunction,
+	Tree,
+	TreeNode,
 } from "./types";
