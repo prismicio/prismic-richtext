@@ -63,6 +63,7 @@ export type RichTextMapSerializerFunction<
  * @remarks
  * This type of serializer needs to be processed through
  * {@link wrapMapSerializer} before being used with {@link serialize}
+ *
  * @typeParam ReturnType - Return type of the map serializer
  *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}

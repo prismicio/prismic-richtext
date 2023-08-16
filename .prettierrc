@@ -1,8 +1,5 @@
 {
-	"plugins": [
-		"@trivago/prettier-plugin-sort-imports",
-		"prettier-plugin-jsdoc"
-	],
+	"plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-jsdoc"],
 	"jsdocCapitalizeDescription": false,
 	"jsdocSeparateReturnsFromParam": true,
 	"jsdocSeparateTagGroups": true,

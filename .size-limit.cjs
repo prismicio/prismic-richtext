@@ -1,4 +1,5 @@
 const pkg = require("./package.json");
+
 function getObjectValues(input, acc = []) {
 	if (typeof input === "string") {
 		return input;
@@ -9,6 +10,7 @@ function getObjectValues(input, acc = []) {
 		];
 	}
 }
+
 module.exports = [
 	...new Set([pkg.main, pkg.module, ...getObjectValues(pkg.exports)]),
 ]

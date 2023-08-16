@@ -22,6 +22,7 @@ uuid.i = 0;
  * @remarks
  * This is a low level helper mainly intended to be used by higher level
  * packages. Most users aren't expected to this function directly.
+ *
  * @param nodes - A rich text or title field from Prismic
  *
  * @returns Tree from given rich text or title field
