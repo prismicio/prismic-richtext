@@ -14,7 +14,7 @@ it("composes multiple serializers", () => {
 	const mapSerializer2 = { heading1: htmlMapSerializer.heading1 };
 
 	const serializer = composeSerializers(
-		wrapMapSerializer(mapSerializer1),
+		mapSerializer1,
 		wrapMapSerializer(mapSerializer2),
 	);
 
