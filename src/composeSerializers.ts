@@ -1,4 +1,6 @@
-import { RichTextFunctionSerializer } from "./types";
+import { RichTextFunctionSerializer, RichTextMapSerializer } from "./types";
+
+import { wrapMapSerializer } from "./wrapMapSerializer";
 
 /**
  * Takes an array of serializers and returns a serializer applying provided
@@ -14,15 +16,20 @@ import { RichTextFunctionSerializer } from "./types";
  */
 export const composeSerializers = <SerializerReturnType>(
 	...serializers: (
+		| RichTextMapSerializer<SerializerReturnType>
 		| RichTextFunctionSerializer<SerializerReturnType>
 		| undefined
 	)[]
 ): RichTextFunctionSerializer<SerializerReturnType> => {
 	return (...args) => {
 		for (let i = 0; i < serializers.length; i++) {
-			const serializer = serializers[i];
+			let serializer = serializers[i];
 
 			if (serializer) {
+				if (typeof serializer === "object") {
+					serializer = wrapMapSerializer(serializer);
+				}
+
 				const res = serializer(...args);
 
 				if (res != null) {
