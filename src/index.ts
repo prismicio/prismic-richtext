@@ -5,7 +5,7 @@ export { serialize } from "./serialize";
 export { wrapMapSerializer } from "./wrapMapSerializer";
 export { composeSerializers } from "./composeSerializers";
 
-export { RichTextNodeType as Element } from "@prismicio/types";
+export { RichTextNodeType as Element } from "@prismicio/client";
 
 export type {
 	RichTextFunctionSerializer,

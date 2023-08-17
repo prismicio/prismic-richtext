@@ -1,6 +1,6 @@
-import { RichTextMapSerializer } from "../../src";
+import { LinkType } from "@prismicio/client";
 
-import { LinkType } from "@prismicio/types";
+import { RichTextMapSerializer } from "../../src";
 
 export const htmlMapSerializer: RichTextMapSerializer<string> = {
 	heading1: ({ children }) => `<h1>${children.join("")}</h1>`,
