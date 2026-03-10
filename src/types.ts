@@ -1,8 +1,7 @@
 import {
-	RichTextNodeType,
 	RTAnyNode,
-	RTEmbedNode,
 	RTEmNode,
+	RTEmbedNode,
 	RTHeading1Node,
 	RTHeading2Node,
 	RTHeading3Node,
@@ -20,7 +19,8 @@ import {
 	RTPreformattedNode,
 	RTSpanNode,
 	RTStrongNode,
-} from "@prismicio/types";
+	RichTextNodeType,
+} from "@prismicio/client";
 
 // Serializers
 
@@ -28,6 +28,7 @@ import {
  * Serializes a node from a rich text or title field with a function
  *
  * @typeParam ReturnType - Return type of the function serializer
+ *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
 export type RichTextFunctionSerializer<ReturnType> = (
@@ -62,7 +63,9 @@ export type RichTextMapSerializerFunction<
  * @remarks
  * This type of serializer needs to be processed through
  * {@link wrapMapSerializer} before being used with {@link serialize}
+ *
  * @typeParam ReturnType - Return type of the map serializer
+ *
  * @see Templating rich text and title fields from Prismic {@link https://prismic.io/docs/technologies/templating-rich-text-and-title-fields-javascript}
  */
 export type RichTextMapSerializer<ReturnType> = {

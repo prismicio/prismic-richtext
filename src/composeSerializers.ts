@@ -9,7 +9,9 @@ import { wrapMapSerializer } from "./wrapMapSerializer";
  * @remarks
  * This is a low level helper mainly intended to be used by higher level
  * packages Most users aren't expected to this function directly
+ *
  * @typeParam SerializerReturnType - Return type of serializers
+ *
  * @param serializers - Serializers to compose
  *
  * @returns Composed serializer

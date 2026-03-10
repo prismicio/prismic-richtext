@@ -1,4 +1,4 @@
-import { it, expect } from "vitest";
+import { expect, it } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 

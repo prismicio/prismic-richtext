@@ -1,5 +1,4 @@
 import {
-	RichTextNodeType,
 	RTAnyNode,
 	RTBlockNode,
 	RTInlineNode,
@@ -7,7 +6,9 @@ import {
 	RTNode,
 	RTOListItemNode,
 	RTTextNode,
-} from "@prismicio/types";
+	RichTextNodeType,
+} from "@prismicio/client";
+
 import { Tree, TreeNode } from "./types";
 
 const uuid = (): string => {
@@ -21,6 +22,7 @@ uuid.i = 0;
  * @remarks
  * This is a low level helper mainly intended to be used by higher level
  * packages. Most users aren't expected to this function directly.
+ *
  * @param nodes - A rich text or title field from Prismic
  *
  * @returns Tree from given rich text or title field

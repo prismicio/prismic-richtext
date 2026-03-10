@@ -1,9 +1,9 @@
-import { it, expect } from "vitest";
+import { expect, it } from "vitest";
 
 import { createRichTextFixtures } from "./__testutils__/createRichTextFixtures";
 import { htmlMapSerializer } from "./__testutils__/htmlMapSerializer";
 
-import { composeSerializers, wrapMapSerializer, serialize } from "../src";
+import { composeSerializers, serialize, wrapMapSerializer } from "../src";
 
 it("composes multiple serializers", () => {
 	const richTextFixtures = createRichTextFixtures();
